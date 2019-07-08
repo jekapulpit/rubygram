@@ -1,0 +1,22 @@
+default: &default
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  timeout: 5000
+  adapter: postgresql
+  encoding: unicode
+  username: <%= ENV["db_user"] %>
+  password: <%= ENV["db_password"] %>
+  host: localhost
+  port: 5432
+
+
+development:
+  <<: *default
+  database: rubygram_dev
+
+test:
+  <<: *default
+  database: rubygram_test
+
+production:
+  <<: *default
+  database: rubygram
