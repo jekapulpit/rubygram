@@ -1,8 +1,6 @@
 # frozen_string_literal: true
 
 class Api::V4::RoomsController < ApplicationController
-  skip_before_action :verify_authenticity_token
-
   def show
     begin
       room = Room.includes(:messages, :users).find(params[:id])
