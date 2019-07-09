@@ -3,14 +3,14 @@ import ReactDOM from 'react-dom';
 import './stylesheets/index.css';
 import * as serviceWorker from './serviceWorker';
 import store from './store'
-import App from './App'
+import Menu from './components/Menu'
 import { Provider } from 'react-redux'
 import { BrowserRouter as Router, Route } from 'react-router-dom'
 
 ReactDOM.render(
     <Provider store={store}>
         <Router>
-            <Route path="/" component={App} />
+            <Route path="/" component={Menu} />
         </Router>
     </Provider>,
     document.getElementById('root'));
