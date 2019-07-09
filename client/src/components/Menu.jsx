@@ -1,23 +1,20 @@
 import React from 'react';
 import { hot } from 'react-hot-loader/root';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 import '../stylesheets/components/menu.scss'
+import AppBar from '@material-ui/core/AppBar';
+import Tabs from '@material-ui/core/Tabs';
+import Tab from '@material-ui/core/Tab';
 
 const Menu = props => {
     return (
-        <div className="menu">
-            <ul className="menu-puncts">
-                <li className="menu-punct">
-                    some punct
-                </li>
-                <li className="menu-punct">
-                    some punct
-                </li>
-                <li className="menu-punct">
-                    some punct
-                </li>
-            </ul>
-        </div>
+        <AppBar id="navbar-menu" position="relative">
+            <Tabs>
+                <Tab component={Link} to="/rooms" label="Room List" />
+                <Tab component={Link} to="/profile" label="Profile" />
+            </Tabs>
+        </AppBar>
     )
 };
 

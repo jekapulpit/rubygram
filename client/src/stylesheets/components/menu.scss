@@ -1,13 +1,11 @@
-.menu {
+#navbar-menu {
   height: 100%;
-  display: flex;
-  flex-direction: column;
   justify-content: center;
   align-items: center;
   width: 250px;
 
-  .menu-puncts {
-    text-align: center;
-    padding: 0;
+  .MuiTabs-flexContainer {
+    display: flex;
+    flex-direction: column;
   }
 }
