@@ -14,7 +14,7 @@ export function authentificateUser(userCredintials) {
         .then((response) => {return response.json()})
         .then((data) => {
             if(data.token) {
-                setUserSession(data.current_user);
+                setUserSession(data);
                 setCookie('auth_token', data.token);
             }
             else {

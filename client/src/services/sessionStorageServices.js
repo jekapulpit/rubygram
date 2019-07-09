@@ -1,5 +1,6 @@
-export const setUserSession = (user) => {
-    window.sessionStorage.setItem('currentUser', JSON.stringify(user));
+export const setUserSession = (data) => {
+    window.sessionStorage.setItem('currentUser', JSON.stringify(data.user));
+    window.sessionStorage.setItem('auth_token', JSON.stringify(data.token));
 };
 
 export const deleteUserSession = () => {
