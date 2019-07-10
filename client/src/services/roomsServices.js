@@ -10,9 +10,15 @@ export const getUserRooms = fetch('http://localhost:3001/api/v4/rooms/', {
                                             .then((response) => { return response.json() });
 
 
-export const getRoom = (roomId) => {
-
-};
+export async function getRoom(roomId) {
+    return fetch(`http://localhost:3001/api/v4/rooms/${roomId}`, {
+        mode: 'cors',
+        headers: {
+            'Authorization': getTokenFromSessionStorage()
+        }
+    })
+        .then((response) => { return response.json() });
+}
 
 export const addNewRoom = (roomAttributes) => {
 
