@@ -4,15 +4,21 @@ import './stylesheets/index.css';
 import * as serviceWorker from './serviceWorker';
 import store from './store'
 import Menu from './components/Menu'
+import Login from './components/users/Login'
 import RoomContent from './components/rooms/RoomContent'
 import { Provider } from 'react-redux'
 import { BrowserRouter as Router, Route } from 'react-router-dom'
+import { Redirect } from 'react-router'
 
 ReactDOM.render(
     <Provider store={store}>
         <Router>
-            <Route path="/" component={Menu} />
-            <Route path="/rooms" component={RoomContent} />
+            <Route exact path="/" render={() => (
+                <Redirect to="/home"/>
+            )}/>
+            <Route path="/home" component={Menu} />
+            <Route exact path="/home/rooms" component={RoomContent} />
+            <Route exact path="/login" component={Login} />
         </Router>
     </Provider>,
     document.getElementById('root'));

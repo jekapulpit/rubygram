@@ -11,8 +11,8 @@ const Menu = props => {
     return (
         <AppBar id="navbar-menu" position="relative">
             <Tabs>
-                <Tab component={Link} to="/rooms" label="Room List" />
-                <Tab component={Link} to="/profile" label="Profile" />
+                <Tab component={Link} to="/home/rooms" label="Room List" />
+                <Tab component={Link} to="/home/profile" label="Profile" />
             </Tabs>
         </AppBar>
     )

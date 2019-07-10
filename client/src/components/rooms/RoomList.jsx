@@ -3,6 +3,7 @@ import { hot } from 'react-hot-loader/root';
 import { connect } from 'react-redux';
 import RoomCard from "./RoomCard";
 import '../../stylesheets/components/rooms.scss'
+import {getCurrentUser} from "../../services/sessionStorageServices";
 
 const roomsStub = [{
         id:1,
@@ -38,8 +39,9 @@ const roomsStub = [{
     }];
 
 const RoomList = props => {
+    console.log(getCurrentUser());
     let rooms = roomsStub.map((room) => {
-        return (<RoomCard room={room} />)
+        return (<RoomCard key={room.id} room={room} />)
     });
     return (
         <div className='room-list'>

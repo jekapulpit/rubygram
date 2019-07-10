@@ -1,5 +1,5 @@
 export const setUserSession = (data) => {
-    window.sessionStorage.setItem('currentUser', JSON.stringify(data.user));
+    window.sessionStorage.setItem('currentUser', JSON.stringify(data.current_user));
     window.sessionStorage.setItem('auth_token', JSON.stringify(data.token));
 };
 
@@ -8,5 +8,5 @@ export const deleteUserSession = () => {
 };
 
 export const getCurrentUser = () => {
-    return JSON.parse(window.sessionStorage.getItem('currentUser'));
+    return window.sessionStorage.getItem('currentUser');
 };
