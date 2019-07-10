@@ -5,7 +5,8 @@ import '../../stylesheets/components/rooms.scss'
 const RoomCard = props => {
     return (
         <div className='room-card'>
-            {props.room.name}
+            <h2>{props.room.name}</h2>
+            <p>0 new messages</p>
         </div>
     )
 };

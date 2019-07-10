@@ -4,4 +4,27 @@
   justify-content: center;
   align-items: center;
   width: 100%;
+
+  .room-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+
+    .room-card {
+      width: 200px;
+      height: 100px;
+      margin: 20px;
+      box-shadow: 0 0 6px 1px rgba(0,0,0,.6);
+      display: flex;
+      flex-direction: column;
+      box-sizing: border-box;
+      padding: 10px;
+      align-items: center;
+      justify-content: center;
+
+      h2, p {
+        margin: 5px;
+      }
+    }
+  }
 }

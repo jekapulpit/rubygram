@@ -4,7 +4,38 @@ import { connect } from 'react-redux';
 import RoomCard from "./RoomCard";
 import '../../stylesheets/components/rooms.scss'
 
-const roomsStub = [{ id:1, name: 'alooo' }, { id:2, name: 'sssss' }];
+const roomsStub = [{
+        id:1,
+        name: 'alooo',
+        users: [
+            {
+                id: 1,
+                username: "zheka",
+                email: "q010@bk.ru"
+            },
+            {
+                id: 3,
+                username: "zheka1",
+                email: "q020@bk.ru"
+            },
+        ]
+    },
+    {
+        id:2,
+        name: 'sssss',
+        users: [
+            {
+                id: 1,
+                username: "zheka",
+                email: "q010@bk.ru"
+            },
+            {
+                id: 3,
+                username: "zheka1",
+                email: "q020@bk.ru"
+            },
+        ]
+    }];
 
 const RoomList = props => {
     let rooms = roomsStub.map((room) => {
