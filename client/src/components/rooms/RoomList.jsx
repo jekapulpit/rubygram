@@ -8,7 +8,7 @@ import {rooms} from "../../actionTypes";
 
 class RoomList extends React.Component {
     componentDidMount() {
-        getUserRooms.then((data) => {
+        getUserRooms().then((data) => {
             this.props.toggleSetRooms(data.rooms)
         });
     }
