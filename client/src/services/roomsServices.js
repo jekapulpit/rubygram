@@ -21,7 +21,15 @@ export async function getRoom(roomId) {
 }
 
 export const addNewRoom = (roomAttributes) => {
-
+    return fetch(`http://localhost:3001/api/v4/rooms/`, {
+        method: 'POST',
+        mode: 'cors',
+        headers: {
+            'Authorization': getTokenFromSessionStorage()
+        },
+        body: JSON.stringify(roomAttributes)
+    })
+        .then((response) => { return response.json() });
 };
 
 export const deleteRoom = (roomId) => {
