@@ -4,5 +4,6 @@ export const users = {
 };
 
 export const rooms = {
-    SET_ROOM_LIST: 'SET_ROOM_LIST'
+    SET_ROOM_LIST: 'SET_ROOM_LIST',
+    CREATE: 'CREATE_ROOM'
 };

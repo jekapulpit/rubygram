@@ -25,8 +25,8 @@ export async function getRoom(roomId) {
 export async function addNewRoom(roomAttributes) {
     return fetch(`http://${apiHost}:${apiPort}/api/v4/rooms/`, {
         method: 'POST',
-        mode: 'cors',
         headers: {
+            'Content-Type': 'application/json',
             'Authorization': getTokenFromSessionStorage()
         },
         body: JSON.stringify(roomAttributes)

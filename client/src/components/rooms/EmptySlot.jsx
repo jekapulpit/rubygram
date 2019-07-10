@@ -2,6 +2,9 @@ import React from 'react';
 import { hot } from 'react-hot-loader/root';
 import '../../stylesheets/components/rooms.scss'
 import {mapFieldsToValues} from "../../services/mapFieldsToValuesService";
+import {rooms} from "../../actionTypes";
+import {connect} from "react-redux";
+import {addNewRoom} from "../../services/roomsServices";
 
 class EmptySlot extends React.Component {
     constructor(props) {
@@ -9,7 +12,6 @@ class EmptySlot extends React.Component {
         this.state = {
             editable: false
         };
-        this.newRoomAttributes = {}
     }
 
     handleNew = () => {
@@ -19,14 +21,18 @@ class EmptySlot extends React.Component {
     };
 
     handleCreate = (newRoomAttributes) => {
-
+        addNewRoom({ room: { name: newRoomAttributes } })
+            .then((data) => {
+                console.log(data);
+                this.props.toggleCreateRoom(data.room)
+            })
     };
 
     render() {
         let fill = this.state.editable ? (
             <div>
-                <input ref={input => this.newRoomAttributes.name = input} type="text"/>
-                <button onClick={() => this.handleCreate(mapFieldsToValues(this.newRoomAttributes))}>create</button>
+                <input ref={input => this.newRoomsName = input} type="text"/>
+                <button onClick={() => this.handleCreate(this.newRoomsName.value)}>create</button>
             </div>
         ) : (
             <button onClick={() => this.handleNew()}>+</button>
@@ -39,4 +45,12 @@ class EmptySlot extends React.Component {
     }
 }
 
-export default hot(EmptySlot);
+const mapDispatchToProps = function(dispatch, ownProps) {
+    return {
+        toggleCreateRoom: (newRoom) => {
+            dispatch({ type: rooms.CREATE, newRoom: newRoom })
+        }
+    }
+};
+
+export default hot(connect(null, mapDispatchToProps)(EmptySlot));

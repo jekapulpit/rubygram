@@ -15,13 +15,19 @@ class RoomList extends React.Component {
         });
     }
 
+    randomInteger = (min, max) => {
+        let rand = min - 0.5 + Math.random() * (max - min + 1);
+        rand = Math.round(rand);
+        return rand;
+    };
+
     render() {
         let rooms = this.props.roomList.map((room) => {
             return (<RoomCard key={room.id} room={room} />)
         });
 
         let emptySlots = (new Array(maxChats - rooms.length).fill(null)).map((slot) => {
-            return (<EmptySlot />)
+            return (<EmptySlot key={this.randomInteger(-100, -50)} />)
         });
 
         return (
