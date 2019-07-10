@@ -9,12 +9,16 @@ import RoomContent from './components/rooms/RoomContent'
 import { Provider } from 'react-redux'
 import { BrowserRouter as Router, Route } from 'react-router-dom'
 import { Redirect } from 'react-router'
+import {getCurrentUser} from "./services/sessionStorageServices";
 
 ReactDOM.render(
     <Provider store={store}>
         <Router>
-            <Route exact path="/" render={() => (
-                <Redirect to="/home"/>
+            <Route path="/" render={() => (
+                getCurrentUser() ?
+                null
+                :
+                (<Redirect to="/login"/>)
             )}/>
             <Route path="/home" component={Menu} />
             <Route exact path="/home/rooms" component={RoomContent} />
