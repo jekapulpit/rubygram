@@ -4,12 +4,12 @@ import { connect } from 'react-redux';
 import RoomCard from "./RoomCard";
 import '../../stylesheets/components/rooms.scss'
 import {getUserRooms} from "../../services/roomsServices";
-import {getTokenFromSessionStorage} from "../../services/sessionStorageServices";
+import {rooms} from "../../actionTypes";
 
 class RoomList extends React.Component {
     componentDidMount() {
         getUserRooms.then((data) => {
-            console.log(data.rooms)
+            this.props.toggleSetRooms(data.rooms)
         });
     }
 
@@ -26,7 +26,11 @@ class RoomList extends React.Component {
 }
 
 const mapDispatchToProps = function(dispatch, ownProps) {
-    return {}
+    return {
+        toggleSetRooms: (newRoomList) => {
+            dispatch({ type: rooms.SET_ROOM_LIST, newRoomList: newRoomList })
+        }
+    }
 };
 
 const mapStateToProps = state => ({

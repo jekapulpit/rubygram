@@ -1,3 +1,11 @@
+import {rooms} from "../actionTypes";
+
 export default (state = { roomList: [], currentRoom: {} }, action) => {
-    return state;
+    switch (action.type) {
+        case rooms.SET_ROOM_LIST:
+            let newRoomList = action.newRoomList;
+            return {...state, roomList: newRoomList};
+        default:
+            return state;
+    }
 };
