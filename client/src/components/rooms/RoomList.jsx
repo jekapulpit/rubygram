@@ -3,50 +3,27 @@ import { hot } from 'react-hot-loader/root';
 import { connect } from 'react-redux';
 import RoomCard from "./RoomCard";
 import '../../stylesheets/components/rooms.scss'
+import {getUserRooms} from "../../services/roomsServices";
+import {getTokenFromSessionStorage} from "../../services/sessionStorageServices";
 
-const roomsStub = [{
-        id:1,
-        name: 'alooo',
-        users: [
-            {
-                id: 1,
-                username: "zheka",
-                email: "q010@bk.ru"
-            },
-            {
-                id: 3,
-                username: "zheka1",
-                email: "q020@bk.ru"
-            },
-        ]
-    },
-    {
-        id:2,
-        name: 'sssss',
-        users: [
-            {
-                id: 1,
-                username: "zheka",
-                email: "q010@bk.ru"
-            },
-            {
-                id: 3,
-                username: "zheka1",
-                email: "q020@bk.ru"
-            },
-        ]
-    }];
+class RoomList extends React.Component {
+    componentDidMount() {
+        getUserRooms.then((data) => {
+            console.log(data.rooms)
+        });
+    }
 
-const RoomList = props => {
-    let rooms = roomsStub.map((room) => {
-        return (<RoomCard key={room.id} room={room} />)
-    });
-    return (
-        <div className='room-list'>
-            {rooms}
-        </div>
-    )
-};
+    render() {
+        let rooms = this.props.roomList.map((room) => {
+            return (<RoomCard key={room.id} room={room} />)
+        });
+        return (
+            <div className='room-list'>
+                {rooms}
+            </div>
+        )
+    }
+}
 
 const mapDispatchToProps = function(dispatch, ownProps) {
     return {}

@@ -12,5 +12,6 @@ export const getCurrentUser = () => {
 };
 
 export const getTokenFromSessionStorage = () => {
-    return window.sessionStorage.getItem('auth_token');
+    let token = window.sessionStorage.getItem('auth_token');
+    return token ? `Bearer ${token.split('"').join('')}` : null;
 };
