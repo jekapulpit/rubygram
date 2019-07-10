@@ -21,9 +21,13 @@ class EmptySlot extends React.Component {
     };
 
     handleCreate = (newRoomAttributes) => {
-        addNewRoom({ room: { name: newRoomAttributes } })
+        let roomAttributes = {
+            room: {
+                name: newRoomAttributes
+            }
+        };
+        addNewRoom(roomAttributes)
             .then((data) => {
-                console.log(data);
                 this.props.toggleCreateRoom(data.room)
             })
     };
