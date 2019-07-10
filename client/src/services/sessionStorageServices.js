@@ -8,5 +8,5 @@ export const deleteUserSession = () => {
 };
 
 export const getCurrentUser = () => {
-    return window.sessionStorage.getItem('currentUser');
+    return JSON.parse(window.sessionStorage.getItem('currentUser'));
 };

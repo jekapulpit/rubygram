@@ -7,11 +7,12 @@ import AppBar from '@material-ui/core/AppBar';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import {logout} from "../services/authentificationService";
+import {getCurrentUser} from "../services/sessionStorageServices";
 
 const Menu = props => {
     return (
         <AppBar id="navbar-menu" position="relative">
-            <button onClick={() => {logout()}}>log out</button>
+            <p>You logged in as {getCurrentUser().username}, <span onClick={() => logout()}>log out</span></p>
             <Tabs>
                 <Tab component={Link} to="/home/rooms" label="Room List" />
                 <Tab component={Link} to="/home/profile" label="Profile" />
