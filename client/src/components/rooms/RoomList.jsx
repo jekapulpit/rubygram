@@ -5,6 +5,8 @@ import RoomCard from "./RoomCard";
 import '../../stylesheets/components/rooms.scss'
 import {getUserRooms} from "../../services/roomsServices";
 import {rooms} from "../../actionTypes";
+import {maxChats} from '../../constants'
+import EmptySlot from "./EmptySlot";
 
 class RoomList extends React.Component {
     componentDidMount() {
@@ -17,9 +19,15 @@ class RoomList extends React.Component {
         let rooms = this.props.roomList.map((room) => {
             return (<RoomCard key={room.id} room={room} />)
         });
+
+        let emptySlots = (new Array(maxChats - rooms.length).fill(null)).map((slot) => {
+            return (<EmptySlot />)
+        });
+
         return (
             <div className='room-list'>
                 {rooms}
+                {emptySlots}
             </div>
         )
     }
