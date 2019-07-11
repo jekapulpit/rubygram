@@ -1,10 +1,10 @@
 import React from 'react';
 import { hot } from 'react-hot-loader/root';
 import '../../stylesheets/components/rooms.scss'
-import {mapFieldsToValues} from "../../services/mapFieldsToValuesService";
 import {rooms} from "../../actionTypes";
 import {connect} from "react-redux";
 import {addNewRoom} from "../../services/roomsServices";
+import {Grid} from "@material-ui/core";
 
 class EmptySlot extends React.Component {
     constructor(props) {
@@ -16,7 +16,7 @@ class EmptySlot extends React.Component {
 
     handleNew = () => {
         this.setState({
-            editable: true
+            editable: !this.state.editable
         })
     };
 
@@ -39,10 +39,19 @@ class EmptySlot extends React.Component {
 
     render() {
         let fill = this.state.editable ? (
-            <div>
-                <input ref={input => this.newRoomsName = input} type="text"/>
-                <button onClick={() => this.handleCreate(this.newRoomsName.value)}>create</button>
-            </div>
+            <Grid container
+                  direction="row"
+                  spacing={2} >
+                <Grid item xs={12}>
+                    <input ref={input => this.newRoomsName = input} type="text"/>
+                </Grid>
+                <Grid item xs={6}>
+                    <button onClick={() => this.handleCreate(this.newRoomsName.value)}>create</button>
+                </Grid>
+                <Grid item xs={6}>
+                    <button onClick={() => this.handleNew()}>cancel</button>
+                </Grid>
+            </Grid>
         ) : (
             <button onClick={() => this.handleNew()}>+</button>
         );
