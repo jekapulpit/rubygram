@@ -11,6 +11,13 @@ export default (state = { roomList: [], currentRoom: {} }, action) => {
         case rooms.DELETE:
             let newRooms = state.roomList.filter((room) => room.id !== action.roomId);
             return {...state, roomList: newRooms};
+        case rooms.UPDATE:
+            let updatedRooms = state.roomList.map((room) => {
+               if(room.id === action.room.id)
+                   return action.room;
+               return room
+            });
+            return {...state, roomList: updatedRooms};
         default:
             return state;
     }

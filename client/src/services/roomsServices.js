@@ -50,7 +50,8 @@ export async function updateRoom(roomId, roomAttributes) {
         method: 'PUT',
         mode: 'cors',
         headers: {
-            'Authorization': getTokenFromSessionStorage()
+            'Authorization': getTokenFromSessionStorage(),
+            'Content-Type': 'application/json',
         },
         body: JSON.stringify(roomAttributes)
     })
