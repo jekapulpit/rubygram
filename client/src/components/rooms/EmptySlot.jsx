@@ -30,6 +30,11 @@ class EmptySlot extends React.Component {
             .then((data) => {
                 this.props.toggleCreateRoom(data.room)
             })
+            .then(() => {
+                this.setState({
+                    editable: false
+                })
+            })
     };
 
     render() {
