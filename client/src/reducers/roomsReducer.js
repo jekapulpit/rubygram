@@ -8,6 +8,9 @@ export default (state = { roomList: [], currentRoom: {} }, action) => {
         case rooms.CREATE:
             let newRoomList = state.roomList.concat(action.newRoom);
             return {...state, roomList: newRoomList};
+        case rooms.DELETE:
+            let newRooms = state.roomList.filter((room) => room.id !== action.roomId);
+            return {...state, roomList: newRooms};
         default:
             return state;
     }
