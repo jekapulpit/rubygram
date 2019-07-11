@@ -10,9 +10,12 @@ import { Provider } from 'react-redux'
 import { BrowserRouter as Router, Route } from 'react-router-dom'
 import { Redirect } from 'react-router'
 import {getCurrentUser} from "./services/sessionStorageServices";
+import { ActionCableProvider } from 'react-actioncable-provider';
+import { API_WS_ROOT } from "./constants";
 
 ReactDOM.render(
     <Provider store={store}>
+        <ActionCableProvider url={API_WS_ROOT}>
         <Router>
             <Route path="/" render={() => (
                 getCurrentUser() ?
@@ -24,6 +27,7 @@ ReactDOM.render(
             <Route exact path="/home/rooms" component={RoomContent} />
             <Route exact path="/login" component={Login} />
         </Router>
+        </ActionCableProvider>
     </Provider>,
     document.getElementById('root'));
 
