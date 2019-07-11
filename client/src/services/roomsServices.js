@@ -1,8 +1,8 @@
-import { apiHost, apiPort } from '../constants'
+import { API_HOST, API_PORT, HEADERS } from '../constants'
 import { getTokenFromSessionStorage } from "./sessionStorageServices";
 
 export async function getUserRooms() {
-    return fetch(`http://${apiHost}:${apiPort}/api/v4/rooms/`, {
+    return fetch(`http://${API_HOST}:${API_PORT}/api/v4/rooms/`, {
         mode: 'cors',
         headers: {
             'Authorization': getTokenFromSessionStorage()
@@ -13,7 +13,7 @@ export async function getUserRooms() {
 
 
 export async function getRoom(roomId) {
-    return fetch(`http://${apiHost}:${apiPort}/api/v4/rooms/${roomId}`, {
+    return fetch(`http://${API_HOST}:${API_PORT}/api/v4/rooms/${roomId}`, {
         mode: 'cors',
         headers: {
             'Authorization': getTokenFromSessionStorage()
@@ -23,7 +23,7 @@ export async function getRoom(roomId) {
 }
 
 export async function addNewRoom(roomAttributes) {
-    return fetch(`http://${apiHost}:${apiPort}/api/v4/rooms/`, {
+    return fetch(`http://${API_HOST}:${API_PORT}/api/v4/rooms/`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -35,7 +35,7 @@ export async function addNewRoom(roomAttributes) {
 }
 
 export async function deleteRoom(roomId) {
-    return fetch(`http://${apiHost}:${apiPort}/api/v4/rooms/${roomId}`, {
+    return fetch(`http://${API_HOST}:${API_PORT}/api/v4/rooms/${roomId}`, {
         method: 'DELETE',
         mode: 'cors',
         headers: {
@@ -46,7 +46,7 @@ export async function deleteRoom(roomId) {
 }
 
 export async function updateRoom(roomId, roomAttributes) {
-    return fetch(`http://${apiHost}:${apiPort}/api/v4/rooms/${roomId}`, {
+    return fetch(`http://${API_HOST}:${API_PORT}/api/v4/rooms/${roomId}`, {
         method: 'PUT',
         mode: 'cors',
         headers: {
