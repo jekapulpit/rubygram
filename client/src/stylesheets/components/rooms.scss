@@ -14,13 +14,54 @@
       width: 200px;
       height: 100px;
       margin: 20px;
-      box-shadow: 0 0 6px 1px rgba(0,0,0,.6);
+      box-shadow: 0 0 6px 0 rgba(240,85,85,.6);
       display: flex;
       flex-direction: column;
       box-sizing: border-box;
       padding: 10px;
       align-items: center;
       justify-content: center;
+
+      &.info {
+        height: 100%;
+        margin: 0;
+        z-index: 100;
+        background-color: #fff;
+
+
+      }
+
+      &.with-room {
+        position: relative;
+        padding: 0;
+
+        &:hover .control-pop-up {
+          transform: translateY(25px);
+        }
+
+        .control-pop-up {
+          z-index: 50;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          height: 25px;
+          position: absolute;
+          bottom: 0;
+          width: 100%;
+          -webkit-transition: .3s;
+          -moz-transition: .3s;
+          -ms-transition: .3s;
+          -o-transition: .3s;
+          transition: .3s;
+        }
+      }
+
+      .new-card-fields {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+      }
 
       h2, p {
         margin: 5px;

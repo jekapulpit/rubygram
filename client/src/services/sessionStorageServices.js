@@ -10,3 +10,8 @@ export const deleteUserSession = () => {
 export const getCurrentUser = () => {
     return JSON.parse(window.sessionStorage.getItem('currentUser'));
 };
+
+export const getTokenFromSessionStorage = () => {
+    let token = window.sessionStorage.getItem('auth_token');
+    return token ? `Bearer ${token.split('"').join('')}` : null;
+};
