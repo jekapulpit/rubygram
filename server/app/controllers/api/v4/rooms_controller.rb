@@ -19,7 +19,7 @@ class Api::V4::RoomsController < ApplicationController
   def create
     room = Room.new(room_params)
     current_user.rooms << room
-    render json: { room: room, success: room.valid? }
+    render json: { room: room, success: room.valid?, errors: room.errors }
   end
 
   def destroy
