@@ -5,6 +5,7 @@ import {rooms} from "../../actionTypes";
 import {addNewRoom, deleteRoom, updateRoom} from "../../services/roomsServices";
 import {connect} from "react-redux";
 import {Grid} from "@material-ui/core";
+import { Link } from 'react-router-dom';
 
 class RoomCard extends React.Component {
     constructor(props) {
@@ -54,18 +55,18 @@ class RoomCard extends React.Component {
             </Grid>
         ) : (
             <React.Fragment>
-            <div className='room-card info'>
-                <h2>{this.props.room.name}</h2>
-            </div>
-            <div className="control-pop-up">
-                <button onClick={() => {
-                    deleteRoom(this.props.room.id)
-                        .then((data) => {
-                            this.props.toggleDeleteRoom(data.destroyed.id)
-                        })
-                    }}>x</button>
-                <button onClick={() => this.handleEdit()}>edit</button>
-            </div>
+                <Link to={'/home/rooms/' + this.props.room.id} className='room-card info'>
+                    <h2>{this.props.room.name}</h2>
+                </Link>
+                <div className="control-pop-up">
+                    <button onClick={() => {
+                        deleteRoom(this.props.room.id)
+                            .then((data) => {
+                                this.props.toggleDeleteRoom(data.destroyed.id)
+                            })
+                        }}>x</button>
+                    <button onClick={() => this.handleEdit()}>edit</button>
+                </div>
             </React.Fragment>
         );
 
