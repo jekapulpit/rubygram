@@ -9,3 +9,10 @@ export const rooms = {
     DELETE: 'DELETE_ROOM',
     UPDATE: 'UPDATE_ROOM',
 };
+
+export const messages = {
+    GET_ALL_MESSAGES: 'GET_ALL_MESSAGES',
+    SEND: 'SEND_MESSAGE',
+    DELETE: 'DELETE_MESSAGE',
+    RECEIVE: 'RECEIVE_MESSAGE',
+};

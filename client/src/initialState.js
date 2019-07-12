@@ -5,6 +5,9 @@ export default  {
     },
     rooms: {
         roomList: [],
-        currentRoom: {}
+        currentRoom: {
+            messages: [],
+            users: []
+        }
     }
 };
