@@ -13,6 +13,6 @@ export async function sendMessage(messageAttributes) {
         .then((response) => { return response.json() });
 }
 
-export async function receiveMessage(message) {
+export function receiveMessage(message) {
     console.log(message);
 }

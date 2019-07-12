@@ -5,6 +5,7 @@ export const users = {
 
 export const rooms = {
     SET_ROOM_LIST: 'SET_ROOM_LIST',
+    SET_CURRENT_ROOM: 'SET_ROOM',
     CREATE: 'CREATE_ROOM',
     DELETE: 'DELETE_ROOM',
     UPDATE: 'UPDATE_ROOM',

@@ -6,6 +6,7 @@ export default  {
     rooms: {
         roomList: [],
         currentRoom: {
+            roomInfo: {},
             messages: [],
             users: []
         }

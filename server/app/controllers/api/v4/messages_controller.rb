@@ -1,11 +1,9 @@
 # frozen_string_literal: true
 
 class Api::V4::MessagesController < ApplicationController
-  skip_before_action :verify_authenticity_token
-
   def create
     message = Message.new(message_params)
-    room = message_params[:recipient_id]
+    room = Room.find(message_params[:recipient_id])
     if message.save
       RoomsChannel.broadcast_to room, message
       render json: {

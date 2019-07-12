@@ -18,6 +18,9 @@ export default (state = { roomList: [], currentRoom: {} }, action) => {
                return room
             });
             return {...state, roomList: updatedRooms};
+        case rooms.SET_CURRENT_ROOM:
+            let {room, users} = action.data;
+            return {...state, currentRoom: { messages: action.data.messages, roomInfo: room, users: users }};
 
         case messages.GET_ALL_MESSAGES:
             return {...state, currentRoom: {...state.currentRoom, messages: action.messages}};

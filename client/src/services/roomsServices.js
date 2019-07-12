@@ -16,6 +16,7 @@ export async function getRoom(roomId) {
     return fetch(`http://${API_HOST}:${API_PORT}/api/v4/rooms/${roomId}`, {
         mode: 'cors',
         headers: {
+            'Content-Type': 'application/json',
             'Authorization': getTokenFromSessionStorage()
         }
     })
