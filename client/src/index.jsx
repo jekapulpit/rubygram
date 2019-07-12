@@ -12,6 +12,7 @@ import { Redirect } from 'react-router'
 import {getCurrentUser} from "./services/sessionStorageServices";
 import { ActionCableProvider } from 'react-actioncable-provider';
 import { API_WS_ROOT } from "./constants";
+import ActiveRoom from "./components/rooms/ActiveRoom";
 
 ReactDOM.render(
     <Provider store={store}>
@@ -25,6 +26,7 @@ ReactDOM.render(
             )}/>
             <Route path="/home" component={Menu} />
             <Route exact path="/home/rooms" component={RoomContent} />
+            <Route exact path="/home/rooms/:id" component={ActiveRoom} />
             <Route exact path="/login" component={Login} />
         </Router>
         </ActionCableProvider>
