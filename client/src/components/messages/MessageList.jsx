@@ -7,7 +7,7 @@ const MessageList = props => {
       return (<Message key={message.id} message={message} />);
     });
     return (
-        <div className="talk talk-active">
+        <div className="talk">
           <div className="message-box">
             <div id="m-list" className="messages">
               {messages}
