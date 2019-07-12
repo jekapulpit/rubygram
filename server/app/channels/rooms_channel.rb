@@ -2,7 +2,7 @@
 
 class RoomsChannel < ApplicationCable::Channel
   def subscribed
-    @room = 'all_rooms'
+    @room = Room.find(params[:room_id])
     stream_for @room
   end
 
