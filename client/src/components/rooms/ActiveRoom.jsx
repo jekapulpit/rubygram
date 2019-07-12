@@ -29,7 +29,7 @@ class ActiveRoom extends React.Component {
         return (
             <div className='content-container'>
                 {this.props.room.roomInfo.id ? (<Cable room={this.props.room.roomInfo}/>) : null}
-                <MessageList messages={this.props.room.messages}/>
+                <MessageList roomId={this.props.room.roomInfo.id} messages={this.props.room.messages}/>
             </div>
         )
     }

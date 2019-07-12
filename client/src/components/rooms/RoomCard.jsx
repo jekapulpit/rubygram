@@ -2,7 +2,7 @@ import React from 'react';
 import { hot } from 'react-hot-loader/root';
 import '../../stylesheets/components/rooms.scss'
 import {rooms} from "../../actionTypes";
-import {addNewRoom, deleteRoom, updateRoom} from "../../services/roomsServices";
+import {deleteRoom, updateRoom} from "../../services/roomsServices";
 import {connect} from "react-redux";
 import {Grid} from "@material-ui/core";
 import { Link } from 'react-router-dom';
