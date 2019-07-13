@@ -1,5 +1,7 @@
 import { API_HOST, API_PORT, HEADERS } from '../constants'
 import { getTokenFromSessionStorage } from "./sessionStorageServices";
+import store from '../store'
+import {messages} from "../actionTypes";
 
 export async function sendMessage(messageAttributes) {
     return fetch(`http://${API_HOST}:${API_PORT}/api/v4/messages/`, {
@@ -14,5 +16,5 @@ export async function sendMessage(messageAttributes) {
 }
 
 export function receiveMessage(message) {
-    console.log(message);
+    store.dispatch({type: messages.RECEIVE, message: message})
 }

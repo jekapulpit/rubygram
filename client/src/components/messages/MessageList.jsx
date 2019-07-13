@@ -17,9 +17,11 @@ const MessageList = props => {
             </div>
             <form onSubmit={(e) => {
               e.preventDefault();
+              let newMessageContent = newMessage.value;
+              e.target.reset();
               sendMessage({
                 message: {
-                  content: newMessage.value,
+                  content: newMessageContent,
                   sender_id: getCurrentUser().id,
                   recipient_id: props.roomId,
                   recipient_type: "Room",

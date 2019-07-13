@@ -8,6 +8,7 @@ import {rooms} from "../../actionTypes";
 import {maxChats} from '../../constants'
 import EmptySlot from "./EmptySlot";
 import BlockedEmptySlot from "./BlockedEmptySlot";
+import Cable from "./Cable";
 
 class RoomList extends React.Component {
     componentDidMount() {
@@ -18,7 +19,11 @@ class RoomList extends React.Component {
 
     render() {
         let rooms = this.props.roomList.map((room) => {
-            return (<RoomCard key={room.id} room={room} />)
+            return (
+                <React.Fragment>
+                    <RoomCard key={room.id} room={room} />
+                </React.Fragment>
+            )
         });
 
         let restSlotsNumber = (maxChats - rooms.length - 1);
