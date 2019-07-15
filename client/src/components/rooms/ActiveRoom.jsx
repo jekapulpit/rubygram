@@ -1,13 +1,14 @@
 import React from 'react';
 import { hot } from 'react-hot-loader/root';
 import '../../stylesheets/components/rooms.scss'
-import {messages, rooms} from "../../actionTypes";
+import {messages, rooms, search} from "../../actionTypes";
 import {connect} from "react-redux";
 import Cable from './Cable'
 import {getRoom} from "../../services/roomsServices";
 import MessageList from "../messages/MessageList";
 import basicScroll from '../../services/scrollingService'
 import SearchWindow from "../search/SearchWindow";
+import searchUsers from '../../services/searchService'
 
 class ActiveRoom extends React.Component {
     componentDidMount() {
@@ -18,19 +19,33 @@ class ActiveRoom extends React.Component {
             .then(() => basicScroll())
     }
 
+    handleSearch = (request) => {
+        searchUsers(request)
+            .then((data) => {
+                this.props.toggleExecuteSearch(data.results)
+            })
+    };
+
     render() {
         return (
             <div className='content-container'>
+                <div className="room-header">
+                    <button onClick={() => this.props.toggleSearch()}>invite more people</button>
+                </div>
                 <Cable room={this.props.room.roomInfo}/>
                 <MessageList roomId={this.props.room.roomInfo.id} messages={this.props.room.messages}/>
-                <SearchWindow visible={false}/>
+                <SearchWindow  handleSearch={this.handleSearch}
+                               results={this.props.search.results}
+                               toggleSearch={this.props.toggleSearch}
+                               visible={this.props.search.active}/>
             </div>
         )
     }
 }
 
 const mapStateToProps = state => ({
-    room: state.rooms.currentRoom
+    room: state.rooms.currentRoom,
+    search: state.search
 });
 
 const mapDispatchToProps = function(dispatch, ownProps) {
@@ -43,6 +58,12 @@ const mapDispatchToProps = function(dispatch, ownProps) {
         },
         toggleReceiveMessage: (message) => {
             dispatch({ type: messages.RECEIVE, message: message })
+        },
+        toggleSearch: () => {
+            dispatch({ type: search.TOGGLE })
+        },
+        toggleExecuteSearch: (results) => {
+            dispatch({ type: search.EXECUTE, results: results })
         }
     }
 };

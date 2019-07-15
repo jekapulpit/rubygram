@@ -10,5 +10,9 @@ export default  {
             messages: [],
             users: []
         }
+    },
+    search: {
+        active: false,
+        results: []
     }
 };

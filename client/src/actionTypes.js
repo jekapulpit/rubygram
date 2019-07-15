@@ -17,3 +17,8 @@ export const messages = {
     DELETE: 'DELETE_MESSAGE',
     RECEIVE: 'RECEIVE_MESSAGE',
 };
+
+export const search = {
+    TOGGLE: 'TOGGLE_SEARCH',
+    EXECUTE: 'EXECUTE_SEARCH'
+};

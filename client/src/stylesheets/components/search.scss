@@ -47,6 +47,7 @@
       display: flex;
       flex-direction: column;
       overflow-y: scroll;
+      box-sizing: border-box;
 
       .result {
         display: flex;
