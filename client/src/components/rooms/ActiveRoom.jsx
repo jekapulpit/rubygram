@@ -6,23 +6,19 @@ import {connect} from "react-redux";
 import Cable from './Cable'
 import {getRoom} from "../../services/roomsServices";
 import MessageList from "../messages/MessageList";
+import basicScroll from '../../services/scrollingService'
 
 class ActiveRoom extends React.Component {
     constructor(props) {
         super(props);
     }
 
-    basicScroll = () => {
-        let objDiv = document.getElementById('m-list');
-        objDiv.scrollTop = 9999;
-    };
-
     componentDidMount() {
         getRoom(this.props.match.params.id)
             .then((data) => {
                 this.props.toggleSetRoom(data)
             })
-            .then(() => this.basicScroll())
+            .then(() => basicScroll())
     }
 
     render() {

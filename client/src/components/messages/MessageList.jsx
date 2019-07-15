@@ -3,6 +3,7 @@ import Message from "./Message";
 import { hot } from 'react-hot-loader/root';
 import {sendMessage} from "../../services/messagesServices";
 import {getCurrentUser} from "../../services/sessionStorageServices";
+import basicScroll from "../../services/scrollingService";
 
 const MessageList = props => {
     let messages = props.messages.map((message) => {
@@ -27,9 +28,7 @@ const MessageList = props => {
                   recipient_type: "Room",
                   sender_type: "User",
                 }
-              }).then(() => {
-
-              });
+              })
             }} className="send-box">
               <input ref={input => newMessage = input} type="text"/>
               <input type="submit" value="send" />
