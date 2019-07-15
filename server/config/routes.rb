@@ -8,6 +8,7 @@ Rails.application.routes.draw do
       resources :messages
       resource :auth, only: %i[create]
       post '/rooms/unreaded/:id', to: 'rooms#read_all'
+      get '/users/search', to: 'search#find_users'
     end
   end
 

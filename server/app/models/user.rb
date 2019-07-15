@@ -8,4 +8,6 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   searchkick word_start: %i[username email]
+
+  scope :search_by_email, ->(email) { search(email, fields: [{ email: :exact }, :username]) }
 end
