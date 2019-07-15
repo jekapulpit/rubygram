@@ -5,7 +5,6 @@ class Invite < ApplicationRecord
   belongs_to :user
 
   enum status: %i[sended accepted rejected]
-  enum invite_type: %i[relation modering]
 
   def accept
     unless status != 'sended' || user.in?(room.users)
