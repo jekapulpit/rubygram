@@ -10,7 +10,7 @@ module Invites
     end
 
     def call
-      Invite.create(content: content, invite_type: invite_type, room_id: room, user_id: user)
+      Invite.new(content: content, invite_type: invite_type, room_id: room, user_id: user) unless Invite.find_by(room_id: room, user_id: user)
     end
   end
 end

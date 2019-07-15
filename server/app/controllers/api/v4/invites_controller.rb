@@ -12,8 +12,12 @@ class Api::V4::InvitesController < ApplicationController
   end
 
   def create
-    invite = Invites::CreateService.new(invite_params[:content], invite_params[:user_id], invite_params[:room_id]).call
-    render json: { success: invite.valid?, invite: invite, errors: invite.errors }
+    begin
+      invite = Invites::CreateService.new(invite_params[:content], invite_params[:user_id], invite_params[:room_id]).call
+      render json: { success: invite.valid?, invite: invite, errors: invite.errors }
+    rescue NoMethodError => exception
+      render json: { success: false, errors: { record: [exception.message] }}
+    end
   end
 
   def index
