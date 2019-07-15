@@ -26,6 +26,7 @@ ReactDOM.render(
             )}/>
             <Route path="/home" component={Menu} />
             <Route exact path="/home/rooms" component={RoomContent} />
+            <Route exact path="/home/invites" component={RoomContent} />
             <Route exact path="/home/rooms/:id" component={ActiveRoom} />
             <Route exact path="/login" component={Login} />
         </Router>

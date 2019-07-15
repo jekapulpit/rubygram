@@ -1,4 +1,4 @@
-import { API_HOST, API_PORT, HEADERS } from '../constants'
+import { API_HOST, API_PORT } from '../constants'
 import { getTokenFromSessionStorage } from "./sessionStorageServices";
 
 export async function getUserRooms() {

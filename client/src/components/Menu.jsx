@@ -15,6 +15,7 @@ const Menu = props => {
             <p>You logged in as {getCurrentUser().username}, <span onClick={() => logout()}>log out</span></p>
             <Tabs>
                 <Tab component={Link} to="/home/rooms" label="Room List" />
+                <Tab component={Link} to="/home/notifications" label="Notifications" />
                 <Tab component={Link} to="/home/profile" label="Profile" />
             </Tabs>
         </AppBar>

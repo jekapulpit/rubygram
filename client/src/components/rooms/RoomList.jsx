@@ -8,7 +8,6 @@ import {rooms} from "../../actionTypes";
 import {maxChats} from '../../constants'
 import EmptySlot from "./EmptySlot";
 import BlockedEmptySlot from "./BlockedEmptySlot";
-import Cable from "./Cable";
 
 class RoomList extends React.Component {
     componentDidMount() {

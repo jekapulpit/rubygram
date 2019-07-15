@@ -9,10 +9,6 @@ import MessageList from "../messages/MessageList";
 import basicScroll from '../../services/scrollingService'
 
 class ActiveRoom extends React.Component {
-    constructor(props) {
-        super(props);
-    }
-
     componentDidMount() {
         getRoom(this.props.match.params.id)
             .then((data) => {

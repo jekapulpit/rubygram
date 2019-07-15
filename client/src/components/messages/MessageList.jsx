@@ -3,7 +3,6 @@ import Message from "./Message";
 import { hot } from 'react-hot-loader/root';
 import {sendMessage} from "../../services/messagesServices";
 import {getCurrentUser} from "../../services/sessionStorageServices";
-import basicScroll from "../../services/scrollingService";
 
 const MessageList = props => {
     let messages = props.messages.map((message) => {
