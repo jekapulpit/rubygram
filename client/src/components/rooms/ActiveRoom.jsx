@@ -7,6 +7,7 @@ import Cable from './Cable'
 import {getRoom} from "../../services/roomsServices";
 import MessageList from "../messages/MessageList";
 import basicScroll from '../../services/scrollingService'
+import SearchWindow from "../search/SearchWindow";
 
 class ActiveRoom extends React.Component {
     componentDidMount() {
@@ -22,6 +23,7 @@ class ActiveRoom extends React.Component {
             <div className='content-container'>
                 <Cable room={this.props.room.roomInfo}/>
                 <MessageList roomId={this.props.room.roomInfo.id} messages={this.props.room.messages}/>
+                <SearchWindow visible={false}/>
             </div>
         )
     }
