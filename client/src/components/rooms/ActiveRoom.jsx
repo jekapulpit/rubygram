@@ -16,11 +16,12 @@ class ActiveRoom extends React.Component {
             .then((data) => {
                 this.props.toggleSetRoom(data)
             })
+            .then(() => this.props.toggleCleanResults())
             .then(() => basicScroll())
     }
 
     handleSearch = (request) => {
-        searchUsers(request)
+        searchUsers(request, this.props.room.roomInfo.id)
             .then((data) => {
                 this.props.toggleExecuteSearch(data.results)
             })
@@ -61,6 +62,9 @@ const mapDispatchToProps = function(dispatch, ownProps) {
         },
         toggleSearch: () => {
             dispatch({ type: search.TOGGLE })
+        },
+        toggleCleanResults: () => {
+            dispatch({ type: search.CLEAN })
         },
         toggleExecuteSearch: (results) => {
             dispatch({ type: search.EXECUTE, results: results })

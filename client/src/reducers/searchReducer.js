@@ -6,6 +6,8 @@ export default (state = { results: [], active: false }, action) => {
             return {...state, active: !state.active};
         case search.EXECUTE:
             return {...state, results: action.results};
+        case search.CLEAN:
+            return {...state, results: []};
         default:
             return state;
     }

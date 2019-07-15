@@ -1,6 +1,20 @@
 import React from "react"
-import PropTypes from "prop-types"
+
 const Result = props => {
+    let inviteStatus;
+    switch (props.userInfo.invite_status) {
+        case "sent":
+            inviteStatus = (<p className="sent">sent</p>);
+            break;
+        case "accepted":
+            inviteStatus = (<p className="accepted">accepted</p>);
+            break;
+        case "rejected":
+            inviteStatus = (<p className="rejected">rejected</p>);
+            break;
+        default:
+            inviteStatus = (<button>invite</button>)
+    }
     return (
         <div className="result">
           <div className="person-data">
@@ -8,7 +22,7 @@ const Result = props => {
             <p>{props.userInfo.email}</p>
           </div>
           <div className="invite-button">
-              <button>invite</button>
+              {inviteStatus}
           </div>
         </div>
     );

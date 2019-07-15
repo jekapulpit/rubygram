@@ -2,7 +2,7 @@
 
 class Api::V4::SearchController < ApplicationController
   def find_users
-    results = User.search_by_email(params[:request])
+    results = User.search_for_invite(params[:request], params[:room_id])
     render json: { results: results }
   end
 end
