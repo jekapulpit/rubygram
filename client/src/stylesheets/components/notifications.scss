@@ -30,6 +30,9 @@
         .btn {
           width: 70px;
           height: 30px;
+          color: #fff;
+          font-weight: bold;
+          font-size: 13px;
           margin: 5px;
           cursor: pointer;
           -webkit-border-radius: 5px;
@@ -46,6 +49,7 @@
             box-shadow: 0 0 6px 0 rgba(33, 166, 110, 0);
 
             &:hover {
+              color: #21A66D;
               background-color: transparent;
               box-shadow: 0 0 6px 0 rgba(33, 166, 110, 1);
             }
@@ -56,6 +60,7 @@
             box-shadow: 0 0 6px 0 rgba(224, 58, 7, 0);
 
             &:hover {
+              color: #E03A07;
               background-color: transparent;
               box-shadow: 0 0 6px 0 rgba(224, 58, 7, 1);
             }
