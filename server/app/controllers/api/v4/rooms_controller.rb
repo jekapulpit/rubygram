@@ -4,7 +4,7 @@ class Api::V4::RoomsController < ApplicationController
   def show
     begin
       room = Room.includes(:messages, :users).find(params[:id])
-      messages = room.messages
+      messages = room.messages.map(&:with_send_info)
       render json: { room: room, messages: messages, users: room.users }
     rescue ArgumentError
       render json: { error: "error message" }
@@ -12,7 +12,7 @@ class Api::V4::RoomsController < ApplicationController
   end
 
   def index
-    rooms = current_user.rooms
+    rooms = current_user.all_rooms
     render json: { rooms: rooms }
   end
 

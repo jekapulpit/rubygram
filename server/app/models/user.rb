@@ -30,6 +30,10 @@ class User < ApplicationRecord
     )
   end
 
+  def all_rooms
+    rooms.map { |room| room.with_member_status(self) }
+  end
+
   scope :search_by_email, ->(email) { search(email, fields: [{ email: :exact }, :username]) }
   scope :search_for_invite, ->(request, room_id) { search_by_email(request).map { |user| user.with_invited_status(Room.find(room_id)) } }
 end

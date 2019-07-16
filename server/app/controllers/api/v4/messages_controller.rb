@@ -5,7 +5,7 @@ class Api::V4::MessagesController < ApplicationController
     message = Message.new(message_params)
     room = Room.find(message_params[:recipient_id])
     if message.save
-      RoomsChannel.broadcast_to room, message
+      RoomsChannel.broadcast_to room, message.with_send_info
       render json: {
           success: true,
           message: message,
