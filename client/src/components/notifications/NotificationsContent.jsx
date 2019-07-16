@@ -4,7 +4,7 @@ import '../../stylesheets/components/notifications.scss'
 import { invites } from "../../actionTypes";
 import {connect} from "react-redux";
 import {acceptInvite, getUserInvites, rejectInvite} from "../../services/invitesServices";
-import Invite from './Invite'
+import InviteList from "./InviteList";
 
 class NotificationsContent extends React.Component {
     componentDidMount() {
@@ -29,18 +29,11 @@ class NotificationsContent extends React.Component {
     };
 
     render () {
-        let invites = this.props.inviteList.map((invite) => {
-           return (
-               <Invite
-                   handleAcceptInvite={this.handleAcceptInvite}
-                   handleRejectInvite={this.handleRejectInvite}
-                   invite={invite}
-                   key={invite.id} />
-           )
-        });
         return (
             <div className='content-container'>
-                {invites}
+                <InviteList inviteList={this.props.inviteList}
+                            handleAcceptInvite={this.handleAcceptInvite}
+                            handleRejectInvite={this.handleRejectInvite}/>
             </div>
         )
     }

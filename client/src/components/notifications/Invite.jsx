@@ -6,8 +6,10 @@ const Invite = props => {
     return (
         <div className="invite">
             {props.invite.content}
-            <button onClick={() => props.handleAcceptInvite(props.invite.id)}>accept</button>
-            <button onClick={() => props.handleRejectInvite(props.invite.id)}>reject</button>
+            <div className="invite-controls">
+                <button className="btn accept" onClick={() => props.handleAcceptInvite(props.invite.id)}>accept</button>
+                <button className="btn reject" onClick={() => props.handleRejectInvite(props.invite.id)}>reject</button>
+            </div>
         </div>
     )
 };
