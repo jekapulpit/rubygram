@@ -32,11 +32,25 @@ export async function getUserInvites() {
 }
 
 export async function acceptInvite(inviteId) {
-
+    return fetch(`http://${API_HOST}:${API_PORT}/api/v4/invites/accept/${inviteId}`, {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': getTokenFromSessionStorage()
+        },
+    })
+        .then((response) => { return response.json() });
 }
 
 export async function rejectInvite(inviteId) {
-
+    return fetch(`http://${API_HOST}:${API_PORT}/api/v4/invites/reject/${inviteId}`, {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': getTokenFromSessionStorage()
+        },
+    })
+        .then((response) => { return response.json() });
 }
 
 export async function receiveInvite(invite) {

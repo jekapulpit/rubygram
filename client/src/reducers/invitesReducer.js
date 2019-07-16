@@ -7,9 +7,9 @@ export default (state = { inviteList: [] }, action) => {
         case invites.RECEIVE:
             return {...state, inviteList: state.inviteList.concat(action.invite)};
         case invites.ACCEPT:
-            return {...state, inviteList: state.inviteList.filter((invite) => invite.id !== action.invite.id)};
+            return {...state, inviteList: state.inviteList.filter((invite) => invite.id !== action.inviteId)};
         case invites.REJECT:
-            return {...state, inviteList: state.inviteList.filter((invite) => invite.id !== action.invite.id)};
+            return {...state, inviteList: state.inviteList.filter((invite) => invite.id !== action.inviteId)};
         default:
             return state;
     }

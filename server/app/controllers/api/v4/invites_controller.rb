@@ -4,7 +4,6 @@ class Api::V4::InvitesController < ApplicationController
   def accept
     invite = Invite.find(params[:id])
     if invite.accept
-      NotificationsChannel.broadcast_to 'notifications_channel', invite
       render json: { success: true, room: invite.room, user: invite.user }
     else
       render json: { success: false }
@@ -14,7 +13,6 @@ class Api::V4::InvitesController < ApplicationController
   def reject
     invite = Invite.find(params[:id])
     if invite.reject
-      NotificationsChannel.broadcast_to 'notifications_channel', invite
       render json: { success: true, room: invite.room, user: invite.user }
     else
       render json: { success: false }
@@ -24,7 +22,6 @@ class Api::V4::InvitesController < ApplicationController
   def create
     begin
       invite = Invites::CreateService.new(invite_params[:content], invite_params[:user_id], invite_params[:room_id]).call
-      puts invite.valid?
       NotificationsChannel.broadcast_to 'notifications_channel', invite if invite.valid?
       render json: { success: invite.valid?, invite: invite, errors: invite.errors }
     rescue NoMethodError => exception

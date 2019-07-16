@@ -3,7 +3,8 @@ import { hot } from 'react-hot-loader/root';
 import '../../stylesheets/components/notifications.scss'
 import { invites } from "../../actionTypes";
 import {connect} from "react-redux";
-import {getUserInvites} from "../../services/invitesServices";
+import {acceptInvite, getUserInvites, rejectInvite} from "../../services/invitesServices";
+import Invite from './Invite'
 
 class NotificationsContent extends React.Component {
     componentDidMount() {
@@ -13,10 +14,28 @@ class NotificationsContent extends React.Component {
             })
     }
 
+    handleAcceptInvite = (inviteId) => {
+        acceptInvite(inviteId)
+            .then((data) => {
+                this.props.toggleAcceptInvite(inviteId)
+            })
+    };
+
+    handleRejectInvite = (inviteId) => {
+        rejectInvite(inviteId)
+            .then((data) => {
+                this.props.toggleRejectInvite(inviteId)
+            })
+    };
+
     render () {
         let invites = this.props.inviteList.map((invite) => {
            return (
-               <div key={invite.id}>{invite.content}</div>
+               <Invite
+                   handleAcceptInvite={this.handleAcceptInvite}
+                   handleRejectInvite={this.handleRejectInvite}
+                   invite={invite}
+                   key={invite.id} />
            )
         });
         return (
@@ -36,6 +55,12 @@ const mapDispatchToProps = function(dispatch, ownProps) {
         toggleSetInviteList: (inviteList) => {
             dispatch({ type: invites.SET_LIST, invites: inviteList })
         },
+        toggleAcceptInvite: (inviteId) => {
+            dispatch({ type: invites.ACCEPT, inviteId: inviteId })
+        },
+        toggleRejectInvite: (inviteId) => {
+            dispatch({ type: invites.REJECT, inviteId: inviteId })
+        }
     }
 };
 
