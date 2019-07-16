@@ -1,0 +1,11 @@
+#navbar-menu {
+  height: 100%;
+  justify-content: center;
+  align-items: center;
+  width: 250px;
+
+  .MuiTabs-flexContainer {
+    display: flex;
+    flex-direction: column;
+  }
+}

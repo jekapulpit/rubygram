@@ -1,0 +1,161 @@
+.content-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+
+  .room-header {
+    height: 150px;
+  }
+
+  .talk {
+    display: flex;
+    width: 100%;
+    height: 100%;
+
+    .message-box {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+
+      .messages {
+        width: 100%;
+        height: 100%;
+        overflow-y: scroll;
+
+        .message {
+          padding: 5px;
+          padding-left: 10px;
+          margin: 10px;
+          background-color: white;
+          max-width: 300px;
+          font-size: 12px;
+          border-radius: 3px;
+          -webkit-box-shadow: 3px 3px 10px 0 rgba(0,0,0,.3);
+          -moz-box-shadow: 3px 3px 10px 0 rgba(0,0,0,.3);
+          box-shadow: 3px 3px 10px 0 rgba(0,0,0,.3);
+        }
+
+        .partner-message {
+          width: 100%;
+          display: flex;
+          justify-content: flex-start;
+
+          .sender, .sended {
+            align-self: flex-start;
+          }
+        }
+
+        .self-message {
+          width: 100%;
+          display: flex;
+          justify-content: flex-end;
+
+          .sender, .sended {
+            align-self: flex-end;
+          }
+        }
+
+        .message {
+          display: flex;
+          flex-direction: column;
+        }
+
+        .sender, .sended {
+          color: #999999;
+          font-size: 10px;
+        }
+      }
+
+      .send-box {
+        width: 100%;
+        min-height: 100px;
+        max-height: 100px;
+        background-color: #f6f6f6;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: relative;
+
+        .input {
+          width: 50%;
+          min-height: 25px;
+          border-radius: 5px 0 0 5px;
+          padding: 5px 10px;
+          background-color: white;
+          border: 1px solid #bdbdbd;
+          outline: none;
+          border-right: none;
+          color: #212121;
+          font-size: 12px;
+        }
+      }
+    }
+  }
+
+  .room-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+
+    .room-card {
+      width: 200px;
+      height: 100px;
+      margin: 20px;
+      box-shadow: 0 0 6px 0 rgba(240,85,85,.6);
+      display: flex;
+      flex-direction: column;
+      box-sizing: border-box;
+      padding: 10px;
+      align-items: center;
+      justify-content: center;
+
+      &.info {
+        height: 100%;
+        margin: 0;
+        z-index: 100;
+        background-color: #fff;
+      }
+
+      &.with-room {
+        position: relative;
+        padding: 0;
+
+        &:hover .control-pop-up {
+          transform: translateY(25px);
+        }
+
+        .control-pop-up {
+          z-index: 50;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          height: 25px;
+          position: absolute;
+          bottom: 0;
+          width: 100%;
+          -webkit-transition: .3s;
+          -moz-transition: .3s;
+          -ms-transition: .3s;
+          -o-transition: .3s;
+          transition: .3s;
+        }
+      }
+
+      .new-card-fields {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+      }
+
+      h2, p {
+        margin: 5px;
+      }
+    }
+  }
+}
