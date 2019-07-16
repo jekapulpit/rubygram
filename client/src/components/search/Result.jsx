@@ -1,4 +1,5 @@
 import React from "react"
+import {sendInvite} from "../../services/invitesServices";
 
 const Result = props => {
     let inviteStatus;
@@ -13,7 +14,7 @@ const Result = props => {
             inviteStatus = (<p className="rejected">rejected</p>);
             break;
         default:
-            inviteStatus = (<button>invite</button>)
+            inviteStatus = (<button onClick={() => sendInvite(props.userInfo.id, props.room.id, 'hello')}>invite</button>)
     }
     return (
         <div className="result">

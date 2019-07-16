@@ -38,6 +38,7 @@ class ActiveRoom extends React.Component {
                 <SearchWindow  handleSearch={this.handleSearch}
                                results={this.props.search.results}
                                toggleSearch={this.props.toggleSearch}
+                               room={this.props.room.roomInfo}
                                visible={this.props.search.active}/>
             </div>
         )

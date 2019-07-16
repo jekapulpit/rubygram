@@ -23,3 +23,11 @@ export const search = {
     EXECUTE: 'EXECUTE_SEARCH',
     CLEAN: 'CLEAN_SEARCH'
 };
+
+export const invites = {
+    SET_LIST: 'SET_INVITE_LIST',
+    RECEIVE: 'RECEIVE_INVITE',
+    ACCEPT: 'ACCEPT_INVITE',
+    REJECT: 'REJECT_INVITE',
+    READ: 'READ_INVITES'
+};

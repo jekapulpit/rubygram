@@ -14,5 +14,8 @@ export default  {
     search: {
         active: false,
         results: []
+    },
+    invites: {
+        inviteList: []
     }
 };
