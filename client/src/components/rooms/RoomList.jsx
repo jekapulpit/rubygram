@@ -17,15 +17,17 @@ class RoomList extends React.Component {
     }
 
     render() {
-        let rooms = this.props.roomList.map((room) => {
-            return (
-                <React.Fragment>
-                    <RoomCard key={room.id} room={room} />
-                </React.Fragment>
-            )
+        let createdRooms = this.props.roomList.filter((room) => room.member_status === "creator")
+            .map((room) => {
+            return (<RoomCard key={room.id} room={room} />)
         });
 
-        let restSlotsNumber = (maxChats - rooms.length - 1);
+        let memberships = this.props.roomList.filter((room) => room.member_status === "member")
+            .map((room) => {
+            return (<RoomCard key={room.id} room={room} />)
+        });
+
+        let restSlotsNumber = (maxChats - createdRooms.length - 1);
 
         let emptySlots = (new Array(restSlotsNumber >= 0 ? restSlotsNumber : 0).fill(null)).map((slot) => {
             return (<BlockedEmptySlot />)
@@ -33,9 +35,16 @@ class RoomList extends React.Component {
 
         return (
             <div className='room-list'>
-                {rooms}
-                {rooms.length >= 5 ? null : <EmptySlot />}
-                {emptySlots}
+                <p>your chats: </p>
+                <div className="room-section">
+                    {createdRooms}
+                    {createdRooms.length >= 5 ? null : <EmptySlot />}
+                    {emptySlots}
+                </div>
+                <p>your memberships: </p>
+                <div className="room-section">
+                    {memberships}
+                </div>
             </div>
         )
     }

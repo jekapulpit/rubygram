@@ -6,7 +6,6 @@ import RoomList from "./RoomList";
 const RoomContent = props => {
     return (
         <div className='content-container'>
-            roomList:
             <RoomList />
         </div>
     )
