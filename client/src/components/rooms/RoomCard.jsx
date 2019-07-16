@@ -39,7 +39,20 @@ class RoomCard extends React.Component {
     };
 
     render() {
-        let fill = this.state.editable ? (
+        let controls = this.props.room.member_status === "creator" ? (
+            <React.Fragment>
+                <button onClick={() => {
+                    deleteRoom(this.props.room.id)
+                        .then((data) => {
+                            this.props.toggleDeleteRoom(data.destroyed.id)
+                        })
+                }}>x</button>
+                <button onClick={() => this.handleEdit()}>edit</button>
+            </React.Fragment>
+        ) : (
+            <button>leave</button>
+        );
+            let fill = this.state.editable ? (
             <Grid container
                   direction="row"
                   spacing={2} >
@@ -59,13 +72,7 @@ class RoomCard extends React.Component {
                     <h2>{this.props.room.name}</h2>
                 </Link>
                 <div className="control-pop-up">
-                    <button onClick={() => {
-                        deleteRoom(this.props.room.id)
-                            .then((data) => {
-                                this.props.toggleDeleteRoom(data.destroyed.id)
-                            })
-                        }}>x</button>
-                    <button onClick={() => this.handleEdit()}>edit</button>
+                    {controls}
                 </div>
             </React.Fragment>
         );

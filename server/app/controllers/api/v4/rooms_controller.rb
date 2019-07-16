@@ -18,14 +18,14 @@ class Api::V4::RoomsController < ApplicationController
 
   def create
     room = Rooms::CreateService.new(room_params[:name], current_user).call
-    render json: { room: room, success: room.valid?, errors: room.errors }
+    render json: { room: room.with_member_status(current_user), success: room.valid?, errors: room.errors }
   end
 
   def update
     room = Room.find(params[:id])
     begin
       success = room.update_attributes(room_params)
-      render json: { success: success, room: room, errors: room.errors }
+      render json: { success: success, room: room.with_member_status(current_user), errors: room.errors }
     rescue ActiveRecord::RecordNotFound => exception
       render json: { success: false, errors: { record: [exception.message] } }
     end
