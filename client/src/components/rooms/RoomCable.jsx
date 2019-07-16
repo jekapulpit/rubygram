@@ -4,7 +4,7 @@ import '../../stylesheets/components/rooms.scss'
 import { ActionCableConsumer } from 'react-actioncable-provider';
 import {receiveMessage} from "../../services/messagesServices";
 
-class Cable extends React.Component {
+class RoomCable extends React.Component {
     shouldComponentUpdate(nextProps, nextState) {
         return !(!!this.props.room.id);
     }
@@ -20,4 +20,4 @@ class Cable extends React.Component {
     }
 }
 
-export default hot(Cable);
+export default hot(RoomCable);

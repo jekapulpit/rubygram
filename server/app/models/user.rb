@@ -15,6 +15,13 @@ class User < ApplicationRecord
     if invite
       return invite.status
     end
+    if in? room.users
+      return "accepted"
+    end
+  end
+
+  def sent_invites
+    invites.where(status: 'sent')
   end
 
   def with_invited_status(room)

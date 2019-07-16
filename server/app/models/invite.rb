@@ -11,9 +11,11 @@ class Invite < ApplicationRecord
       room.users << user
       update(status: 'accepted')
     end
+    self
   end
 
   def reject
     update(status: 'rejected') unless status != 'sent' || user.in?(room.users)
+    self
   end
 end

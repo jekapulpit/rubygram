@@ -13,3 +13,7 @@ export async function acceptInvite(inviteId) {
 export async function rejectInvite(inviteId) {
 
 }
+
+export async function receiveInvite(invite) {
+
+}

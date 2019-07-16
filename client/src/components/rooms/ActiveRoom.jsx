@@ -3,12 +3,12 @@ import { hot } from 'react-hot-loader/root';
 import '../../stylesheets/components/rooms.scss'
 import {messages, rooms, search} from "../../actionTypes";
 import {connect} from "react-redux";
-import Cable from './Cable'
 import {getRoom} from "../../services/roomsServices";
 import MessageList from "../messages/MessageList";
 import basicScroll from '../../services/scrollingService'
 import SearchWindow from "../search/SearchWindow";
 import searchUsers from '../../services/searchService'
+import RoomCable from "./RoomCable";
 
 class ActiveRoom extends React.Component {
     componentDidMount() {
@@ -33,7 +33,7 @@ class ActiveRoom extends React.Component {
                 <div className="room-header">
                     <button onClick={() => this.props.toggleSearch()}>invite more people</button>
                 </div>
-                <Cable room={this.props.room.roomInfo}/>
+                <RoomCable room={this.props.room.roomInfo}/>
                 <MessageList roomId={this.props.room.roomInfo.id} messages={this.props.room.messages}/>
                 <SearchWindow  handleSearch={this.handleSearch}
                                results={this.props.search.results}

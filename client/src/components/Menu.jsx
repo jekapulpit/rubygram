@@ -8,6 +8,7 @@ import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import {logout} from "../services/authentificationService";
 import {getCurrentUser} from "../services/sessionStorageServices";
+import NotificationsCable from "./notifications/NotificationsCable";
 
 const Menu = props => {
     return (
@@ -18,6 +19,7 @@ const Menu = props => {
                 <Tab component={Link} to="/home/notifications" label="Notifications" />
                 <Tab component={Link} to="/home/profile" label="Profile" />
             </Tabs>
+            <NotificationsCable/>
         </AppBar>
     )
 };
