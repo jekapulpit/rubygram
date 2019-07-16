@@ -9,6 +9,7 @@ export const rooms = {
     CREATE: 'CREATE_ROOM',
     DELETE: 'DELETE_ROOM',
     UPDATE: 'UPDATE_ROOM',
+    SHOW_USERS: 'SHOW_USERS',
 };
 
 export const messages = {

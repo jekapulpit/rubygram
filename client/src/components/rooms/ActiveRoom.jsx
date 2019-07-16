@@ -9,6 +9,7 @@ import basicScroll from '../../services/scrollingService'
 import SearchWindow from "../search/SearchWindow";
 import searchUsers from '../../services/searchService'
 import RoomCable from "./RoomCable";
+import UserList from "./UserList";
 
 class ActiveRoom extends React.Component {
     componentDidMount() {
@@ -32,6 +33,7 @@ class ActiveRoom extends React.Component {
             <div className='content-container'>
                 <div className="room-header">
                     <button onClick={() => this.props.toggleSearch()}>invite more people</button>
+                    <p onClick={() => this.props.toggleShowUsers()}>show users ({this.props.room.users.length})</p>
                 </div>
                 <RoomCable room={this.props.room.roomInfo}/>
                 <MessageList roomId={this.props.room.roomInfo.id} messages={this.props.room.messages}/>
@@ -41,6 +43,9 @@ class ActiveRoom extends React.Component {
                                toggleSearch={this.props.toggleSearch}
                                room={this.props.room.roomInfo}
                                visible={this.props.search.active}/>
+                <UserList visible={this.props.showUsers}
+                          toggleShowUsers={this.props.toggleShowUsers}
+                          users={this.props.room.users}/>
             </div>
         )
     }
@@ -48,6 +53,7 @@ class ActiveRoom extends React.Component {
 
 const mapStateToProps = state => ({
     room: state.rooms.currentRoom,
+    showUsers: state.rooms.showUsers,
     search: state.search
 });
 
@@ -55,6 +61,9 @@ const mapDispatchToProps = function(dispatch, ownProps) {
     return {
         toggleSetRoom: (data) => {
             dispatch({ type: rooms.SET_CURRENT_ROOM, data: data })
+        },
+        toggleShowUsers: () => {
+            dispatch({ type: rooms.SHOW_USERS })
         },
         toggleSendMessage: (message) => {
             dispatch({ type: messages.SEND, message: message })

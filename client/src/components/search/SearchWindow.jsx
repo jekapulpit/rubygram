@@ -26,7 +26,6 @@ const SearchWindow = props => {
                     <button onClick={() => props.toggleSearch()}>x</button>
                 </div>
             </div>
-
         </div>
     );
 };

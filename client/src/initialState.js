@@ -4,6 +4,7 @@ export default  {
         loggedIn: false
     },
     rooms: {
+        showUsers: false,
         roomList: [],
         currentRoom: {
             roomInfo: {},
