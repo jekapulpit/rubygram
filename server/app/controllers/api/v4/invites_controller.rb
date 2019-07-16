@@ -23,7 +23,8 @@ class Api::V4::InvitesController < ApplicationController
 
   def create
     begin
-      invite = Invites::CreateService.create(invite_params[:content], invite_params[:user_id], invite_params[:room_id]).call
+      invite = Invites::CreateService.new(invite_params[:content], invite_params[:user_id], invite_params[:room_id]).call
+      puts invite.valid?
       NotificationsChannel.broadcast_to 'notifications_channel', invite if invite.valid?
       render json: { success: invite.valid?, invite: invite, errors: invite.errors }
     rescue NoMethodError => exception
