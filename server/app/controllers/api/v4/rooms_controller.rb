@@ -36,6 +36,10 @@ class Api::V4::RoomsController < ApplicationController
     render json: { destroyed: room.destroy }
   end
 
+  def unsubscribe
+    render json: { success: Rooms::UnsubscribeService.new(params[:id], params[:user_id]).call }
+  end
+
   def read_all
     room_relation = RoomRelation.find_by(room_id: params[:id], user: current_user)
     room_relation&.update(unreaded_number: 0)

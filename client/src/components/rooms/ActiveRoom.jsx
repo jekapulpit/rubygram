@@ -3,7 +3,7 @@ import { hot } from 'react-hot-loader/root';
 import '../../stylesheets/components/rooms.scss'
 import {messages, rooms, search} from "../../actionTypes";
 import {connect} from "react-redux";
-import {getRoom} from "../../services/roomsServices";
+import {getRoom, unsubscribeUser} from "../../services/roomsServices";
 import MessageList from "../messages/MessageList";
 import basicScroll from '../../services/scrollingService'
 import SearchWindow from "../search/SearchWindow";
@@ -28,6 +28,13 @@ class ActiveRoom extends React.Component {
             })
     };
 
+    handleUnsubscribe = (roomId, userId) => {
+        unsubscribeUser(roomId, userId)
+            .then((result) => {
+                if(result) this.props.toggleDeleteUser(userId);
+            })
+    };
+
     render() {
         return (
             <div className='content-container'>
@@ -44,6 +51,8 @@ class ActiveRoom extends React.Component {
                                room={this.props.room.roomInfo}
                                visible={this.props.search.active}/>
                 <UserList visible={this.props.showUsers}
+                          room={this.props.room.roomInfo}
+                          handleUnsubscribe={this.handleUnsubscribe}
                           toggleShowUsers={this.props.toggleShowUsers}
                           users={this.props.room.users}/>
             </div>
@@ -64,6 +73,12 @@ const mapDispatchToProps = function(dispatch, ownProps) {
         },
         toggleShowUsers: () => {
             dispatch({ type: rooms.SHOW_USERS })
+        },
+        toggleAddUser: (user) => {
+            dispatch({ type: rooms.ADD_USER, user: user })
+        },
+        toggleDeleteUser: (userId) => {
+            dispatch({ type: rooms.DELETE_USER, userId: userId })
         },
         toggleSendMessage: (message) => {
             dispatch({ type: messages.SEND, message: message })

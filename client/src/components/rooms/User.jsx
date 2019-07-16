@@ -8,7 +8,7 @@ const User = props => {
             <p>{props.userInfo.email}</p>
           </div>
           <div className="invite-button">
-            <button>delete user</button>
+            <button onClick={() => {props.handleUnsubscribe(props.room.id, props.userInfo.id)}}>delete user</button>
           </div>
         </div>
     );

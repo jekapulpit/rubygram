@@ -7,7 +7,8 @@ Rails.application.routes.draw do
       resources :invites
       resources :messages
       resource :auth, only: %i[create]
-      post '/rooms/unreaded/:id', to: 'rooms#read_all'
+      post '/rooms/unread/:id', to: 'rooms#read_all'
+      delete '/rooms/:id/unsubscribe', to: 'rooms#unsubscribe'
       put '/invites/accept/:id', to: 'invites#accept'
       put '/invites/reject/:id', to: 'invites#reject'
       get '/users/search', to: 'search#find_users'

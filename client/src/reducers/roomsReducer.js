@@ -23,6 +23,12 @@ export default (state = { roomList: [], currentRoom: {} }, action) => {
             return {...state, currentRoom: { messages: action.data.messages, roomInfo: room, users: users }};
         case rooms.SHOW_USERS:
             return {...state, showUsers: !state.showUsers };
+        case rooms.ADD_USER:
+            let newUserList = state.currentRoom.users.concat(action.user);
+            return {...state, currentRoom: { ...state.currentRoom, users: newUserList} };
+        case rooms.DELETE_USER:
+            let newUsers = state.currentRoom.users.filter((user) => user.id !== action.userId);
+            return {...state, currentRoom: { ...state.currentRoom, users: newUsers} };
 
 
         case messages.GET_ALL_MESSAGES:

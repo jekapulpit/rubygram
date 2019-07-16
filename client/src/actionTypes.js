@@ -10,6 +10,8 @@ export const rooms = {
     DELETE: 'DELETE_ROOM',
     UPDATE: 'UPDATE_ROOM',
     SHOW_USERS: 'SHOW_USERS',
+    ADD_USER: 'ADD_USER',
+    DELETE_USER: 'DELETE_USER',
 };
 
 export const messages = {

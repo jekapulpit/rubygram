@@ -58,3 +58,16 @@ export async function updateRoom(roomId, roomAttributes) {
     })
         .then((response) => { return response.json() });
 }
+
+export async function unsubscribeUser(roomId, userId) {
+    return fetch(`http://${API_HOST}:${API_PORT}/api/v4/rooms/${roomId}/unsubscribe`, {
+        method: 'DELETE',
+        mode: 'cors',
+        headers: {
+            'Authorization': getTokenFromSessionStorage(),
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ user_id: userId })
+    })
+        .then((response) => { return response.json() });
+}

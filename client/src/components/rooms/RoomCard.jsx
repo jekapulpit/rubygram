@@ -2,7 +2,7 @@ import React from 'react';
 import { hot } from 'react-hot-loader/root';
 import '../../stylesheets/components/rooms.scss'
 import {rooms} from "../../actionTypes";
-import {deleteRoom, updateRoom} from "../../services/roomsServices";
+import {deleteRoom, unsubscribeUser, updateRoom} from "../../services/roomsServices";
 import {connect} from "react-redux";
 import {Grid} from "@material-ui/core";
 import { Link } from 'react-router-dom';
@@ -19,6 +19,13 @@ class RoomCard extends React.Component {
         this.setState({
             editable: !this.state.editable
         })
+    };
+
+    handleUnsubscribe = (roomId, userId) => {
+        unsubscribeUser(roomId, userId)
+            .then((result) => {
+                if(result) this.props.toggleDeleteRoom(roomId);
+            })
     };
 
     handleUpdate = (newRoomAttributes) => {
@@ -50,7 +57,7 @@ class RoomCard extends React.Component {
                 <button onClick={() => this.handleEdit()}>edit</button>
             </React.Fragment>
         ) : (
-            <button>leave</button>
+            <button onClick={() => this.handleUnsubscribe(this.props.room.id, this.props.user.id)}>leave</button>
         );
             let fill = this.state.editable ? (
             <Grid container

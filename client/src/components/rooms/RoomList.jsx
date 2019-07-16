@@ -8,6 +8,7 @@ import {rooms} from "../../actionTypes";
 import {maxChats} from '../../constants'
 import EmptySlot from "./EmptySlot";
 import BlockedEmptySlot from "./BlockedEmptySlot";
+import {getCurrentUser} from "../../services/sessionStorageServices";
 
 class RoomList extends React.Component {
     componentDidMount() {
@@ -24,7 +25,7 @@ class RoomList extends React.Component {
 
         let memberships = this.props.roomList.filter((room) => room.member_status === "member")
             .map((room) => {
-            return (<RoomCard key={room.id} room={room} />)
+            return (<RoomCard key={room.id} user={getCurrentUser()} room={room} />)
         });
 
         let restSlotsNumber = (maxChats - createdRooms.length - 1);
