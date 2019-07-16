@@ -5,7 +5,7 @@ import '../../stylesheets/components/search.scss'
 const SearchWindow = props => {
     let userData={};
     let results = props.results.map((result) => {
-        return <Result room={props.room} key={result.id} userInfo={result}/>
+        return <Result toggleSendInvite={props.toggleSendInvite} room={props.room} key={result.id} userInfo={result}/>
     });
     return (
         <div className={"pop-up-background" + (props.visible ? "" : " hidden")}>

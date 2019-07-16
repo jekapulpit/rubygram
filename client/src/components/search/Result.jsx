@@ -14,7 +14,12 @@ const Result = props => {
             inviteStatus = (<p className="rejected">rejected</p>);
             break;
         default:
-            inviteStatus = (<button onClick={() => sendInvite(props.userInfo.id, props.room.id, 'hello')}>invite</button>)
+            inviteStatus = (<button onClick={() => {
+                sendInvite(props.userInfo.id, props.room.id, 'hello')
+                    .then(() => {
+                        props.toggleSendInvite(props.userInfo.id);
+                    })
+            }}>invite</button>)
     }
     return (
         <div className="result">

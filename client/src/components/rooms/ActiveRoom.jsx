@@ -36,6 +36,7 @@ class ActiveRoom extends React.Component {
                 <RoomCable room={this.props.room.roomInfo}/>
                 <MessageList roomId={this.props.room.roomInfo.id} messages={this.props.room.messages}/>
                 <SearchWindow  handleSearch={this.handleSearch}
+                               toggleSendInvite={this.props.toggleSendInvite}
                                results={this.props.search.results}
                                toggleSearch={this.props.toggleSearch}
                                room={this.props.room.roomInfo}
@@ -63,6 +64,9 @@ const mapDispatchToProps = function(dispatch, ownProps) {
         },
         toggleSearch: () => {
             dispatch({ type: search.TOGGLE })
+        },
+        toggleSendInvite: (userId) => {
+            dispatch({ type: search.SEND, userId: userId })
         },
         toggleCleanResults: () => {
             dispatch({ type: search.CLEAN })

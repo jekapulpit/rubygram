@@ -6,7 +6,7 @@ import {receiveMessage} from "../../services/messagesServices";
 
 class RoomCable extends React.Component {
     shouldComponentUpdate(nextProps, nextState) {
-        return !(!!this.props.room.id);
+        return !(!!this.props.room.id && nextProps.room.id === this.props.room.id);
     }
 
     render() {

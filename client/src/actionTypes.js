@@ -21,7 +21,8 @@ export const messages = {
 export const search = {
     TOGGLE: 'TOGGLE_SEARCH',
     EXECUTE: 'EXECUTE_SEARCH',
-    CLEAN: 'CLEAN_SEARCH'
+    CLEAN: 'CLEAN_SEARCH',
+    SEND: 'SEND_INVITE'
 };
 
 export const invites = {
