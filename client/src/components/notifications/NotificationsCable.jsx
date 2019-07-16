@@ -2,22 +2,21 @@ import React from 'react';
 import { hot } from 'react-hot-loader/root';
 import '../../stylesheets/components/rooms.scss'
 import { ActionCableConsumer } from 'react-actioncable-provider';
-import {receiveMessage} from "../../services/messagesServices";
+import {receiveInvite} from "../../services/invitesServices";
 
-class Cable extends React.Component {
+class NotificationsCable extends React.Component {
     shouldComponentUpdate(nextProps, nextState) {
-        return !(!!this.props.room.id);
+        return false
     }
 
     render() {
         return (
             <ActionCableConsumer
-                key={this.props.room.id}
-                channel={{ channel: 'RoomsChannel', room_id: this.props.room.id }}
-                onReceived={receiveMessage}
+                channel={{ channel: 'NotificationsChannel' }}
+                onReceived={receiveInvite}
             />
         )
     }
 }
 
-export default hot(Cable);
+export default hot(NotificationsCable);

@@ -8,6 +8,7 @@ import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import {logout} from "../services/authentificationService";
 import {getCurrentUser} from "../services/sessionStorageServices";
+import NotificationsCable from "./notifications/NotificationsCable";
 
 const Menu = props => {
     return (
@@ -15,8 +16,10 @@ const Menu = props => {
             <p>You logged in as {getCurrentUser().username}, <span onClick={() => logout()}>log out</span></p>
             <Tabs>
                 <Tab component={Link} to="/home/rooms" label="Room List" />
+                <Tab component={Link} to="/home/notifications" label="Notifications" />
                 <Tab component={Link} to="/home/profile" label="Profile" />
             </Tabs>
+            <NotificationsCable/>
         </AppBar>
     )
 };
