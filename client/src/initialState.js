@@ -14,7 +14,9 @@ export default  {
     },
     search: {
         active: false,
-        results: []
+        messageSearch: false,
+        results: [],
+        messageResults: [],
     },
     invites: {
         inviteList: []

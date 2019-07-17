@@ -1,12 +1,12 @@
 .content-container {
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
   width: 100%;
 
   .room-header {
     height: 150px;
+    width: 100%;
   }
 
   .talk {

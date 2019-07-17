@@ -1,7 +1,7 @@
 import React from "react"
 import {sendInvite} from "../../services/invitesServices";
 
-const Result = props => {
+const UserResult = props => {
     let inviteStatus;
     switch (props.userInfo.invite_status) {
         case "sent":
@@ -34,4 +34,4 @@ const Result = props => {
     );
 };
 
-export default Result
+export default UserResult

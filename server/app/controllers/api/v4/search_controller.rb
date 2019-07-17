@@ -13,6 +13,6 @@ class Api::V4::SearchController < ApplicationController
 
   def find_messages
     results = Message.search_in_all_rooms(params[:request], current_user)
-    render json: { results: results }
+    render json: { results: results.map(&:with_send_info) }
   end
 end
