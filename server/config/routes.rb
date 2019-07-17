@@ -12,6 +12,8 @@ Rails.application.routes.draw do
       put '/invites/accept/:id', to: 'invites#accept'
       put '/invites/reject/:id', to: 'invites#reject'
       get '/users/search', to: 'search#find_users'
+      get '/messages/search', to: 'search#find_messages'
+      get '/messages/search/:room_id', to: 'search#find_messages_in_room'
     end
   end
 
