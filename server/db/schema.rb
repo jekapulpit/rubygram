@@ -10,10 +10,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_07_15_103655) do
+ActiveRecord::Schema.define(version: 2019_07_17_142252) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "default_settings", force: :cascade do |t|
+    t.integer "value"
+    t.string "setting_type"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "invites", force: :cascade do |t|
     t.string "content"
@@ -54,6 +61,16 @@ ActiveRecord::Schema.define(version: 2019_07_15_103655) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "settings", force: :cascade do |t|
+    t.string "target_type"
+    t.bigint "target_id"
+    t.integer "value"
+    t.string "setting_type"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["target_type", "target_id"], name: "index_settings_on_target_type_and_target_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "username", default: ""
@@ -63,6 +80,7 @@ ActiveRecord::Schema.define(version: 2019_07_15_103655) do
     t.datetime "remember_created_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "admin"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end

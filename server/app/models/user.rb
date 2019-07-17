@@ -1,4 +1,5 @@
 class User < ApplicationRecord
+  has_one :setting, as: :target
   has_many :room_relations
   has_many :invites
   has_many :messages, as: :sender
@@ -32,6 +33,10 @@ class User < ApplicationRecord
 
   def all_rooms
     rooms.map { |room| room.with_member_status(self) }
+  end
+
+  def max_chats
+    defined?(setting.value) ? setting.value : DefaultSetting.max_chats.value
   end
 
   scope :search_by_email, ->(email) { search(email, fields: [{ email: :exact }, :username]) }
