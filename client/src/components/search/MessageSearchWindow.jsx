@@ -14,7 +14,7 @@ const MessageSearchWindow = props => {
                 <form onSubmit={(e) => {
                     e.preventDefault();
                     let newMessageContent = messageContent.value;
-                    searchMessages(newMessageContent)
+                    searchMessages(newMessageContent, '/' + props.roomId)
                         .then((data) => {
                             props.toggleExecuteMessageSearch(data.results)
                         })

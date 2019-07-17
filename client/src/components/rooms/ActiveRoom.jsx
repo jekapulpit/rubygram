@@ -10,6 +10,7 @@ import UserSearchWindow from "../search/UserSearchWindow";
 import { searchUsers } from '../../services/searchService'
 import RoomCable from "./RoomCable";
 import UserList from "./UserList";
+import MessageSearchWindow from "../search/MessageSearchWindow";
 
 class ActiveRoom extends React.Component {
     componentDidMount() {
@@ -36,11 +37,22 @@ class ActiveRoom extends React.Component {
     };
 
     render() {
-        return (
-            <div className='content-container'>
+        let fill = this.props.search.messageSearch ? (
+            <React.Fragment>
+                <div className="room-header">
+                    <button onClick={() => {this.props.toggleCleanMessageResults()}}>back</button>
+                </div>
+                <MessageSearchWindow toggleExecuteMessageSearch={this.props.toggleExecuteMessageSearch}
+                                     toggleMessageSearch={this.props.toggleMessageSearch}
+                                     roomId={this.props.room.roomInfo.id}
+                                     results={this.props.search.messageResults}/>
+            </React.Fragment>
+        ) : (
+            <React.Fragment>
                 <div className="room-header">
                     <button onClick={() => this.props.toggleSearch()}>invite more people</button>
                     <p onClick={() => this.props.toggleShowUsers()}>show users ({this.props.room.users.length})</p>
+                    <button onClick={() => {this.props.toggleMessageSearch()}}>search messages in room</button>
                 </div>
                 <RoomCable room={this.props.room.roomInfo}/>
                 <MessageList roomId={this.props.room.roomInfo.id} messages={this.props.room.messages}/>
@@ -55,6 +67,12 @@ class ActiveRoom extends React.Component {
                           handleUnsubscribe={this.handleUnsubscribe}
                           toggleShowUsers={this.props.toggleShowUsers}
                           users={this.props.room.users}/>
+            </React.Fragment>
+        );
+
+        return (
+            <div className='content-container'>
+                {fill}
             </div>
         )
     }
@@ -97,7 +115,16 @@ const mapDispatchToProps = function(dispatch, ownProps) {
         },
         toggleExecuteSearch: (results) => {
             dispatch({ type: search.EXECUTE, results: results })
-        }
+        },
+        toggleMessageSearch: (data) => {
+            dispatch({ type: search.TOGGLE_MESSAGES, data: data })
+        },
+        toggleExecuteMessageSearch: (results) => {
+            dispatch({ type: search.EXECUTE_MESSAGES, results: results })
+        },
+        toggleCleanMessageResults: () => {
+            dispatch({ type: search.CLEAN_MESSAGES })
+        },
     }
 };
 

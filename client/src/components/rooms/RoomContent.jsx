@@ -10,7 +10,7 @@ const RoomContent = props => {
     let fill = props.search.messageSearch ? (
         <React.Fragment>
             <div className="room-header">
-                <button onClick={() => {props.toggleMessageSearch()}}>back</button>
+                <button onClick={() => {props.toggleCleanMessageResults()}}>back</button>
             </div>
             <MessageSearchWindow toggleExecuteMessageSearch={props.toggleExecuteMessageSearch}
                                  toggleMessageSearch={props.toggleMessageSearch}
@@ -42,6 +42,9 @@ const mapDispatchToProps = function(dispatch, ownProps) {
         },
         toggleExecuteMessageSearch: (results) => {
             dispatch({ type: search.EXECUTE_MESSAGES, results: results })
+        },
+        toggleCleanMessageResults: () => {
+            dispatch({ type: search.CLEAN_MESSAGES })
         },
     }
 };

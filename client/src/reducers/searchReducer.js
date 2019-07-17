@@ -16,11 +16,11 @@ export default (state = { results: [], active: false }, action) => {
         case search.CLEAN:
             return {...state, results: []};
         case search.TOGGLE_MESSAGES:
-            return {...state, messageSearch: !state.messageSearch};
+            return {...state, messageSearch: true};
         case search.EXECUTE_MESSAGES:
             return {...state, messageResults: action.results};
         case search.CLEAN_MESSAGES:
-            return {...state, messageResults: []};
+            return {...state, messageResults: [], messageSearch: false};
         default:
             return state;
     }
