@@ -9,7 +9,7 @@ export const searchUsers = (request, room) => fetch(`http://${API_HOST}:${API_PO
     })
     .then((response) => { return response.json() });
 
-export const searchMessages = (request, room = '') => fetch(`http://${API_HOST}:${API_PORT}/api/v4/search${room}/messages?request=${request}`, {
+export const searchMessages = (request, room) => fetch(`http://${API_HOST}:${API_PORT}/api/v4/search${room}/messages?request=${request}`, {
     mode: 'cors',
     headers: {
         'Authorization': getTokenFromSessionStorage()

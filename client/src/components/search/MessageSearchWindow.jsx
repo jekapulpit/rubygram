@@ -5,6 +5,7 @@ import {searchMessages} from "../../services/searchService";
 
 const MessageSearchWindow = props => {
     let messageContent={};
+    let roomId = !!props.roomId ? ('/' + props.roomId) : '';
     let results = props.results.map((result) => {
         return <Message message={result}/>
     });
@@ -14,7 +15,7 @@ const MessageSearchWindow = props => {
                 <form onSubmit={(e) => {
                     e.preventDefault();
                     let newMessageContent = messageContent.value;
-                    searchMessages(newMessageContent, '/' + props.roomId)
+                    searchMessages(newMessageContent, roomId)
                         .then((data) => {
                             props.toggleExecuteMessageSearch(data.results)
                         })
