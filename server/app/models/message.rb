@@ -7,6 +7,7 @@ class Message < ApplicationRecord
 
   scope :search_import, -> { includes(:sender) }
   scope :search_in_all_rooms, ->(content, sender) { search(content, where: {recipient_id: sender.rooms.pluck(:id)}) }
+  scope :search_in_room, ->(content, room) { search(content, where: {recipient_id: room.id}) }
 
   def with_send_info
     attributes.merge({
