@@ -5,9 +5,15 @@
   width: 250px;
   background-color: #fff;
   color: rgb(240,85,85);
+  overflow-x: hidden;
 
   .MuiTabs-root {
     width: 100%;
+    overflow: visible;
+
+    .MuiTabs-scroller {
+      overflow: visible !important;
+    }
   }
   
   .MuiTabs-indicator {
@@ -17,9 +23,15 @@
   .MuiTabs-flexContainer {
     display: flex;
     flex-direction: column;
+    overflow: visible;
 
     .MuiTab-root {
       padding: 0;
+      transition: all 300ms;
+
+      &:hover {
+        box-shadow: 0 0 6px 0 rgba(240,85,85,.6);
+      }
 
       &:after {
         content: '';
