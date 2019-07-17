@@ -6,6 +6,7 @@ class Message < ApplicationRecord
   searchkick text_middle: [:content]
 
   scope :search_import, -> { includes(:sender) }
+  scope :search_in_all_rooms, ->(content, sender) { search(content, where: {recipient_id: sender.rooms.pluck(:id)}) }
 
   def with_send_info
     attributes.merge({
@@ -17,7 +18,8 @@ class Message < ApplicationRecord
   def search_data
     {
         content: content,
-        sender: sender.username
+        sender: sender.username,
+        recipient_id: recipient_id
     }
   end
 end
