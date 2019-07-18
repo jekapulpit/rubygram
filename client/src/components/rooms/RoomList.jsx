@@ -27,7 +27,7 @@ class RoomList extends React.Component {
             return (<RoomCard key={room.id} user={getCurrentUser()} room={room} />)
         });
 
-        let restSlotsNumber = (getCurrentUser().max_chats - createdRooms.length - 1);
+        let restSlotsNumber = getCurrentUser().admin ? 0 : (getCurrentUser().max_chats - createdRooms.length - 1);
 
         let emptySlots = (new Array(restSlotsNumber >= 0 ? restSlotsNumber : 0).fill(null)).map((slot) => {
             return (<BlockedEmptySlot />)
@@ -38,7 +38,7 @@ class RoomList extends React.Component {
                 <p>your chats: </p>
                 <div className="room-section">
                     {createdRooms}
-                    {createdRooms.length >= 5 ? null : <EmptySlot />}
+                    {(getCurrentUser().admin || (getCurrentUser().max_chats - createdRooms.length > 0)) ? (<EmptySlot />) : null}
                     {emptySlots}
                 </div>
                 <p>your memberships: </p>

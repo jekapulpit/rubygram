@@ -16,8 +16,9 @@ const UserResult = props => {
         default:
             inviteStatus = (<button onClick={() => {
                 sendInvite(props.userInfo.id, props.room.id, 'hello')
-                    .then(() => {
-                        props.toggleSendInvite(props.userInfo.id);
+                    .then((data) => {
+                        if(data.success)
+                            props.toggleSendInvite(props.userInfo.id);
                     })
             }}>invite</button>)
     }
