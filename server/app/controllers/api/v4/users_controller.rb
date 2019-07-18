@@ -18,6 +18,12 @@ class Api::V4::UsersController < ApplicationController
     end
   end
 
+  def set_max_chats
+    setting = Settings::UsersService.new(params[:id], params[:new_value]).call
+    user = User.find(params[:id])
+    render json: { success: setting, user: user.with_settings }
+  end
+
   private
 
   def user_params

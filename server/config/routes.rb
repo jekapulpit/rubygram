@@ -15,6 +15,8 @@ Rails.application.routes.draw do
       put '/users/:id', to: 'users#update'
       get '/users/:id', to: 'users#show'
       get '/users/search', to: 'search#find_users'
+      post '/users/:id/settings', to: 'users#set_max_chats'
+      post '/rooms/:id/settings', to: 'rooms#set_max_users'
       get '/search/messages', to: 'search#find_messages'
       get '/search/:room_id/messages/', to: 'search#find_messages_in_room'
       get '/auth/sync', to: 'auths#sync'
