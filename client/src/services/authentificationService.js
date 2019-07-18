@@ -48,6 +48,7 @@ export function syncCurrentUser() {
         .then((data) => {
             if(data.status !== 500) {
                 updateUserSession(data.current_user);
+                store.dispatch({type: users.UPDATE, newAttributes: data.current_user})
             }
             else {
                 deleteUserSession();

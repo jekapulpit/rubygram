@@ -17,7 +17,7 @@ const Menu = props => {
             <Tabs value={window.location.pathname}>
                 <Tab value={"/home/rooms"} component={Link} to="/home/rooms" label="Room List" />
                 <Tab value={"/home/notifications"} component={Link} to="/home/notifications" label="Notifications" />
-                <Tab value={"/home/profile"} component={Link} to="/home/profile" label="Profile" />
+                <Tab value={`/home/profile/${getCurrentUser().id}`} component={Link} to={`/home/profile/${getCurrentUser().id}`} label="Profile" />
             </Tabs>
             <NotificationsCable/>
         </AppBar>

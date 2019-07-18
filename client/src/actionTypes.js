@@ -1,6 +1,7 @@
 export const users = {
     AUTHENTICATE: 'AUTHENTICATE',
     LOG_OUT: 'LOG_OUT',
+    UPDATE: 'USER_UPDATE'
 };
 
 export const rooms = {

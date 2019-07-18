@@ -5,11 +5,11 @@ import * as serviceWorker from './serviceWorker';
 import store from './store'
 import Menu from './components/Menu'
 import Login from './components/users/Login'
+import Profile from './components/users/Profile'
 import RoomContent from './components/rooms/RoomContent'
 import { Provider } from 'react-redux'
 import { BrowserRouter as Router, Route } from 'react-router-dom'
 import { Redirect } from 'react-router'
-import {getCurrentUser} from "./services/sessionStorageServices";
 import { ActionCableProvider } from 'react-actioncable-provider';
 import { API_WS_ROOT } from "./constants";
 import ActiveRoom from "./components/rooms/ActiveRoom";
@@ -30,8 +30,10 @@ ReactDOM.render(
             <Route exact path="/home/rooms" component={RoomContent} />
             <Route exact path="/home/notifications" component={NotificationsContent} />
             <Route exact path="/home/rooms/:id" component={ActiveRoom} />
+            <Route exact path="/home/profile/:id" component={Profile} />
             <Route exact path="/login" component={Login} />
         </Router>
+
         </ActionCableProvider>
     </Provider>,
     document.getElementById('root'));
