@@ -8,7 +8,7 @@ class Api::V4::AuthsController < ApplicationController
     if token_command.success?
       render json: {
           token: token_command.result,
-          current_user: User.find_by(email: params[:email])
+          current_user: User.find_by(email: params[:email]).with_settings
       }
     else
       render json: { error: token_command.errors }, status: :unauthorized

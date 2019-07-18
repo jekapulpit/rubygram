@@ -5,12 +5,16 @@ module Invites
     def initialize(content, user_id, room_id = nil, invite_type = 0)
       @content = content
       @invite_type = invite_type
-      @room = room_id
-      @user = user_id
+      @room = Room.find(room_id)
+      @user = User.find(user_id)
     end
 
     def call
-      Invite.create(content: content, invite_type: invite_type, room_id: room, user_id: user) unless Invite.find_by(room_id: room, user_id: user)
+      Invite.create(content: content, invite_type: invite_type, room: room, user: user) unless able_to_invite
+    end
+
+    def able_to_invite
+      (Invite.find_by(room: room, user: user) || room.empty_slots <= 0) && !room.creator.admin?
     end
   end
 end

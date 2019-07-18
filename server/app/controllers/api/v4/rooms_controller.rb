@@ -5,7 +5,7 @@ class Api::V4::RoomsController < ApplicationController
     begin
       room = Room.includes(:messages, :users).find(params[:id])
       messages = room.messages.map(&:with_send_info)
-      render json: { room: room, messages: messages, users: room.users }
+      render json: { room: room.with_settings, messages: messages, users: room.users }
     rescue ArgumentError
       render json: { error: "error message" }
     end

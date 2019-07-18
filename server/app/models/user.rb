@@ -25,10 +25,16 @@ class User < ApplicationRecord
     invites.where(status: 'sent')
   end
 
+  def with_settings
+    attributes.merge({
+                         max_chats: max_chats
+                    })
+  end
+
   def with_invited_status(room)
-    attributes.merge(
-        invite_status: invite_status(room),
-    )
+    attributes.merge({
+                         invite_status: invite_status(room),
+                    })
   end
 
   def all_rooms
