@@ -3,8 +3,13 @@ export const setUserSession = (data) => {
     window.sessionStorage.setItem('auth_token', JSON.stringify(data.token));
 };
 
+export const updateUserSession = (currentUser) => {
+    window.sessionStorage.setItem('currentUser', JSON.stringify(currentUser));
+};
+
 export const deleteUserSession = () => {
     window.sessionStorage.removeItem('currentUser');
+    window.sessionStorage.removeItem('auth_token');
 };
 
 export const getCurrentUser = () => {

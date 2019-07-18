@@ -14,13 +14,14 @@ import { ActionCableProvider } from 'react-actioncable-provider';
 import { API_WS_ROOT } from "./constants";
 import ActiveRoom from "./components/rooms/ActiveRoom";
 import NotificationsContent from "./components/notifications/NotificationsContent";
+import {syncCurrentUser} from "./services/authentificationService";
 
 ReactDOM.render(
     <Provider store={store}>
         <ActionCableProvider url={API_WS_ROOT}>
         <Router>
-            <Route path="/" render={() => (
-                getCurrentUser() ?
+            <Route path="/home" render={() => (
+                syncCurrentUser() ?
                 null
                 :
                 (<Redirect to="/login"/>)

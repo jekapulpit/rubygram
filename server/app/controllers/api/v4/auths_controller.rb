@@ -14,4 +14,10 @@ class Api::V4::AuthsController < ApplicationController
       render json: { error: token_command.errors }, status: :unauthorized
     end
   end
+
+  def sync
+    render json: {
+        current_user: current_user.with_settings
+    }
+  end
 end
