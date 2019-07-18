@@ -27,7 +27,8 @@ class User < ApplicationRecord
 
   def with_settings
     attributes.merge({
-                         max_chats: max_chats
+                         max_chats: max_chats,
+                         empty_slots: empty_slots
                     })
   end
 
@@ -43,6 +44,10 @@ class User < ApplicationRecord
 
   def max_chats
     defined?(setting.value) ? setting.value : DefaultSetting.max_chats.value
+  end
+
+  def empty_slots
+    max_chats - room_relations.where(status: 'creator').count
   end
 
   scope :search_by_email, ->(email) { search(email, fields: [{ email: :exact }, :username]) }

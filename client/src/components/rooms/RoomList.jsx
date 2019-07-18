@@ -5,7 +5,6 @@ import RoomCard from "./RoomCard";
 import '../../stylesheets/components/rooms.scss'
 import {getUserRooms} from "../../services/roomsServices";
 import {rooms} from "../../actionTypes";
-import {maxChats} from '../../constants'
 import EmptySlot from "./EmptySlot";
 import BlockedEmptySlot from "./BlockedEmptySlot";
 import {getCurrentUser} from "../../services/sessionStorageServices";
@@ -28,7 +27,7 @@ class RoomList extends React.Component {
             return (<RoomCard key={room.id} user={getCurrentUser()} room={room} />)
         });
 
-        let restSlotsNumber = (maxChats - createdRooms.length - 1);
+        let restSlotsNumber = (getCurrentUser().max_chats - createdRooms.length - 1);
 
         let emptySlots = (new Array(restSlotsNumber >= 0 ? restSlotsNumber : 0).fill(null)).map((slot) => {
             return (<BlockedEmptySlot />)

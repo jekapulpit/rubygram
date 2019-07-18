@@ -4,7 +4,7 @@ import User from "./User";
 
 const UserList = props => {
     let users = props.users.map((user) => {
-        return (<User room={props.room} handleUnsubscribe={props.handleUnsubscribe} userInfo={user}/>)
+        return (<User key={user.id} room={props.room} handleUnsubscribe={props.handleUnsubscribe} userInfo={user}/>)
     });
     return (
         <div className={"pop-up-background" + (props.visible ? "" : " hidden")}>
