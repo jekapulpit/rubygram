@@ -1,4 +1,5 @@
 import React from "react"
+import {getCurrentUser} from "../../services/sessionStorageServices";
 
 const User = props => {
     return (
@@ -8,7 +9,10 @@ const User = props => {
             <p>{props.userInfo.email}</p>
           </div>
           <div className="invite-button">
-            <button onClick={() => {props.handleUnsubscribe(props.room.id, props.userInfo.id)}}>delete user</button>
+              {
+                  (props.userInfo.id !== props.room.creator && getCurrentUser().id === props.room.creator) ?
+                      <button onClick={() => {props.handleUnsubscribe(props.room.id, props.userInfo.id)}}>delete user</button> : null
+              }
           </div>
         </div>
     );

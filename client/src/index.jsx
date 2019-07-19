@@ -17,6 +17,7 @@ import UsersSettings from "./components/settings/UsersSettings";
 import NotificationsContent from "./components/notifications/NotificationsContent";
 import {syncCurrentUser} from "./services/authentificationService";
 import {getCurrentUser} from "./services/sessionStorageServices";
+import Register from "./components/users/Register";
 
 ReactDOM.render(
     <Provider store={store}>
@@ -46,6 +47,7 @@ ReactDOM.render(
                     (<Redirect to="/home/rooms"/>)
             )} />
             <Route exact path="/login" component={Login} />
+            <Route exact path="/sing_up" component={Register} />
         </Router>
 
         </ActionCableProvider>

@@ -4,14 +4,14 @@ import store from '../store'
 import { users } from '../actionTypes'
 import {API_HOST, API_PORT} from "../constants";
 
-export function authentificateUser(userCredintials) {
+export function authentificateUser(userCredentials) {
     let url = 'http://localhost:3001/api/v4/auth';
     let requestOpts = {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify(userCredintials)
+        body: JSON.stringify(userCredentials)
     };
     fetch(url, requestOpts)
         .then((response) => {return response.json()})
@@ -25,6 +25,23 @@ export function authentificateUser(userCredintials) {
             else {
                 console.log('nope')
             }
+        })
+}
+
+export function registerUser(userCredentials) {
+    let url = 'http://localhost:3001/api/v4/register/';
+    let requestOpts = {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(userCredentials)
+    };
+    fetch(url, requestOpts)
+        .then((response) => {return response.json()})
+        .then((data) => {
+            if(data.success)
+                window.location = '/login'
         })
 }
 
