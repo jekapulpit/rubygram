@@ -71,3 +71,31 @@ export async function unsubscribeUser(roomId, userId) {
     })
         .then((response) => { return response.json() });
 }
+
+
+export async function changeRoomSettings(roomId, newValue) {
+    return fetch(`http://${API_HOST}:${API_PORT}/api/v4/rooms/${roomId}/settings`, {
+        mode: 'cors',
+        method: 'POST',
+        headers: {
+            'Authorization': getTokenFromSessionStorage(),
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({new_value: newValue})
+    })
+        .then((response) => { return response.json() });
+}
+
+export async function changeDefaultRoomSettings(newValue) {
+    return fetch(`http://${API_HOST}:${API_PORT}/api/v4/settings/rooms`, {
+        mode: 'cors',
+        method: 'PUT',
+        headers: {
+            'Authorization': getTokenFromSessionStorage(),
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({new_value: newValue})
+    })
+        .then((response) => { return response.json() });
+}
+

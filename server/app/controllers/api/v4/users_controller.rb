@@ -29,6 +29,11 @@ class Api::V4::UsersController < ApplicationController
     render json: { success: setting }
   end
 
+  def get_default_max_chats
+    setting = DefaultSetting.find_by(setting_type: 'max_chats')
+    render json: { setting: setting }
+  end
+
   private
 
   def user_params

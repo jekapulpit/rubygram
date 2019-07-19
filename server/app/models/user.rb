@@ -52,4 +52,5 @@ class User < ApplicationRecord
 
   scope :search_by_email, ->(email) { search(email, fields: [{ email: :exact }, :username]) }
   scope :search_for_invite, ->(request, room_id) { search_by_email(request).map { |user| user.with_invited_status(Room.find(room_id)) } }
+  scope :search_with_settings, ->(request) { search_by_email(request).map(&:with_settings) }
 end

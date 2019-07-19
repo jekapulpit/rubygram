@@ -57,6 +57,11 @@ class Api::V4::RoomsController < ApplicationController
     render json: { success: setting }
   end
 
+  def get_default_max_users
+    setting = DefaultSetting.find_by(setting_type: 'max_chats')
+    render json: { setting: setting }
+  end
+
   private
 
   def room_params
