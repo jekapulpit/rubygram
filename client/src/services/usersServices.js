@@ -50,3 +50,15 @@ export async function changeDefaultUserSettings(newValue) {
     })
         .then((response) => { return response.json() });
 }
+
+export async function givePriveleges(userId) {
+    return fetch(`http://${API_HOST}:${API_PORT}/api/v4/settings/users/admin/${userId}`, {
+        mode: 'cors',
+        method: 'PUT',
+        headers: {
+            'Authorization': getTokenFromSessionStorage(),
+            'Content-Type': 'application/json',
+        },
+    })
+        .then((response) => { return response.json() });
+}

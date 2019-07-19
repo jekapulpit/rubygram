@@ -19,6 +19,7 @@ Rails.application.routes.draw do
       put '/settings/users', to: 'users#set_default_max_chats'
       put '/settings/rooms', to: 'rooms#set_default_max_users'
       get '/settings/users/default', to: 'users#get_default_max_chats'
+      put '/settings/users/admin/:id', to: 'users#give_permissions'
       get '/settings/rooms/default', to: 'rooms#get_default_max_users'
       post '/rooms/:id/settings', to: 'rooms#set_max_users'
       get '/search/messages', to: 'search#find_messages'

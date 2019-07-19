@@ -34,6 +34,11 @@ class Api::V4::UsersController < ApplicationController
     render json: { setting: setting }
   end
 
+  def give_permissions
+    user = User.find(params[:id])
+    render json: { success: user.update(admin: true), user: user.with_settings }
+  end
+
   private
 
   def user_params

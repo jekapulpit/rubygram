@@ -7,6 +7,7 @@ const UserList = props => {
     let users = props.users.map((user) => {
         return (
             <User
+                handleGivePrivileges={props.handleGivePrivileges}
                 handleChangeSettings={props.handleChangeSettings}
                 user={user}
                 key={user.id} />

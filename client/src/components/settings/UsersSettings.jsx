@@ -4,7 +4,7 @@ import { search } from "../../actionTypes";
 import { connect } from "react-redux";
 import { searchUsersGlobal} from '../../services/searchService'
 import UserList from "./UserList";
-import {changeDefaultUserSettings, changeUserSettings} from "../../services/usersServices";
+import {changeDefaultUserSettings, changeUserSettings, givePriveleges} from "../../services/usersServices";
 import {API_HOST, API_PORT} from "../../constants";
 import {getTokenFromSessionStorage} from "../../services/sessionStorageServices";
 
@@ -40,7 +40,7 @@ class UsersSettings extends React.Component {
 
     handleChangeDefaultSettings = (newValue) => {
         changeDefaultUserSettings(newValue)
-            .then((result) => {
+            .then(() => {
                 this.setState({
                     defaultValue: newValue
                 })
@@ -51,6 +51,13 @@ class UsersSettings extends React.Component {
         searchUsersGlobal(request)
             .then((data) => {
                 this.props.toggleExecuteSearch(data.results)
+            })
+    };
+
+    handleGivePrivileges = (userId) => {
+        givePriveleges(userId)
+            .then((result) => {
+                this.props.toggleUpdateResults(result.user)
             })
     };
 
@@ -70,7 +77,9 @@ class UsersSettings extends React.Component {
                     <button onClick={() => this.handleChangeDefaultSettings(this.state.defaultValue + 1)}>more</button>
                     <button onClick={() => this.handleChangeDefaultSettings(this.state.defaultValue - 1)}>less</button>
                 </div>
-                <UserList users={this.props.search.results} handleChangeSettings={this.handleChangeSettings} />
+                <UserList users={this.props.search.results}
+                          handleGivePrivileges={this.handleGivePrivileges}
+                          handleChangeSettings={this.handleChangeSettings} />
             </div>
         )
     }
