@@ -5,3 +5,6 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+
+DefaultSetting.create(setting_type: 'max_chats', value: 5)
+DefaultSetting.create(setting_type: 'max_users', value: 5)
