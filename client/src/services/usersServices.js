@@ -24,3 +24,16 @@ export async function getUser(userId) {
     })
         .then((response) => { return response.json() });
 }
+
+export async function changeUserSettings(userId, newValue) {
+    return fetch(`http://${API_HOST}:${API_PORT}/api/v4/users/${userId}/settings`, {
+        mode: 'cors',
+        method: 'POST',
+        headers: {
+            'Authorization': getTokenFromSessionStorage(),
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({new_value: newValue})
+    })
+        .then((response) => { return response.json() });
+}

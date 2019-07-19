@@ -3,7 +3,7 @@ import { hot } from 'react-hot-loader/root';
 import {connect} from "react-redux";
 import {users} from "../../actionTypes";
 import {getCurrentUser, updateUserSession} from "../../services/sessionStorageServices";
-import {updateUser} from "../../services/usersServices";
+import {changeUserSettings, updateUser} from "../../services/usersServices";
 import {getUser} from "../../services/usersServices";
 
 class Profile extends React.Component {
@@ -11,7 +11,7 @@ class Profile extends React.Component {
         super(props);
         this.state = {
             editable: false,
-            currentUser: {}
+            currentUser: {},
         }
     }
 
@@ -37,7 +37,7 @@ class Profile extends React.Component {
             })
     }
 
-    isSelfProfile = () => {
+    selfProfile = () => {
         return (this.state.currentUser.id === this.props.currentUser.id)
     };
 
@@ -58,9 +58,19 @@ class Profile extends React.Component {
         })
     };
 
+    handleChangeSettings = (newValue) => {
+        changeUserSettings(this.state.currentUser.id, newValue)
+            .then((result) => {
+                if(result.success)
+                    this.setState({
+                        currentUser: result.user
+                    })
+            })
+    };
+
     render() {
         let userData = {};
-        let field = (this.state.editable && this.isSelfProfile()) ? (
+        let field = (this.state.editable && this.selfProfile()) ? (
             <h1><input ref={input => userData.username = input} defaultValue={this.state.currentUser.username} type="text"/></h1>
         ) : (
             <h1>{this.state.currentUser.username}</h1>
@@ -69,9 +79,16 @@ class Profile extends React.Component {
             <div className='content-container'>
                 <div className="user-data">
                     {field}
-                    {this.isSelfProfile() ? <button onClick={() => this.handleEdit(userData)}>{this.state.editable ? 'save' : 'edit username'}</button> : null}
+                    {this.selfProfile() ? <button onClick={() => this.handleEdit(userData)}>{this.state.editable ? 'save' : 'edit username'}</button> : null}
                     <p>email: {this.state.currentUser.email}</p>
-                    <p>rooms available: {this.state.currentUser.admin ? 'infinite' : this.state.currentUser.max_chats }</p>
+                    <p>
+                        rooms available: {this.state.currentUser.admin ? 'infinite' : this.state.currentUser.max_chats }
+                        {(this.props.currentUser.admin && !this.selfProfile()) ? (
+                            <span>
+                                <button onClick={() => this.handleChangeSettings(this.state.currentUser.max_chats + 1)}>more</button>
+                                <button onClick={() => this.handleChangeSettings(this.state.currentUser.max_chats - 1)}>less</button>
+                            </span>) : null}
+                    </p>
                 </div>
             </div>
         );
