@@ -1,4 +1,7 @@
 class Api::V4::UsersController < ApplicationController
+
+  skip_before_action :authenticate_user, only: :create
+
   def update
     begin
       user = User.find(params[:id])
@@ -7,6 +10,11 @@ class Api::V4::UsersController < ApplicationController
     rescue ActiveRecord::RecordNotFound => exception
       render json: { success: false, errors: { record: [exception.message] } }
     end
+  end
+
+  def create
+    user = User.create(register_user_params)
+    render json: { success: user.save }
   end
 
   def show
@@ -43,5 +51,9 @@ class Api::V4::UsersController < ApplicationController
 
   def user_params
     params.require(:user).permit(:username)
+  end
+
+  def register_user_params
+    params.permit(:username, :email, :password)
   end
 end

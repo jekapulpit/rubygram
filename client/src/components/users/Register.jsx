@@ -1,20 +1,21 @@
 import React from "react"
-import { authentificateUser } from "../../services/authentificationService";
+import { registerUser} from "../../services/authentificationService";
 import { mapFieldsToValues } from "../../services/mapFieldsToValuesService";
 
-const Login = props => {
+const Register = props => {
     let userCredentials = {};
     return (
          <form className="login-form">
               <input ref={input => userCredentials.email = input} type="text" placeholder="your email" />
+              <input ref={input => userCredentials.username = input} type="text" placeholder="your username" />
               <input ref={input => userCredentials.password = input} type="password" placeholder="your password" />
               <button onClick={(e) => {
-                  authentificateUser(mapFieldsToValues(userCredentials));
+                  registerUser(mapFieldsToValues(userCredentials));
                   e.preventDefault();
-              }}>log in</button>
-             <a href="/sing_up">sing up</a>
+              }}>sing up</button>
+             <a href="/login">log in</a>
          </form>
     );
 };
 
-export default Login
+export default Register

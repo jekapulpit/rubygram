@@ -15,6 +15,7 @@ Rails.application.routes.draw do
       put '/users/:id', to: 'users#update'
       get '/users/:id', to: 'users#show'
       get '/search/users/', to: 'search#find_users'
+      post '/register', to: 'users#create'
       post '/users/:id/settings', to: 'users#set_max_chats'
       put '/settings/users', to: 'users#set_default_max_chats'
       put '/settings/rooms', to: 'rooms#set_default_max_users'
