@@ -87,3 +87,12 @@
     }
   }
 }
+
+.clickable-link {
+  margin: 10px;
+  cursor: pointer;
+  
+  &:hover {
+    text-decoration: underline;
+  }
+}

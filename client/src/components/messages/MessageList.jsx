@@ -28,7 +28,7 @@ const MessageList = props => {
                   sender_type: "User",
                 }
               })
-            }} className="send-box">
+            }} className="send-box messages">
               <input ref={input => newMessage = input} type="text"/>
               <input type="submit" value="send" />
             </form>

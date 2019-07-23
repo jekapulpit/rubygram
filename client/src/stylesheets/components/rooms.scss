@@ -7,11 +7,23 @@
   .room-header {
     height: 100px;
     width: 100%;
+    position: relative;
     display: flex;
-    flex-direction: column;
     justify-content: center;
     align-items: center;
+    border-bottom: 2px dashed #F09B55;
+    padding-left: 40px;
+    padding-right: 40px;
+    box-sizing: border-box;
+    -webkit-box-shadow: 3px 3px 10px 0 rgba(0,0,0,.3);
+    -moz-box-shadow: 3px 3px 10px 0 rgba(0,0,0,.3);
+    box-shadow: 3px 3px 10px 0 rgba(0,0,0,.3);
+
+    &.active-room {
+      justify-content: space-between;
+    }
   }
+
 
   .talk {
     display: flex;
@@ -87,9 +99,15 @@
         position: relative;
         padding: 15px;
         box-sizing: border-box;
+        -webkit-box-shadow: -3px 0 10px 0 rgba(0,0,0,.3);
+        -moz-box-shadow: -3px 0 10px 0 rgba(0,0,0,.3);
+        box-shadow: -3px 0 10px 0 rgba(0,0,0,.3);
 
         &.messages {
           justify-content: center;
+          background: #fff;
+          border-top: 2px dashed #F09B55;
+          overflow: hidden;
         }
 
         .inputs {

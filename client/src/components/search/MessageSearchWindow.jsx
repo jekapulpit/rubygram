@@ -21,6 +21,7 @@ const MessageSearchWindow = props => {
                     <div className="inputs">
                         <input
                             ref={input => messageContent = input}
+                            placeholder={!!props.roomId ? `search in room ${props.room.name}` : 'search in all rooms'}
                             onChange={(e) => {
                                 e.preventDefault();
                                 let newMessageContent = messageContent.value;
