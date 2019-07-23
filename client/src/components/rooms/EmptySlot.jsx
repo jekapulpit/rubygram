@@ -4,7 +4,8 @@ import '../../stylesheets/components/rooms.scss'
 import {rooms} from "../../actionTypes";
 import {connect} from "react-redux";
 import {addNewRoom} from "../../services/roomsServices";
-import {Grid} from "@material-ui/core";
+import LockOpenIcon from '@material-ui/icons/LockOpen';
+import RoomFields from "./RoomFields";
 
 class EmptySlot extends React.Component {
     constructor(props) {
@@ -39,21 +40,13 @@ class EmptySlot extends React.Component {
 
     render() {
         let fill = this.state.editable ? (
-            <Grid container
-                  direction="row"
-                  spacing={2} >
-                <Grid item xs={12}>
-                    <input ref={input => this.newRoomsName = input} type="text"/>
-                </Grid>
-                <Grid item xs={6}>
-                    <button onClick={() => this.handleCreate(this.newRoomsName.value)}>create</button>
-                </Grid>
-                <Grid item xs={6}>
-                    <button onClick={() => this.handleNew()}>cancel</button>
-                </Grid>
-            </Grid>
+            <RoomFields submitHandler={this.handleCreate} cancelHandler={this.handleNew}/>
         ) : (
-            <button onClick={() => this.handleNew()}>+</button>
+            <LockOpenIcon onClick={() => this.handleNew()} style={{
+                color: '#C0448A',
+                fontSize: '40px',
+                cursor: 'pointer',
+            }}/>
         );
         return (
             <div className='room-card'>

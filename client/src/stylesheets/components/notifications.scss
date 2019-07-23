@@ -23,62 +23,6 @@
       padding: 10px;
       padding-left: 30px;
       align-items: center;
-
-      .invite-controls {
-
-        .btn {
-          width: 70px;
-          height: 30px;
-          color: #fff;
-          font-weight: bold;
-          font-size: 13px;
-          margin: 5px;
-          cursor: pointer;
-          -webkit-border-radius: 5px;
-          -moz-border-radius: 5px;
-          border-radius: 5px;
-          -webkit-transition: .3s;
-          -moz-transition: .3s;
-          -ms-transition: .3s;
-          -o-transition: .3s;
-          transition: .3s;
-
-          &.accept {
-            background-color: #21A66D;
-            box-shadow: 0 0 6px 0 rgba(33, 166, 110, 0);
-
-            &:hover {
-              color: #21A66D;
-              background-color: transparent;
-              box-shadow: 0 0 6px 0 rgba(33, 166, 110, 1);
-            }
-          }
-
-          &.reject {
-            background-color: #E03A07;
-            box-shadow: 0 0 6px 0 rgba(224, 58, 7, 0);
-
-            &:hover {
-              color: #E03A07;
-              background-color: transparent;
-              box-shadow: 0 0 6px 0 rgba(224, 58, 7, 1);
-            }
-          }
-
-          &.empty {
-            background-color: #000;
-            box-shadow: 0 0 6px 0 rgba(0,0,0, 0);
-            width: auto;
-
-            &:hover {
-              color: #000;
-              background-color: transparent;
-              box-shadow: 0 0 6px 0 rgba(0,0,0, 1);
-            }
-          }
-
-        }
-      }
     }
   }
 }

@@ -1,9 +1,10 @@
 .btn {
-  width: 70px;
   outline: none;
   height: 30px;
   color: #fff;
   font-weight: bold;
+  padding-left: 15px;
+  padding-right: 15px;
   font-size: 13px;
   margin: 5px;
   cursor: pointer;
@@ -51,7 +52,7 @@
   }
 
   &.neutral {
-    background-color: #2E64FE;
+    background-color: #C0448A;
     box-shadow: 0 0 6px 0 rgba(46,100,254, 0);
     width: auto;
 

@@ -19,7 +19,7 @@ const RoomContent = props => {
     ) : (
         <React.Fragment>
             <div className="room-header">
-                <button className="btn neutral" onClick={() => {props.toggleMessageSearch()}}>search messages</button>
+                <button className="btn neutral" onClick={() => {props.toggleMessageSearch()}}>search for messages</button>
             </div>
             <RoomList />
         </React.Fragment>

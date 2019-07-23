@@ -141,11 +141,35 @@
         align-items: center;
         justify-content: center;
 
+        .edit-card {
+          display: flex;
+          flex-direction: column;
+          width: 100%;
+          height: 100%;
+          justify-content: center;
+          align-items: center;
+
+          .edit-fields {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            input {
+              padding-left: 10px;
+              box-sizing: border-box;
+              height: 25px;
+              margin: 5px;
+            }
+          }
+        }
+
         &.info {
           height: 100%;
           margin: 0;
           z-index: 100;
           background-color: #fff;
+          text-decoration: none;
+          color: #C0448A;
         }
 
         &.with-room {
