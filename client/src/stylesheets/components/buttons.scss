@@ -89,9 +89,11 @@
 }
 
 .clickable-link {
+  display: flex;
   margin: 10px;
   cursor: pointer;
-  
+  align-items: center;
+
   &:hover {
     text-decoration: underline;
   }
