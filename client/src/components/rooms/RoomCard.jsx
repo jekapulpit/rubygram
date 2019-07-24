@@ -4,8 +4,10 @@ import '../../stylesheets/components/rooms.scss'
 import {rooms} from "../../actionTypes";
 import {deleteRoom, unsubscribeUser, updateRoom} from "../../services/roomsServices";
 import {connect} from "react-redux";
-import {Grid} from "@material-ui/core";
 import { Link } from 'react-router-dom';
+import ClearIcon from '@material-ui/icons/Clear';
+import EditIcon from '@material-ui/icons/Edit';
+import RoomFields from "./RoomFields";
 
 class RoomCard extends React.Component {
     constructor(props) {
@@ -48,32 +50,24 @@ class RoomCard extends React.Component {
     render() {
         let controls = this.props.room.member_status === "creator" ? (
             <React.Fragment>
-                <button onClick={() => {
+                <ClearIcon onClick={() => {
                     deleteRoom(this.props.room.id)
                         .then((data) => {
                             this.props.toggleDeleteRoom(data.destroyed.id)
                         })
-                }}>x</button>
-                <button onClick={() => this.handleEdit()}>edit</button>
+                }}/>
+                <EditIcon onClick={() => this.handleEdit()} />
             </React.Fragment>
         ) : (
-            <button onClick={() => this.handleUnsubscribe(this.props.room.id, this.props.user.id)}>leave</button>
+            <div onClick={() => this.handleUnsubscribe(this.props.room.id, this.props.user.id)}
+                 style={{cursor: 'pointer', display: 'flex', alignItems: 'center'}}>
+                <ClearIcon/>
+                leave this chat
+            </div>
         );
             let fill = this.state.editable ? (
-            <Grid container
-                  direction="row"
-                  spacing={2} >
-                <Grid item xs={12}>
-                    <input ref={input => this.newRoomsName = input} defaultValue={this.props.room.name} type="text"/>
-                </Grid>
-                <Grid item xs={6}>
-                    <button onClick={() => this.handleUpdate(this.newRoomsName.value)}>update</button>
-                </Grid>
-                <Grid item xs={6}>
-                    <button onClick={() => this.handleEdit()}>cancel</button>
-                </Grid>
-            </Grid>
-        ) : (
+                <RoomFields defaultName={this.props.room.name} submitHandler={this.handleUpdate} cancelHandler={this.handleEdit}/>
+            ) : (
             <React.Fragment>
                 <Link to={'/home/rooms/' + this.props.room.id} className='room-card info'>
                     <h2>{this.props.room.name}</h2>

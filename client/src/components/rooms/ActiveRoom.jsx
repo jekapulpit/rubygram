@@ -11,6 +11,9 @@ import { searchUsers } from '../../services/searchService'
 import RoomCable from "./RoomCable";
 import UserList from "./UserList";
 import MessageSearchWindow from "../search/MessageSearchWindow";
+import AccessibilityIcon from '@material-ui/icons/Accessibility';
+import AddIcon from '@material-ui/icons/Add';
+
 
 class ActiveRoom extends React.Component {
     componentDidMount() {
@@ -39,20 +42,21 @@ class ActiveRoom extends React.Component {
     render() {
         let fill = this.props.search.messageSearch ? (
             <React.Fragment>
-                <div className="room-header">
-                    <button onClick={() => {this.props.toggleCleanMessageResults()}}>back</button>
-                </div>
                 <MessageSearchWindow toggleExecuteMessageSearch={this.props.toggleExecuteMessageSearch}
+                                     toggleCleanMessageResults={this.props.toggleCleanMessageResults}
                                      toggleMessageSearch={this.props.toggleMessageSearch}
+                                     room={this.props.room.roomInfo}
                                      roomId={this.props.room.roomInfo.id}
                                      results={this.props.search.messageResults}/>
             </React.Fragment>
         ) : (
             <React.Fragment>
-                <div className="room-header">
-                    <button onClick={() => this.props.toggleSearch()}>invite more people</button>
-                    <p onClick={() => this.props.toggleShowUsers()}>show users ({this.props.room.users.length})</p>
-                    <button onClick={() => {this.props.toggleMessageSearch()}}>search messages in room</button>
+                <div className="room-header active-room">
+                    <div className="members">
+                        <p className="clickable-link" onClick={() => this.props.toggleShowUsers()}><AccessibilityIcon /> {this.props.room.users.length} member(s)</p>
+                        <p className="clickable-link" onClick={() => this.props.toggleSearch()}><AddIcon /> invite more people</p>
+                    </div>
+                    <button className="btn neutral" onClick={() => {this.props.toggleMessageSearch()}}>search messages in room</button>
                 </div>
                 <RoomCable room={this.props.room.roomInfo}/>
                 <MessageList roomId={this.props.room.roomInfo.id} messages={this.props.room.messages}/>

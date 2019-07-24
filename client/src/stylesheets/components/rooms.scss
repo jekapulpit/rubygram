@@ -5,9 +5,25 @@
   width: 100%;
 
   .room-header {
-    height: 150px;
+    height: 100px;
     width: 100%;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-bottom: 2px dashed #F09B55;
+    padding-left: 40px;
+    padding-right: 40px;
+    box-sizing: border-box;
+    -webkit-box-shadow: 3px 3px 10px 0 rgba(0,0,0,.3);
+    -moz-box-shadow: 3px 3px 10px 0 rgba(0,0,0,.3);
+    box-shadow: 3px 3px 10px 0 rgba(0,0,0,.3);
+
+    &.active-room {
+      justify-content: space-between;
+    }
   }
+
 
   .talk {
     display: flex;
@@ -77,23 +93,44 @@
         width: 100%;
         min-height: 100px;
         max-height: 100px;
-        background-color: #f6f6f6;
-        display: flex;
-        justify-content: center;
+        background: linear-gradient(144deg, rgba(255,255,255,1) 14%, rgba(240,85,85,1) 100%, rgba(240,85,85,1) 100%);        display: flex;
+        justify-content: space-between;
         align-items: center;
         position: relative;
+        padding: 15px;
+        box-sizing: border-box;
+        -webkit-box-shadow: -3px 0 10px 0 rgba(0,0,0,.3);
+        -moz-box-shadow: -3px 0 10px 0 rgba(0,0,0,.3);
+        box-shadow: -3px 0 10px 0 rgba(0,0,0,.3);
 
-        .input {
-          width: 50%;
-          min-height: 25px;
-          border-radius: 5px 0 0 5px;
-          padding: 5px 10px;
-          background-color: white;
-          border: 1px solid #bdbdbd;
-          outline: none;
-          border-right: none;
-          color: #212121;
-          font-size: 12px;
+        &.messages {
+          justify-content: center;
+          background: #fff;
+          border-top: 2px dashed #F09B55;
+          overflow: hidden;
+        }
+
+        .inputs {
+          display: flex;
+
+          .icon {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+          }
+
+          input, .icon {
+            background-color: #fff;
+            border: none;
+            outline: none;
+            padding: 5px 10px;
+            box-sizing: border-box;
+          }
+
+          input {
+            width: 250px;
+            font-size: 12px;
+          }
         }
       }
     }
@@ -122,11 +159,35 @@
         align-items: center;
         justify-content: center;
 
+        .edit-card {
+          display: flex;
+          flex-direction: column;
+          width: 100%;
+          height: 100%;
+          justify-content: center;
+          align-items: center;
+
+          .edit-fields {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            input {
+              padding-left: 10px;
+              box-sizing: border-box;
+              height: 25px;
+              margin: 5px;
+            }
+          }
+        }
+
         &.info {
           height: 100%;
           margin: 0;
           z-index: 100;
           background-color: #fff;
+          text-decoration: none;
+          color: #C0448A;
         }
 
         &.with-room {

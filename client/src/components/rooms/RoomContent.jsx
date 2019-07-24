@@ -1,6 +1,7 @@
 import React from 'react';
 import { hot } from 'react-hot-loader/root';
 import '../../stylesheets/components/rooms.scss'
+import '../../stylesheets/components/buttons.scss'
 import RoomList from "./RoomList";
 import {search} from "../../actionTypes";
 import {connect} from "react-redux";
@@ -9,10 +10,8 @@ import MessageSearchWindow from "../search/MessageSearchWindow";
 const RoomContent = props => {
     let fill = props.search.messageSearch ? (
         <React.Fragment>
-            <div className="room-header">
-                <button onClick={() => {props.toggleCleanMessageResults()}}>back</button>
-            </div>
-            <MessageSearchWindow toggleExecuteMessageSearch={props.toggleExecuteMessageSearch}
+            <MessageSearchWindow toggleCleanMessageResults={props.toggleCleanMessageResults}
+                                 toggleExecuteMessageSearch={props.toggleExecuteMessageSearch}
                                  toggleMessageSearch={props.toggleMessageSearch}
                                  results={props.search.messageResults}/>
         </React.Fragment>
@@ -20,7 +19,7 @@ const RoomContent = props => {
     ) : (
         <React.Fragment>
             <div className="room-header">
-                <button onClick={() => {props.toggleMessageSearch()}}>search messages</button>
+                <button className="btn neutral" onClick={() => {props.toggleMessageSearch()}}>search for messages</button>
             </div>
             <RoomList />
         </React.Fragment>
