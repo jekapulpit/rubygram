@@ -23,6 +23,12 @@ ReactDOM.render(
     <Provider store={store}>
         <ActionCableProvider url={API_WS_ROOT}>
         <Router>
+            <Route exact path="/" render={() => (
+                syncCurrentUser() ?
+                    <Redirect to="/home"/>
+                    :
+                    (<Redirect to="/login"/>)
+            )}/>
             <Route path="/home" render={() => (
                 syncCurrentUser() ?
                 null
