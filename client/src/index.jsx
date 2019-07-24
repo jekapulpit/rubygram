@@ -4,7 +4,6 @@ import './stylesheets/index.css';
 import * as serviceWorker from './serviceWorker';
 import store from './store'
 import Menu from './components/Menu'
-import Login from './components/users/Login'
 import Profile from './components/users/Profile'
 import RoomContent from './components/rooms/RoomContent'
 import { Provider } from 'react-redux'
@@ -17,7 +16,8 @@ import UsersSettings from "./components/settings/UsersSettings";
 import NotificationsContent from "./components/notifications/NotificationsContent";
 import {syncCurrentUser} from "./services/authentificationService";
 import {getCurrentUser} from "./services/sessionStorageServices";
-import Register from "./components/users/Register";
+import RegisterForm from "./components/users/RegisterForm";
+import LoginForm from "./components/users/LoginForm";
 
 ReactDOM.render(
     <Provider store={store}>
@@ -46,8 +46,8 @@ ReactDOM.render(
                     :
                     (<Redirect to="/home/rooms"/>)
             )} />
-            <Route exact path="/login" component={Login} />
-            <Route exact path="/sing_up" component={Register} />
+            <Route exact path="/login" component={LoginForm} />
+            <Route exact path="/sing_up" component={RegisterForm} />
         </Router>
 
         </ActionCableProvider>

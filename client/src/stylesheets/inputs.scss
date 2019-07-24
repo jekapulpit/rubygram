@@ -1,0 +1,73 @@
+.user-form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: auto;
+    width: 400px;
+}
+
+.text-input-block {
+    border: 1px solid #9CABB5;
+    border-radius: 5px;
+    position: relative;
+    justify-content: center;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-smoothing: antialiased;
+    margin: 1em;
+}
+.text-input-block .text-input {
+    border-radius: 5px;
+    height: 3em;
+    font-size: 15px;
+    width: 100%;
+    padding-left: 1em;
+    padding-right: 1em;
+    box-sizing: border-box;
+    background-color: #FBFBFB;
+    color: #667884;
+    border: none;
+}
+
+.text-input-block .text-input:focus {
+    outline: none;
+}
+
+.text-input-block .text-input:focus + .input-label,
+.text-input-block .text-input:valid + .input-label{
+    height: auto;
+    top: 0;
+    left: 5px;
+    font-size: 0.6em;
+    color: #9CABB5;
+}
+
+.text-input-block .input-label {
+    position: absolute;
+    color: #667884;
+    font-size: 1em;
+    top: 0.8em;
+    left: 1em;
+    -webkit-transition: 0.3s;
+    -moz-transition: 0.3s;
+    -ms-transition: 0.3s;
+    -o-transition: 0.3s;
+    transition: 0.3s;
+}
+
+.text-input-block .error-input-label {
+    position: absolute;
+    color: red;
+    font-size: 0.5em;
+    top: -1.5em;
+    left: 5px;
+    display: none;
+}
+
+.text-input-block.input-error .error-input-label {
+    display: inline;
+}
+
+.text-input-block.input-error {
+    border-color: red;
+}
