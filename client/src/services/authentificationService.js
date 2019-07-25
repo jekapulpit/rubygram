@@ -63,7 +63,7 @@ export function syncCurrentUser() {
     fetch(url, requestOpts)
         .then((response) => { return response.json() })
         .then((data) => {
-            if(data.status !== 500) {
+            if(data.current_user && data.status !== 500 && data.status !== 401) {
                 updateUserSession(data.current_user);
                 store.dispatch({type: users.UPDATE, newAttributes: data.current_user})
             }

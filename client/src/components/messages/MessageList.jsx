@@ -3,6 +3,7 @@ import Message from "./Message";
 import { hot } from 'react-hot-loader/root';
 import {sendMessage} from "../../services/messagesServices";
 import {getCurrentUser} from "../../services/sessionStorageServices";
+import SendIcon from '@material-ui/icons/Send';
 
 const MessageList = props => {
     let messages = props.messages.map((message) => {
@@ -29,8 +30,10 @@ const MessageList = props => {
                 }
               })
             }} className="send-box messages">
-              <input ref={input => newMessage = input} type="text"/>
-              <input type="submit" value="send" />
+                <div>
+                    <input ref={input => newMessage = input} type="text"/>
+                    <button><SendIcon/></button>
+                </div>
             </form>
           </div>
         </div>

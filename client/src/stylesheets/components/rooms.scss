@@ -108,6 +108,42 @@
           background: #fff;
           border-top: 2px dashed #F09B55;
           overflow: hidden;
+
+          div {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 35px;
+            width: 300px;
+            border: 1px solid #000;
+            padding: 5px;
+            -webkit-border-radius: 5px;
+            -moz-border-radius: 5px;
+            border-radius: 10px;
+
+            input, button {
+              box-sizing: border-box;
+              background-color: transparent;
+              border: none;
+              height: 100%;
+              display: flex;
+              outline: none;
+            }
+
+            input {
+              width: 100%;
+              padding-left: 15px;
+              padding-right: 15px;
+              font-size: 15px;
+            }
+
+            button {
+              width: 35px;
+              color: #C0448A;
+              cursor: pointer;
+            }
+          }
+
         }
 
         .inputs {
