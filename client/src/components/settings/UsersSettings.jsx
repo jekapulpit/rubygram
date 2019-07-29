@@ -2,11 +2,13 @@ import React from 'react';
 import { hot } from 'react-hot-loader/root';
 import { search } from "../../actionTypes";
 import { connect } from "react-redux";
-import { searchUsersGlobal} from '../../services/searchService'
+import {searchMessages, searchUsersGlobal} from '../../services/searchService'
 import UserList from "./UserList";
 import {changeDefaultUserSettings, changeUserSettings, givePriveleges} from "../../services/usersServices";
 import {API_HOST, API_PORT} from "../../constants";
 import {getTokenFromSessionStorage} from "../../services/sessionStorageServices";
+import ArrowRightAltIcon from "../search/MessageSearchWindow";
+import SearchIcon from '@material-ui/icons/Search';
 
 class UsersSettings extends React.Component {
     constructor(props) {
@@ -65,17 +67,24 @@ class UsersSettings extends React.Component {
         let userData={};
         return (
             <div className='content-container'>
-                <div className="room-header">
-                    <form onSubmit={(e) => {
+                <div className="room-header search">
+                    <div className="defaults">
+                        default value: {this.state.defaultValue}
+                        <div className="controls">
+                            <button className='btn accept' onClick={() => this.handleChangeDefaultSettings(this.state.defaultValue + 1)}>more</button>
+                            <button className='btn reject' onClick={() => this.handleChangeDefaultSettings(this.state.defaultValue - 1)}>less</button>
+                        </div>
+                    </div>
+                    <form className="settings-form" onSubmit={(e) => {
                         e.preventDefault();
-                        this.handleSearch(userData.data.value);
                     }} data-remote="true">
-                        <input ref={input => userData.data = input} />
-                        <button>search</button>
+                        <div className="inputs">
+                            <input placeholder='start typing...' onChange={() => this.handleSearch(userData.data.value)} ref={input => userData.data = input} />
+                            <div className='icon'>
+                                <SearchIcon />
+                            </div>
+                        </div>
                     </form>
-                    default value: {this.state.defaultValue}
-                    <button onClick={() => this.handleChangeDefaultSettings(this.state.defaultValue + 1)}>more</button>
-                    <button onClick={() => this.handleChangeDefaultSettings(this.state.defaultValue - 1)}>less</button>
                 </div>
                 <UserList users={this.props.search.results}
                           handleGivePrivileges={this.handleGivePrivileges}

@@ -94,7 +94,7 @@ class Profile extends React.Component {
                     <p>email: {this.state.currentUser.email}</p>
                     <p>
                         rooms available: {this.state.currentUser.admin ? 'infinite' : this.state.currentUser.max_chats }
-                        {(this.props.currentUser.admin && !this.selfProfile()) ? (
+                        {(this.props.currentUser.admin && !this.selfProfile() && !this.state.currentUser.admin) ? (
                             <span>
                                 <button onClick={() => this.handleChangeSettings(this.state.currentUser.max_chats + 1)}>more</button>
                                 <button onClick={() => this.handleChangeSettings(this.state.currentUser.max_chats - 1)}>less</button>

@@ -91,3 +91,47 @@
     }
   }
 }
+
+.room-header.search {
+
+
+  display: flex;
+  justify-content: space-between;
+
+  .defaults {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    .controls {
+      display: flex;
+    }
+  }
+
+  .settings-form {
+
+    .inputs {
+      display: flex;
+
+      .icon {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      input, .icon {
+        background-color: #fff;
+        outline: none;
+        padding: 5px 10px;
+        box-sizing: border-box;
+      }
+
+      input {
+        width: 250px;
+        font-size: 12px;
+      }
+    }
+  }
+}
+
