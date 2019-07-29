@@ -2,12 +2,11 @@ import React from 'react';
 import { hot } from 'react-hot-loader/root';
 import { search } from "../../actionTypes";
 import { connect } from "react-redux";
-import {searchMessages, searchUsersGlobal} from '../../services/searchService'
+import {searchUsersGlobal} from '../../services/searchService'
 import UserList from "./UserList";
 import {changeDefaultUserSettings, changeUserSettings, givePriveleges} from "../../services/usersServices";
 import {API_HOST, API_PORT} from "../../constants";
 import {getTokenFromSessionStorage} from "../../services/sessionStorageServices";
-import ArrowRightAltIcon from "../search/MessageSearchWindow";
 import SearchIcon from '@material-ui/icons/Search';
 
 class UsersSettings extends React.Component {
@@ -69,7 +68,7 @@ class UsersSettings extends React.Component {
             <div className='content-container'>
                 <div className="room-header search">
                     <div className="defaults">
-                        default value: {this.state.defaultValue}
+                        default max rooms number: {this.state.defaultValue}
                         <div className="controls">
                             <button className='btn accept' onClick={() => this.handleChangeDefaultSettings(this.state.defaultValue + 1)}>more</button>
                             <button className='btn reject' onClick={() => this.handleChangeDefaultSettings(this.state.defaultValue - 1)}>less</button>

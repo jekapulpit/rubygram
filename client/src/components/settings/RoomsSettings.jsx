@@ -2,13 +2,12 @@ import React from 'react';
 import { hot } from 'react-hot-loader/root';
 import { search } from "../../actionTypes";
 import { connect } from "react-redux";
-import {searchMessages, searchUsersGlobal} from '../../services/searchService'
-import UserList from "./UserList";
-import {changeDefaultUserSettings, changeUserSettings, givePriveleges} from "../../services/usersServices";
+import {searchRooms, searchUsersGlobal} from '../../services/searchService'
+import {changeDefaultRoomSettings, changeRoomSettings} from "../../services/roomsServices";
 import {API_HOST, API_PORT} from "../../constants";
 import {getTokenFromSessionStorage} from "../../services/sessionStorageServices";
-import ArrowRightAltIcon from "../search/MessageSearchWindow";
 import SearchIcon from '@material-ui/icons/Search';
+import RoomList from "./RoomList";
 
 class RoomsSettings extends React.Component {
     constructor(props) {
@@ -19,7 +18,7 @@ class RoomsSettings extends React.Component {
     }
 
     componentDidMount() {
-        fetch(`http://${API_HOST}:${API_PORT}/api/v4/settings/users/default`, {
+        fetch(`http://${API_HOST}:${API_PORT}/api/v4/settings/rooms/default`, {
             mode: 'cors',
             headers: {
                 'Authorization': getTokenFromSessionStorage()
@@ -33,15 +32,15 @@ class RoomsSettings extends React.Component {
             })
     }
 
-    handleChangeSettings = (userId, newValue) => {
-        changeUserSettings(userId, newValue)
+    handleChangeSettings = (roomId, newValue) => {
+        changeRoomSettings(roomId, newValue)
             .then((result) => {
-                this.props.toggleUpdateResults(result.user)
+                this.props.toggleUpdateResults(result.room)
             })
     };
 
     handleChangeDefaultSettings = (newValue) => {
-        changeDefaultUserSettings(newValue)
+        changeDefaultRoomSettings(newValue)
             .then(() => {
                 this.setState({
                     defaultValue: newValue
@@ -50,44 +49,36 @@ class RoomsSettings extends React.Component {
     };
 
     handleSearch = (request) => {
-        searchUsersGlobal(request)
+        searchRooms(request)
             .then((data) => {
                 this.props.toggleExecuteSearch(data.results)
             })
     };
 
-    handleGivePrivileges = (userId) => {
-        givePriveleges(userId)
-            .then((result) => {
-                this.props.toggleUpdateResults(result.user)
-            })
-    };
-
     render() {
-        let userData={};
+        let roomData={};
         return (
             <div className='content-container'>
                 <div className="room-header search">
                     <div className="defaults">
-                        default value: {this.state.defaultValue}
+                        default users number: {this.state.defaultValue}
                         <div className="controls">
-                            <button className='btn accept' onClick={() => this.handleChangeDefaultSettings(this.state.defaultValue + 1)}>more</button>
-                            <button className='btn reject' onClick={() => this.handleChangeDefaultSettings(this.state.defaultValue - 1)}>less</button>
+                            <button className='btn accept' onClick={() => this.handleChangeDefaultSettings(this.state.defaultValue + 1)}>+</button>
+                            <button className='btn reject' onClick={() => this.handleChangeDefaultSettings(this.state.defaultValue - 1)}>-</button>
                         </div>
                     </div>
                     <form className="settings-form" onSubmit={(e) => {
                         e.preventDefault();
                     }} data-remote="true">
                         <div className="inputs">
-                            <input placeholder='start typing...' onChange={() => this.handleSearch(userData.data.value)} ref={input => userData.data = input} />
+                            <input placeholder='start typing...' onChange={() => this.handleSearch(roomData.data.value)} ref={input => roomData.data = input} />
                             <div className='icon'>
                                 <SearchIcon />
                             </div>
                         </div>
                     </form>
                 </div>
-                <UserList users={this.props.search.results}
-                          handleGivePrivileges={this.handleGivePrivileges}
+                <RoomList rooms={this.props.search.roomsResults}
                           handleChangeSettings={this.handleChangeSettings} />
             </div>
         )
@@ -101,17 +92,14 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = function(dispatch, ownProps) {
     return {
-        toggleSendInvite: (userId) => {
-            dispatch({ type: search.SEND, userId: userId })
-        },
         toggleCleanResults: () => {
-            dispatch({ type: search.CLEAN })
+            dispatch({ type: search.CLEAN_ROOMS })
         },
         toggleExecuteSearch: (results) => {
-            dispatch({ type: search.EXECUTE, results: results })
+            dispatch({ type: search.EXECUTE_ROOMS, results: results })
         },
         toggleUpdateResults: (result) => {
-            dispatch({ type: search.UPDATE_USER_RESULTS, result: result })
+            dispatch({ type: search.UPDATE_ROOM_RESULTS, result: result })
         },
     }
 };

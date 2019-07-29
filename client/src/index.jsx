@@ -18,6 +18,7 @@ import {syncCurrentUser} from "./services/authentificationService";
 import {getCurrentUser} from "./services/sessionStorageServices";
 import RegisterForm from "./components/users/RegisterForm";
 import LoginForm from "./components/users/LoginForm";
+import RoomsSettings from "./components/settings/RoomsSettings";
 
 ReactDOM.render(
     <Provider store={store}>
@@ -48,7 +49,7 @@ ReactDOM.render(
             )} />
             <Route exact path="/home/settings/rooms" render={() => (
                 getCurrentUser().admin ?
-                    null
+                    <RoomsSettings />
                     :
                     (<Redirect to="/home/rooms"/>)
             )} />

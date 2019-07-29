@@ -28,6 +28,13 @@ export default (state = { results: [], active: false }, action) => {
                 return result
             });
             return {...state, results: results};
+        case search.UPDATE_ROOM_RESULTS:
+            let roomResults = state.roomsResults.map((result) => {
+                if (result.id === action.result.id)
+                    return action.result;
+                return result
+            });
+            return {...state, roomsResults: roomResults};
         case search.EXECUTE_ROOMS:
             return {...state, roomsResults: action.results};
         case search.CLEAN_ROOMS:
