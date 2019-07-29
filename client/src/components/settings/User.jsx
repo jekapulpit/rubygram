@@ -9,9 +9,9 @@ const User = props => {
     ) : (
         <React.Fragment>
             <Link className={'clickable-link'} to={`/home/profile/${props.user.id}`}>{props.user.username}, chat limit: {props.user.max_chats}</Link>
-            <button className="btn empty" onClick={() => props.handleGivePrivileges(props.user.id)}>set as moderator</button>
-            <button className="btn accept" onClick={() => props.handleChangeSettings(props.user.id, props.user.max_chats + 1)}>more</button>
-            <button className="btn reject" onClick={() => props.handleChangeSettings(props.user.id, props.user.max_chats - 1)}>less</button>
+            <button className="btn accept" onClick={() => props.handleChangeSettings(props.user.id, props.user.max_chats + 1)}>+</button>
+            <button className="btn reject" onClick={() => props.handleChangeSettings(props.user.id, props.user.max_chats - 1)}>-</button>
+            <button className="btn empty" onClick={() => props.handleGivePrivileges(props.user.id)}>make a moderator</button>
         </React.Fragment>
     );
     return (

@@ -8,6 +8,7 @@
     display: flex;
     flex-direction: column;
     height: 100%;
+    overflow-y: scroll;
     width: 100%;
     box-sizing: border-box;
     padding: 20px;
@@ -23,6 +24,12 @@
       padding: 10px;
       padding-left: 30px;
       align-items: center;
+
+      .invite-controls {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
     }
   }
 }

@@ -13,7 +13,7 @@ import NotificationsCable from "./notifications/NotificationsCable";
 const Menu = props => {
     return (
         <AppBar id="navbar-menu" position="relative">
-            <p>You logged in as {getCurrentUser().username}, <span onClick={() => logout()}>log out</span></p>
+            <p className='profile-header'>You logged in as {getCurrentUser().username} <p className='clickable-link' onClick={() => logout()}>log out</p></p>
             <Tabs value={window.location.pathname}>
                 <Tab value={"/home/rooms"} component={Link} to="/home/rooms" label="Room List" />
                 <Tab value={"/home/notifications"} component={Link} to="/home/notifications" label="Notifications" />

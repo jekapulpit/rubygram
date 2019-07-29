@@ -70,8 +70,8 @@ class UsersSettings extends React.Component {
                     <div className="defaults">
                         default max rooms number: {this.state.defaultValue}
                         <div className="controls">
-                            <button className='btn accept' onClick={() => this.handleChangeDefaultSettings(this.state.defaultValue + 1)}>more</button>
-                            <button className='btn reject' onClick={() => this.handleChangeDefaultSettings(this.state.defaultValue - 1)}>less</button>
+                            <button className='btn accept' onClick={() => this.handleChangeDefaultSettings(this.state.defaultValue + 1)}>+</button>
+                            <button className='btn reject' onClick={() => this.handleChangeDefaultSettings(this.state.defaultValue - 1)}>-</button>
                         </div>
                     </div>
                     <form className="settings-form" onSubmit={(e) => {

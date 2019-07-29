@@ -6,6 +6,18 @@
   background-color: #fff;
   color: rgb(240,85,85);
   overflow-x: hidden;
+  position: relative;
+
+  .profile-header {
+    position: absolute;
+    margin: auto;
+    top: 20px;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  }
 
   .MuiTabs-root {
     width: 100%;
