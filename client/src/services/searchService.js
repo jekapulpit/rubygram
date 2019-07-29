@@ -24,3 +24,11 @@ export const searchMessages = (request, room) => fetch(`http://${API_HOST}:${API
     }
 })
     .then((response) => { return response.json() });
+
+export const searchRooms = (request) => fetch(`http://${API_HOST}:${API_PORT}/api/v4/search/rooms?request=${request}`, {
+    mode: 'cors',
+    headers: {
+        'Authorization': getTokenFromSessionStorage()
+    }
+})
+    .then((response) => { return response.json() });

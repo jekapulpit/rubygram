@@ -17,6 +17,7 @@ export default  {
         messageSearch: false,
         results: [],
         messageResults: [],
+        roomsResults: [],
     },
     invites: {
         inviteList: []

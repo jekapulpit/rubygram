@@ -28,6 +28,10 @@ export default (state = { results: [], active: false }, action) => {
                 return result
             });
             return {...state, results: results};
+        case search.EXECUTE_ROOMS:
+            return {...state, roomsResults: action.results};
+        case search.CLEAN_ROOMS:
+            return {...state, roomsResults: []};
         default:
             return state;
     }
