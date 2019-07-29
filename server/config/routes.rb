@@ -24,6 +24,7 @@ Rails.application.routes.draw do
       get '/settings/rooms/default', to: 'rooms#get_default_max_users'
       post '/rooms/:id/settings', to: 'rooms#set_max_users'
       get '/search/messages', to: 'search#find_messages'
+      get '/search/rooms/', to: 'search#find_rooms'
       get '/search/:room_id/messages/', to: 'search#find_messages_in_room'
       get '/auth/sync', to: 'auths#sync'
     end

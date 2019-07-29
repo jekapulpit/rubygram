@@ -16,4 +16,9 @@ class Api::V4::SearchController < ApplicationController
     results = Message.search_in_all_rooms(params[:request], current_user)
     render json: { results: results.map(&:with_send_info) }
   end
+
+  def find_rooms
+    results = Room.search(params[:request])
+    render json: { results: results.map(&:with_settings) }
+  end
 end
