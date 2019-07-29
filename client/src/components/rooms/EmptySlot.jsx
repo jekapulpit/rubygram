@@ -4,7 +4,7 @@ import '../../stylesheets/components/rooms.scss'
 import {rooms} from "../../actionTypes";
 import {connect} from "react-redux";
 import {addNewRoom} from "../../services/roomsServices";
-import LockOpenIcon from '@material-ui/icons/LockOpen';
+import AddIcon from '@material-ui/icons/Add';
 import RoomFields from "./RoomFields";
 
 class EmptySlot extends React.Component {
@@ -42,7 +42,7 @@ class EmptySlot extends React.Component {
         let fill = this.state.editable ? (
             <RoomFields submitHandler={this.handleCreate} cancelHandler={this.handleNew}/>
         ) : (
-            <LockOpenIcon onClick={() => this.handleNew()} style={{
+            <AddIcon onClick={() => this.handleNew()} style={{
                 color: '#C0448A',
                 fontSize: '40px',
                 cursor: 'pointer',

@@ -56,7 +56,7 @@ class ActiveRoom extends React.Component {
                         <p className="clickable-link" onClick={() => this.props.toggleShowUsers()}><AccessibilityIcon /> {this.props.room.users.length} member(s)</p>
                         <p className="clickable-link" onClick={() => this.props.toggleSearch()}><AddIcon /> invite more people</p>
                     </div>
-                    <button className="btn neutral" onClick={() => {this.props.toggleMessageSearch()}}>search messages in room</button>
+                    <button className="btn neutral" onClick={() => {this.props.toggleMessageSearch()}}>search for messages in room</button>
                 </div>
                 <RoomCable room={this.props.room.roomInfo}/>
                 <MessageList roomId={this.props.room.roomInfo.id} messages={this.props.room.messages}/>
