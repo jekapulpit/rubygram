@@ -8,7 +8,7 @@ module Rooms
     end
 
     def call
-      room = Room.create(name: name)
+      room = Room.new(name: name)
       RoomRelation.create(user: creator, room: room, status: 'creator')
       room
     end

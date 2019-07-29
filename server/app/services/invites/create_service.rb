@@ -10,6 +10,7 @@ module Invites
     end
 
     def call
+      @user.update(unread_notifications: (@user.unread_notifications + 1)) unless able_to_invite
       Invite.create(content: content, invite_type: invite_type, room: room, user: user) unless able_to_invite
     end
 

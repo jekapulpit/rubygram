@@ -15,8 +15,8 @@ const Menu = props => {
         <AppBar id="navbar-menu" position="relative">
             <p className='profile-header'>You logged in as {getCurrentUser().username} <p className='clickable-link' onClick={() => logout()}>log out</p></p>
             <Tabs value={window.location.pathname}>
-                <Tab value={"/home/rooms"} component={Link} to="/home/rooms" label="Room List" />
-                <Tab value={"/home/notifications"} component={Link} to="/home/notifications" label="Notifications" />
+                <Tab value={"/home/rooms"} component={Link} to="/home/rooms" label={`Room List (${getCurrentUser().unread_number})`} />
+                <Tab value={"/home/notifications"} component={Link} to="/home/notifications" label={`Notifications (${getCurrentUser().unread_notifications})`} />
                 {
                     getCurrentUser().admin ? (
                         <Tab value={"/home/settings/rooms"} component={Link} to="/home/settings/rooms" label="rooms settings" />

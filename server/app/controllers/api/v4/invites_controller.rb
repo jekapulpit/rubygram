@@ -10,6 +10,11 @@ class Api::V4::InvitesController < ApplicationController
     end
   end
 
+  def read_all
+    current_user.update(unread_notifications: 0)
+    render json: { success: true }
+  end
+
   def reject
     invite = Invite.find(params[:id])
     if invite.reject

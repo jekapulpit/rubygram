@@ -14,6 +14,7 @@ class Room < ApplicationRecord
   def with_member_status(user)
     attributes.merge({
                         member_status: user_status(user),
+                        unread_number: room_relations.find_by(user: user).unread_number
                     })
   end
 

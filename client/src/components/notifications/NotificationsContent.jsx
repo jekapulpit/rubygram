@@ -3,7 +3,7 @@ import { hot } from 'react-hot-loader/root';
 import '../../stylesheets/components/notifications.scss'
 import { invites } from "../../actionTypes";
 import {connect} from "react-redux";
-import {acceptInvite, getUserInvites, rejectInvite} from "../../services/invitesServices";
+import {acceptInvite, getUserInvites, rejectInvite, readInvites} from "../../services/invitesServices";
 import InviteList from "./InviteList";
 
 class NotificationsContent extends React.Component {
@@ -12,6 +12,7 @@ class NotificationsContent extends React.Component {
             .then((data) => {
                  this.props.toggleSetInviteList(data.invites)
             })
+            .then(() => readInvites())
     }
 
     handleAcceptInvite = (inviteId) => {

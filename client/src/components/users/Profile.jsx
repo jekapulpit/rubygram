@@ -95,10 +95,10 @@ class Profile extends React.Component {
                     <p>
                         rooms available: {this.state.currentUser.admin ? 'infinite' : this.state.currentUser.max_chats }
                         {(this.props.currentUser.admin && !this.selfProfile() && !this.state.currentUser.admin) ? (
-                            <span>
-                                <button onClick={() => this.handleChangeSettings(this.state.currentUser.max_chats + 1)}>more</button>
-                                <button onClick={() => this.handleChangeSettings(this.state.currentUser.max_chats - 1)}>less</button>
-                            </span>) : null}
+                            <div className='controls'>
+                                <button className='btn accept' onClick={() => this.handleChangeSettings(this.state.currentUser.max_chats + 1)}>+</button>
+                                <button className='btn reject' onClick={() => this.handleChangeSettings(this.state.currentUser.max_chats - 1)}>-</button>
+                            </div>) : null}
                     </p>
                 </div>
             </div>

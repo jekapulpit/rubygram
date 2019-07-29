@@ -1,7 +1,8 @@
 import { API_HOST, API_PORT } from '../constants'
-import { getTokenFromSessionStorage } from "./sessionStorageServices";
+import {deleteUserSession, getTokenFromSessionStorage, updateUserSession} from "./sessionStorageServices";
 import store from "../store";
-import {invites} from "../actionTypes";
+import {invites, users} from "../actionTypes";
+import {syncCurrentUser} from "./authentificationService";
 
 export async function sendInvite(userId, roomId, content) {
     return fetch(`http://${API_HOST}:${API_PORT}/api/v4/invites/`, {
@@ -53,6 +54,20 @@ export async function rejectInvite(inviteId) {
         .then((response) => { return response.json() });
 }
 
+export function readInvites() {
+    fetch(`http://${API_HOST}:${API_PORT}/api/v4/invites/unread/`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': getTokenFromSessionStorage()
+        },
+    }).then(() => syncCurrentUser())
+}
+
 export async function receiveInvite(invite) {
+    if(window.location.pathname === '/home/notifications')
+        readInvites();
+    else
+        syncCurrentUser();
     store.dispatch({type: invites.RECEIVE, invite: invite});
 }

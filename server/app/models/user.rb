@@ -28,7 +28,8 @@ class User < ApplicationRecord
   def with_settings
     attributes.merge({
                          max_chats: max_chats,
-                         empty_slots: empty_slots
+                         empty_slots: empty_slots,
+                         unread_number: room_relations ? room_relations.pluck(:unread_number).sum : 0
                     })
   end
 

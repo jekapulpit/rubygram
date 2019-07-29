@@ -2,6 +2,10 @@
   padding: 20px;
   align-self: flex-start;
 
+  .controls {
+    display: flex;
+  }
+
   .username {
     display: flex;
     align-items: center;
