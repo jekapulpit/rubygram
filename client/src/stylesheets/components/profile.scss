@@ -1,0 +1,15 @@
+.user-data {
+  padding: 20px;
+  align-self: flex-start;
+
+  .username {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid #B00100;
+
+    input {
+      font-size: 16px;
+    }
+  }
+}

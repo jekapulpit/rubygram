@@ -1,5 +1,6 @@
 import React from "react"
 import {sendInvite} from "../../services/invitesServices";
+import {getCurrentUser} from "../../services/sessionStorageServices";
 
 const UserResult = props => {
     let inviteStatus;
@@ -15,7 +16,7 @@ const UserResult = props => {
             break;
         default:
             inviteStatus = (<button onClick={() => {
-                sendInvite(props.userInfo.id, props.room.id, 'hello')
+                sendInvite(props.userInfo.id, props.room.id, `User ${getCurrentUser().username} invites you to his chat "${props.room.name}"!`)
                     .then((data) => {
                         if(data.success)
                             props.toggleSendInvite(props.userInfo.id);

@@ -19,16 +19,19 @@ const MessageList = props => {
             <form onSubmit={(e) => {
               e.preventDefault();
               let newMessageContent = newMessage.value;
-              e.target.reset();
-              sendMessage({
-                message: {
-                  content: newMessageContent,
-                  sender_id: getCurrentUser().id,
-                  recipient_id: props.roomId,
-                  recipient_type: "Room",
-                  sender_type: "User",
-                }
-              })
+              if (newMessageContent) {
+                  e.target.reset();
+                  sendMessage({
+                      message: {
+                          content: newMessageContent,
+                          sender_id: getCurrentUser().id,
+                          recipient_id: props.roomId,
+                          recipient_type: "Room",
+                          sender_type: "User",
+                      }
+                  })
+              }
+
             }} className="send-box messages">
                 <div>
                     <input ref={input => newMessage = input} type="text"/>

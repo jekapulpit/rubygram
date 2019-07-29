@@ -5,6 +5,10 @@ import {users} from "../../actionTypes";
 import {getCurrentUser, updateUserSession} from "../../services/sessionStorageServices";
 import {changeUserSettings, updateUser} from "../../services/usersServices";
 import {getUser} from "../../services/usersServices";
+import EditIcon from '@material-ui/icons/Edit';
+import DoneIcon from '@material-ui/icons/Done';
+import ClearIcon from '@material-ui/icons/Clear';
+import '../../stylesheets/components/profile.scss'
 
 class Profile extends React.Component {
     constructor(props) {
@@ -41,8 +45,8 @@ class Profile extends React.Component {
         return (this.state.currentUser.id === this.props.currentUser.id)
     };
 
-    handleEdit = (userData) => {
-        if(this.state.editable) {
+    handleEdit = (userData = false) => {
+        if(this.state.editable && userData) {
             updateUser(getCurrentUser().id, {
                 user: {
                     username: userData.username.value
@@ -71,15 +75,22 @@ class Profile extends React.Component {
     render() {
         let userData = {};
         let field = (this.state.editable && this.selfProfile()) ? (
-            <h1><input ref={input => userData.username = input} defaultValue={this.state.currentUser.username} type="text"/></h1>
+            <input ref={input => userData.username = input} defaultValue={this.state.currentUser.username} type="text"/>
         ) : (
-            <h1>{this.state.currentUser.username}</h1>
+            this.state.currentUser.username
         );
         return (
             <div className='content-container'>
                 <div className="user-data">
-                    {field}
-                    {this.selfProfile() ? <button onClick={() => this.handleEdit(userData)}>{this.state.editable ? 'save' : 'edit username'}</button> : null}
+                    <div className="username">
+                        {field}
+                        {this.selfProfile() ? (this.state.editable ? (
+                            <React.Fragment>
+                                <DoneIcon onClick={() => this.handleEdit(userData)}/>
+                                <ClearIcon onClick={() => this.handleEdit()}/>
+                            </React.Fragment>
+                            ) : <EditIcon onClick={() => this.handleEdit(userData)}/>) : null}
+                    </div>
                     <p>email: {this.state.currentUser.email}</p>
                     <p>
                         rooms available: {this.state.currentUser.admin ? 'infinite' : this.state.currentUser.max_chats }
