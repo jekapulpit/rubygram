@@ -62,3 +62,39 @@ export async function givePriveleges(userId) {
     })
         .then((response) => { return response.json() });
 }
+
+export async function ignoreUserByRoom(roomId) {
+    return fetch(`http://${API_HOST}:${API_PORT}/api/v4/users/${roomId}/ignore_by_room/`, {
+        mode: 'cors',
+        method: 'POST',
+        headers: {
+            'Authorization': getTokenFromSessionStorage(),
+            'Content-Type': 'application/json',
+        },
+    })
+        .then((response) => { return response.json() });
+}
+
+export async function ignoreUser(userId) {
+    return fetch(`http://${API_HOST}:${API_PORT}/api/v4/users/${userId}/ignore/`, {
+        mode: 'cors',
+        method: 'POST',
+        headers: {
+            'Authorization': getTokenFromSessionStorage(),
+            'Content-Type': 'application/json',
+        },
+    })
+        .then((response) => { return response.json() });
+}
+
+export async function stopIgnoreUser(userId) {
+    return fetch(`http://${API_HOST}:${API_PORT}/api/v4/users/${userId}/stop_ignore/`, {
+        mode: 'cors',
+        method: 'DELETE',
+        headers: {
+            'Authorization': getTokenFromSessionStorage(),
+            'Content-Type': 'application/json',
+        },
+    })
+        .then((response) => { return response.json() });
+}

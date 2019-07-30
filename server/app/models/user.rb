@@ -2,6 +2,8 @@ class User < ApplicationRecord
   has_one :setting, as: :target
   has_many :room_relations
   has_many :invites
+  has_many :black_lists, as: :owner
+  has_many :ignoring_users, through: :black_lists, source: :target, source_type: "User"
   has_many :messages, as: :sender
   has_many :rooms, through: :room_relations
   # Include default devise modules. Others available are:
@@ -21,6 +23,25 @@ class User < ApplicationRecord
     end
   end
 
+  def ignoring?(user)
+    user.id.in? black_lists.pluck(:target_id)
+  end
+
+  def ignore(user)
+    black_lists << BlackList.new(target: user)
+    invites.where(room_id: user
+                               .rooms
+                               .includes(:room_relations)
+                               .where(room_relations: {status: "creator"})
+                               .distinct
+                               .pluck(:id)).destroy_all
+  end
+
+  def stop_ignore(user)
+    ignore = black_lists.where(target: user)
+    ignore.destroy_all if ignore
+  end
+
   def sent_invites
     invites.where(status: 'sent')
   end
@@ -29,6 +50,7 @@ class User < ApplicationRecord
     attributes.merge({
                          max_chats: max_chats,
                          empty_slots: empty_slots,
+                         ignoring_users: ignoring_users.distinct,
                          unread_number: room_relations ? room_relations.pluck(:unread_number).sum : 0
                     })
   end

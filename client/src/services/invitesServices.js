@@ -1,5 +1,10 @@
 import { API_HOST, API_PORT } from '../constants'
-import {deleteUserSession, getTokenFromSessionStorage, updateUserSession} from "./sessionStorageServices";
+import {
+    deleteUserSession,
+    getCurrentUser,
+    getTokenFromSessionStorage,
+    updateUserSession
+} from "./sessionStorageServices";
 import store from "../store";
 import {invites, users} from "../actionTypes";
 import {syncCurrentUser} from "./authentificationService";
@@ -69,5 +74,6 @@ export async function receiveInvite(invite) {
         readInvites();
     else
         syncCurrentUser();
-    store.dispatch({type: invites.RECEIVE, invite: invite});
+    if(invite.user_id === getCurrentUser().id)
+        store.dispatch({type: invites.RECEIVE, invite: invite});
 }

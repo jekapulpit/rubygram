@@ -5,6 +5,7 @@ import { invites } from "../../actionTypes";
 import {connect} from "react-redux";
 import {acceptInvite, getUserInvites, rejectInvite, readInvites} from "../../services/invitesServices";
 import InviteList from "./InviteList";
+import {ignoreUserByRoom} from "../../services/usersServices";
 
 class NotificationsContent extends React.Component {
     componentDidMount() {
@@ -22,6 +23,14 @@ class NotificationsContent extends React.Component {
             })
     };
 
+    handleIgnoreUser = (roomId) => {
+        ignoreUserByRoom(roomId)
+            .then((data) => {
+                if(data.success)
+                    this.props.toggleUpdateList(data.deleted_invites)
+            })
+    };
+
     handleRejectInvite = (inviteId) => {
         rejectInvite(inviteId)
             .then((data) => {
@@ -33,6 +42,7 @@ class NotificationsContent extends React.Component {
         return (
             <div className='content-container'>
                 <InviteList inviteList={this.props.inviteList}
+                            handleIgnoreUser={this.handleIgnoreUser}
                             handleAcceptInvite={this.handleAcceptInvite}
                             handleRejectInvite={this.handleRejectInvite}/>
             </div>
@@ -54,6 +64,9 @@ const mapDispatchToProps = function(dispatch, ownProps) {
         },
         toggleRejectInvite: (inviteId) => {
             dispatch({ type: invites.REJECT, inviteId: inviteId })
+        },
+        toggleUpdateList: (deletedInvites) => {
+            dispatch({ type: invites.UPDATE, deletedInvites: deletedInvites })
         }
     }
 };
