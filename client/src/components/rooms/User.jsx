@@ -1,11 +1,14 @@
 import React from "react"
 import {getCurrentUser} from "../../services/sessionStorageServices";
+import {Link} from "react-router-dom";
 
 const User = props => {
     return (
         <div className="result">
           <div className="person-data">
-            <h2>{props.userInfo.username}</h2>
+              <Link to={'/home/profile/' + props.userInfo.id}>
+                  <h2>{props.userInfo.username}</h2>
+              </Link>
             <p>{props.userInfo.email}</p>
           </div>
           <div className="invite-button">

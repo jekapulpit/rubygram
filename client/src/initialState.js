@@ -1,6 +1,8 @@
 export default  {
     users: {
-        currentUser: {},
+        currentUser: {
+            ignoring_users: []
+        },
         loggedIn: false
     },
     rooms: {

@@ -10,10 +10,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_07_29_142657) do
+ActiveRecord::Schema.define(version: 2019_07_30_121259) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "black_lists", force: :cascade do |t|
+    t.integer "owner_id"
+    t.integer "target_id"
+    t.string "owner_type"
+    t.string "target_type"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["owner_id"], name: "index_black_lists_on_owner_id"
+    t.index ["target_id"], name: "index_black_lists_on_target_id"
+  end
 
   create_table "default_settings", force: :cascade do |t|
     t.integer "value"
