@@ -2,6 +2,7 @@ class User < ApplicationRecord
   has_one :setting, as: :target
   has_many :room_relations
   has_many :invites
+  has_many :black_lists, as: :owner
   has_many :messages, as: :sender
   has_many :rooms, through: :room_relations
   # Include default devise modules. Others available are:
