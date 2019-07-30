@@ -47,6 +47,14 @@ class Api::V4::UsersController < ApplicationController
     render json: { success: user.update(admin: true), user: user.with_settings }
   end
 
+  def ignore
+    deleted_invites = current_user.ignore Room.find(params[:id]).creator
+    render json: {
+        success: true,
+        deleted_invites: deleted_invites.pluck(:id)
+    }
+  end
+
   private
 
   def user_params

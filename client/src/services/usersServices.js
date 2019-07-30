@@ -62,3 +62,15 @@ export async function givePriveleges(userId) {
     })
         .then((response) => { return response.json() });
 }
+
+export async function ignoreUser(roomId) {
+    return fetch(`http://${API_HOST}:${API_PORT}/api/v4/users/${roomId}/ignore/`, {
+        mode: 'cors',
+        method: 'POST',
+        headers: {
+            'Authorization': getTokenFromSessionStorage(),
+            'Content-Type': 'application/json',
+        },
+    })
+        .then((response) => { return response.json() });
+}

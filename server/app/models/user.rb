@@ -22,6 +22,25 @@ class User < ApplicationRecord
     end
   end
 
+  def ignoring?(user)
+    user.id.in? black_lists.pluck(:target_id)
+  end
+
+  def ignore(user)
+    black_lists << BlackList.new(target: user)
+    invites.where(room_id: user
+                               .rooms
+                               .includes(:room_relations)
+                               .where(room_relations: {status: "creator"})
+                               .distinct
+                               .pluck(:id)).destroy_all
+  end
+
+  def stop_ignore(user)
+    ignore = black_lists.find_by(target: user)
+    ignore.destroy if ignore
+  end
+
   def sent_invites
     invites.where(status: 'sent')
   end

@@ -10,11 +10,11 @@ module Invites
     end
 
     def call
-      @user.update(unread_notifications: (@user.unread_notifications + 1)) unless able_to_invite
-      Invite.create(content: content, invite_type: invite_type, room: room, user: user) unless able_to_invite
+      user.update(unread_notifications: (user.unread_notifications + 1)) unless (unable_to_invite || user.ignoring?(room.creator))
+      Invite.create(content: content, invite_type: invite_type, room: room, user: user) unless (unable_to_invite || user.ignoring?(room.creator))
     end
 
-    def able_to_invite
+    def unable_to_invite
       (Invite.find_by(room: room, user: user) || room.empty_slots <= 0) && !room.creator.admin?
     end
   end

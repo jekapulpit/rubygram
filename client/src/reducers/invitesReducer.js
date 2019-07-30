@@ -10,6 +10,8 @@ export default (state = { inviteList: [] }, action) => {
             return {...state, inviteList: state.inviteList.filter((invite) => invite.id !== action.inviteId)};
         case invites.REJECT:
             return {...state, inviteList: state.inviteList.filter((invite) => invite.id !== action.inviteId)};
+        case invites.UPDATE:
+            return {...state, inviteList: state.inviteList.filter((invite) => action.deletedInvites.indexOf(invite.id) === -1)};
         default:
             return state;
     }

@@ -42,4 +42,5 @@ export const invites = {
     RECEIVE: 'RECEIVE_INVITE',
     ACCEPT: 'ACCEPT_INVITE',
     REJECT: 'REJECT_INVITE',
+    UPDATE: 'UPDATE_INVITE_LIST',
 };

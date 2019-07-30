@@ -7,6 +7,7 @@ const InviteList = props => {
     let invites = props.inviteList.map((invite) => {
         return (
             <Invite
+                handleIgnoreUser={props.handleIgnoreUser}
                 handleAcceptInvite={props.handleAcceptInvite}
                 handleRejectInvite={props.handleRejectInvite}
                 invite={invite}
