@@ -80,6 +80,13 @@ class RoomCard extends React.Component {
 
         return (
             <div className='room-card with-room'>
+                {this.props.room.unread_number > 0 ?
+                    (<div className="unread">
+                        <div className="unread-number">
+                            {this.props.room.unread_number} new message(s)
+                        </div>
+                    </div>) : (null)
+                }
                 {fill}
             </div>
         )

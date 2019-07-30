@@ -3,7 +3,7 @@ import { hot } from 'react-hot-loader/root';
 import '../../stylesheets/components/rooms.scss'
 import {messages, rooms, search} from "../../actionTypes";
 import {connect} from "react-redux";
-import {getRoom, unsubscribeUser} from "../../services/roomsServices";
+import {getRoom, readAllMessages, unsubscribeUser} from "../../services/roomsServices";
 import MessageList from "../messages/MessageList";
 import basicScroll from '../../services/scrollingService'
 import UserSearchWindow from "../search/UserSearchWindow";
@@ -13,6 +13,7 @@ import UserList from "./UserList";
 import MessageSearchWindow from "../search/MessageSearchWindow";
 import AccessibilityIcon from '@material-ui/icons/Accessibility';
 import AddIcon from '@material-ui/icons/Add';
+import {syncCurrentUser} from "../../services/authentificationService";
 
 
 class ActiveRoom extends React.Component {
@@ -23,6 +24,8 @@ class ActiveRoom extends React.Component {
             })
             .then(() => this.props.toggleCleanResults())
             .then(() => basicScroll())
+            .then(() => readAllMessages(this.props.match.params.id))
+            .then(() => syncCurrentUser())
     }
 
     handleSearch = (request) => {

@@ -230,6 +230,18 @@
           position: relative;
           padding: 0;
 
+          .unread {
+            position: absolute;
+            z-index: 101;
+            font-size: 12px;
+            top: 3px;
+            right: 3px;
+            color: rgb(240,85,85);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+          }
+
           &:hover .control-pop-up {
             transform: translateY(25px);
           }

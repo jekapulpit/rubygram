@@ -42,7 +42,7 @@ class Api::V4::RoomsController < ApplicationController
 
   def read_all
     room_relation = RoomRelation.find_by(room_id: params[:id], user: current_user)
-    room_relation&.update(unread_number: 0)
+    room_relation.update(unread_number: 0)
     render json: { success: true }
   end
 

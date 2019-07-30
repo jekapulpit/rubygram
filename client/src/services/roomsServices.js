@@ -86,6 +86,18 @@ export async function changeRoomSettings(roomId, newValue) {
         .then((response) => { return response.json() });
 }
 
+export async function readAllMessages(roomId) {
+    return fetch(`http://${API_HOST}:${API_PORT}/api/v4/rooms/unread/${roomId}`, {
+        mode: 'cors',
+        method: 'POST',
+        headers: {
+            'Authorization': getTokenFromSessionStorage(),
+            'Content-Type': 'application/json',
+        },
+    })
+        .then((response) => { return response.json() });
+}
+
 export async function changeDefaultRoomSettings(newValue) {
     return fetch(`http://${API_HOST}:${API_PORT}/api/v4/settings/rooms`, {
         mode: 'cors',

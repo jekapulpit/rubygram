@@ -9,6 +9,8 @@ export default (state = { currentUser: {} }, action) => {
             return {...state, currentUser: {}, loggedIn: false};
         case users.UPDATE:
             return {...state, currentUser: action.newAttributes};
+        case users.CHANGE_UNREAD:
+            return {...state, currentUser: {...state.currentUser, unread_number: action.unread_number}};
         default:
             return state;
     }
