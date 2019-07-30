@@ -5,7 +5,7 @@ import { invites } from "../../actionTypes";
 import {connect} from "react-redux";
 import {acceptInvite, getUserInvites, rejectInvite, readInvites} from "../../services/invitesServices";
 import InviteList from "./InviteList";
-import {ignoreUser} from "../../services/usersServices";
+import {ignoreUserByRoom} from "../../services/usersServices";
 
 class NotificationsContent extends React.Component {
     componentDidMount() {
@@ -24,7 +24,7 @@ class NotificationsContent extends React.Component {
     };
 
     handleIgnoreUser = (roomId) => {
-        ignoreUser(roomId)
+        ignoreUserByRoom(roomId)
             .then((data) => {
                 if(data.success)
                     this.props.toggleUpdateList(data.deleted_invites)

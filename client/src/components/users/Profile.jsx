@@ -3,19 +3,23 @@ import { hot } from 'react-hot-loader/root';
 import {connect} from "react-redux";
 import {users} from "../../actionTypes";
 import {getCurrentUser, updateUserSession} from "../../services/sessionStorageServices";
-import {changeUserSettings, updateUser} from "../../services/usersServices";
+import {changeUserSettings, ignoreUser, stopIgnoreUser, updateUser} from "../../services/usersServices";
 import {getUser} from "../../services/usersServices";
 import EditIcon from '@material-ui/icons/Edit';
 import DoneIcon from '@material-ui/icons/Done';
 import ClearIcon from '@material-ui/icons/Clear';
 import '../../stylesheets/components/profile.scss'
+import IgnoredUser from "./IgnoredUser";
+import {syncCurrentUser} from "../../services/authentificationService";
 
 class Profile extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
             editable: false,
-            currentUser: {},
+            currentUser: {
+                ignoring_users: [],
+            },
         }
     }
 
@@ -31,6 +35,12 @@ class Profile extends React.Component {
                 })
             })
     }
+
+    ignored = () => {
+        return this.props.currentUser.ignoring_users
+            .map((user) => {return user.id})
+            .indexOf(this.state.currentUser.id) === -1;
+    };
 
     componentWillReceiveProps(nextProps, nextContext) {
         getUser(this.props.match.params.id)
@@ -62,6 +72,38 @@ class Profile extends React.Component {
         })
     };
 
+    handleDeleteFromBlackList = (userId) => {
+        stopIgnoreUser(userId)
+            .then((data) => {
+                if(data.success){
+                    let newBlackList = this.state.currentUser.ignoring_users.filter((user) => user.id !== data.user.id)
+                    this.setState({
+                        currentUser: {
+                            ...this.state.currentUser,
+                            ignoring_users: newBlackList
+                        }
+                    })
+                }
+            })
+
+    };
+
+    handleStopIgnore = (userId) => {
+        stopIgnoreUser(userId)
+            .then((data) => {
+                if (data.success)
+                    syncCurrentUser();
+            });
+    };
+
+    handleAddToBlackList = (userId) => {
+        ignoreUser(userId)
+            .then((data) => {
+                if (data.success)
+                    syncCurrentUser();
+            })
+    };
+
     handleChangeSettings = (newValue) => {
         changeUserSettings(this.state.currentUser.id, newValue)
             .then((result) => {
@@ -78,6 +120,13 @@ class Profile extends React.Component {
             <input ref={input => userData.username = input} defaultValue={this.state.currentUser.username} type="text"/>
         ) : (
             this.state.currentUser.username
+        );
+        let blackList = this.selfProfile() ? (
+            this.state.currentUser.ignoring_users.map((user) => {
+                return <IgnoredUser handleDeleteFromBlackList={this.handleDeleteFromBlackList} user={user}/>
+            })
+        ) : (
+            null
         );
         return (
             <div className='content-container'>
@@ -100,6 +149,14 @@ class Profile extends React.Component {
                                 <button className='btn reject' onClick={() => this.handleChangeSettings(this.state.currentUser.max_chats - 1)}>-</button>
                             </div>) : null}
                     </p>
+                    {this.selfProfile() ? '' :
+                        (this.ignored() ?
+                            (<button onClick={() => this.handleAddToBlackList(this.state.currentUser.id)} className="btn reject">ignore</button>) :
+                            (<button onClick={() => this.handleStopIgnore(this.state.currentUser.id)} className="btn empty">stop ignore</button>))}
+                </div>
+                <div className='invite-list'>
+                    {this.selfProfile() ? 'Black List: ' : ''}
+                        {blackList}
                 </div>
             </div>
         );
