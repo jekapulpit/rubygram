@@ -6,6 +6,7 @@ import RoomList from "./RoomList";
 import {search} from "../../actionTypes";
 import {connect} from "react-redux";
 import MessageSearchWindow from "../search/MessageSearchWindow";
+import {deleteMessage} from "../../services/messagesServices";
 
 const RoomContent = props => {
     let fill = props.search.messageSearch ? (
@@ -13,6 +14,13 @@ const RoomContent = props => {
             <MessageSearchWindow toggleCleanMessageResults={props.toggleCleanMessageResults}
                                  toggleExecuteMessageSearch={props.toggleExecuteMessageSearch}
                                  toggleMessageSearch={props.toggleMessageSearch}
+                                 handleDeleteMessage={(messageId) => {
+                                     deleteMessage(messageId)
+                                         .then((result) => {
+                                             if(result.success)
+                                                 props.toggleDeleteMessageResult(result.message)
+                                         })
+                                 }}
                                  results={props.search.messageResults}/>
         </React.Fragment>
 
@@ -44,6 +52,9 @@ const mapDispatchToProps = function(dispatch, ownProps) {
         },
         toggleCleanMessageResults: () => {
             dispatch({ type: search.CLEAN_MESSAGES })
+        },
+        toggleDeleteMessageResult: (message) => {
+            dispatch({ type: search.DELETE_MESSAGE, message: message })
         },
     }
 };

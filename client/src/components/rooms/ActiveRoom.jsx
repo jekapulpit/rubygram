@@ -15,6 +15,7 @@ import AccessibilityIcon from '@material-ui/icons/Accessibility';
 import AddIcon from '@material-ui/icons/Add';
 import {syncCurrentUser} from "../../services/authentificationService";
 import {deleteMessage} from "../../services/messagesServices";
+import {getCurrentUser} from "../../services/sessionStorageServices";
 
 
 class ActiveRoom extends React.Component {
@@ -67,12 +68,17 @@ class ActiveRoom extends React.Component {
                 <div className="room-header active-room">
                     <div className="members">
                         <p className="clickable-link" onClick={() => this.props.toggleShowUsers()}><AccessibilityIcon /> {this.props.room.users.length} member(s)</p>
-                        <p className="clickable-link" onClick={() => this.props.toggleSearch()}><AddIcon /> invite more people</p>
+                        {this.props.room.roomInfo.creator === getCurrentUser().id ?
+                            <p className="clickable-link" onClick={() => this.props.toggleSearch()}><AddIcon /> invite more people</p> : null
+                        }
                     </div>
-                    <button className="btn neutral" onClick={() => {this.props.toggleMessageSearch()}}>search for messages in room</button>
+                    <button className="btn neutral"
+                            onClick={() => {this.props.toggleMessageSearch()}}>search for messages in room</button>
                 </div>
                 <RoomCable room={this.props.room.roomInfo}/>
-                <MessageList handleDeleteMessage={this.handleDeleteMessage} roomId={this.props.room.roomInfo.id} messages={this.props.room.messages}/>
+                <MessageList handleDeleteMessage={this.handleDeleteMessage}
+                             roomId={this.props.room.roomInfo.id}
+                             messages={this.props.room.messages}/>
                 <UserSearchWindow handleSearch={this.handleSearch}
                                   toggleSendInvite={this.props.toggleSendInvite}
                                   results={this.props.search.results}
