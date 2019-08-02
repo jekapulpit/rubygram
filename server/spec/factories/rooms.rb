@@ -10,7 +10,8 @@ FactoryGirl.define do
         messages_count 5
       end
 
-      after(:create) do |room, evaluator|
+      before(:create) do |room, evaluator|
+        create(:room_relation, user: create(:user), room: room, status: 'creator')
         create_list(:user_with_messages, evaluator.users_count, send_for: room)
       end
     end
