@@ -1,9 +1,9 @@
 import { API_HOST, API_PORT } from '../constants'
 import { getTokenFromSessionStorage } from "./sessionStorageServices";
 import store from '../store'
-import {messages} from "../actionTypes";
 import basicScroll from "./scrollingService";
 import {readAllMessages} from "./roomsServices";
+import {messages} from "../actionTypes";
 
 export async function sendMessage(messageAttributes) {
     return fetch(`http://${API_HOST}:${API_PORT}/api/v4/messages/`, {
@@ -17,9 +17,21 @@ export async function sendMessage(messageAttributes) {
         .then((response) => { return response.json() });
 }
 
-export function receiveMessage(message) {
-    if(window.location.pathname === ('/home/rooms/' + message.recipient_id))
-        readAllMessages(message.recipient_id);
-    store.dispatch({type: messages.RECEIVE, message: message});
-    basicScroll();
+export async function deleteMessage(messageId) {
+    return fetch(`http://${API_HOST}:${API_PORT}/api/v4/messages/${messageId}`, {
+        method: 'DELETE',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': getTokenFromSessionStorage()
+        },
+    })
+        .then((response) => { return response.json() });
+}
+
+export function receiveMessage(action) {
+    if(window.location.pathname === ('/home/rooms/' + action.message.recipient_id))
+        readAllMessages(action.message.recipient_id);
+    store.dispatch(action);
+    if(action.type === messages.RECEIVE)
+        basicScroll();
 }

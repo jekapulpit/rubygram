@@ -14,6 +14,8 @@ import MessageSearchWindow from "../search/MessageSearchWindow";
 import AccessibilityIcon from '@material-ui/icons/Accessibility';
 import AddIcon from '@material-ui/icons/Add';
 import {syncCurrentUser} from "../../services/authentificationService";
+import {deleteMessage} from "../../services/messagesServices";
+import {getCurrentUser} from "../../services/sessionStorageServices";
 
 
 class ActiveRoom extends React.Component {
@@ -42,12 +44,21 @@ class ActiveRoom extends React.Component {
             })
     };
 
+    handleDeleteMessage = (messageId) => {
+        deleteMessage(messageId)
+            .then((result) => {
+                if(result.success)
+                    this.props.toggleDeleteMessageResult(result.message)
+            })
+    };
+
     render() {
         let fill = this.props.search.messageSearch ? (
             <React.Fragment>
                 <MessageSearchWindow toggleExecuteMessageSearch={this.props.toggleExecuteMessageSearch}
                                      toggleCleanMessageResults={this.props.toggleCleanMessageResults}
                                      toggleMessageSearch={this.props.toggleMessageSearch}
+                                     handleDeleteMessage={this.handleDeleteMessage}
                                      room={this.props.room.roomInfo}
                                      roomId={this.props.room.roomInfo.id}
                                      results={this.props.search.messageResults}/>
@@ -57,12 +68,17 @@ class ActiveRoom extends React.Component {
                 <div className="room-header active-room">
                     <div className="members">
                         <p className="clickable-link" onClick={() => this.props.toggleShowUsers()}><AccessibilityIcon /> {this.props.room.users.length} member(s)</p>
-                        <p className="clickable-link" onClick={() => this.props.toggleSearch()}><AddIcon /> invite more people</p>
+                        {this.props.room.roomInfo.creator === getCurrentUser().id ?
+                            <p className="clickable-link" onClick={() => this.props.toggleSearch()}><AddIcon /> invite more people</p> : null
+                        }
                     </div>
-                    <button className="btn neutral" onClick={() => {this.props.toggleMessageSearch()}}>search for messages in room</button>
+                    <button className="btn neutral"
+                            onClick={() => {this.props.toggleMessageSearch()}}>search for messages in room</button>
                 </div>
                 <RoomCable room={this.props.room.roomInfo}/>
-                <MessageList roomId={this.props.room.roomInfo.id} messages={this.props.room.messages}/>
+                <MessageList handleDeleteMessage={this.handleDeleteMessage}
+                             roomId={this.props.room.roomInfo.id}
+                             messages={this.props.room.messages}/>
                 <UserSearchWindow handleSearch={this.handleSearch}
                                   toggleSendInvite={this.props.toggleSendInvite}
                                   results={this.props.search.results}
@@ -131,6 +147,9 @@ const mapDispatchToProps = function(dispatch, ownProps) {
         },
         toggleCleanMessageResults: () => {
             dispatch({ type: search.CLEAN_MESSAGES })
+        },
+        toggleDeleteMessageResult: (message) => {
+            dispatch({ type: search.DELETE_MESSAGE, message: message })
         },
     }
 };

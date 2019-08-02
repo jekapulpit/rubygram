@@ -1,12 +1,10 @@
 import { API_HOST, API_PORT } from '../constants'
 import {
-    deleteUserSession,
     getCurrentUser,
     getTokenFromSessionStorage,
-    updateUserSession
 } from "./sessionStorageServices";
 import store from "../store";
-import {invites, users} from "../actionTypes";
+import {invites} from "../actionTypes";
 import {syncCurrentUser} from "./authentificationService";
 
 export async function sendInvite(userId, roomId, content) {

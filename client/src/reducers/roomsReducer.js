@@ -36,6 +36,9 @@ export default (state = { roomList: [], currentRoom: {} }, action) => {
         case messages.RECEIVE:
             let messageList = [...state.currentRoom.messages, action.message];
             return {...state, currentRoom: {...state.currentRoom, messages: messageList}};
+        case messages.DELETE:
+            let newMessages = state.currentRoom.messages.filter((message) => message.id !== action.message.id);
+            return {...state, currentRoom: {...state.currentRoom, messages: newMessages}};
         case messages.SEND:
             let newMessageList = [...state.currentRoom.messages, action.message];
             return {...state, currentRoom: {...state.currentRoom, messages: newMessageList}};
