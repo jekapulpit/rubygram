@@ -7,7 +7,7 @@ import SendIcon from '@material-ui/icons/Send';
 
 const MessageList = props => {
     let messages = props.messages.map((message) => {
-      return (<Message key={message.id} message={message} />);
+      return (<Message handleDeleteMessage={props.handleDeleteMessage} key={message.id} message={message} />);
     });
     let newMessage = '';
     return (

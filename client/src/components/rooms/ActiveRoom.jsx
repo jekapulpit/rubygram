@@ -14,6 +14,7 @@ import MessageSearchWindow from "../search/MessageSearchWindow";
 import AccessibilityIcon from '@material-ui/icons/Accessibility';
 import AddIcon from '@material-ui/icons/Add';
 import {syncCurrentUser} from "../../services/authentificationService";
+import {deleteMessage} from "../../services/messagesServices";
 
 
 class ActiveRoom extends React.Component {
@@ -42,6 +43,10 @@ class ActiveRoom extends React.Component {
             })
     };
 
+    handleDeleteMessage = (messageId) => {
+        deleteMessage(messageId);
+    };
+
     render() {
         let fill = this.props.search.messageSearch ? (
             <React.Fragment>
@@ -62,7 +67,7 @@ class ActiveRoom extends React.Component {
                     <button className="btn neutral" onClick={() => {this.props.toggleMessageSearch()}}>search for messages in room</button>
                 </div>
                 <RoomCable room={this.props.room.roomInfo}/>
-                <MessageList roomId={this.props.room.roomInfo.id} messages={this.props.room.messages}/>
+                <MessageList handleDeleteMessage={this.handleDeleteMessage} roomId={this.props.room.roomInfo.id} messages={this.props.room.messages}/>
                 <UserSearchWindow handleSearch={this.handleSearch}
                                   toggleSendInvite={this.props.toggleSendInvite}
                                   results={this.props.search.results}

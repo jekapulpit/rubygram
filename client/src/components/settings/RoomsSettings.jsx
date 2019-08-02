@@ -2,7 +2,7 @@ import React from 'react';
 import { hot } from 'react-hot-loader/root';
 import { search } from "../../actionTypes";
 import { connect } from "react-redux";
-import {searchRooms, searchUsersGlobal} from '../../services/searchService'
+import {searchRooms} from '../../services/searchService'
 import {changeDefaultRoomSettings, changeRoomSettings} from "../../services/roomsServices";
 import {API_HOST, API_PORT} from "../../constants";
 import {getTokenFromSessionStorage} from "../../services/sessionStorageServices";
