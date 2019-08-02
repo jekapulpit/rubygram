@@ -9,7 +9,7 @@ const MessageSearchWindow = props => {
     let messageContent={};
     let roomId = !!props.roomId ? ('/' + props.roomId) : '';
     let results = props.results.map((result) => {
-        return <Message key={result.id} message={result}/>
+        return <Message handleDeleteMessage={props.handleDeleteMessage} key={result.id} message={result}/>
     });
     return (
         <div className="talk">

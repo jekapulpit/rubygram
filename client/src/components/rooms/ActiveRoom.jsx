@@ -44,7 +44,11 @@ class ActiveRoom extends React.Component {
     };
 
     handleDeleteMessage = (messageId) => {
-        deleteMessage(messageId);
+        deleteMessage(messageId)
+            .then((result) => {
+                if(result.success)
+                    this.props.toggleDeleteMessageResult(result.message)
+            })
     };
 
     render() {
@@ -53,6 +57,7 @@ class ActiveRoom extends React.Component {
                 <MessageSearchWindow toggleExecuteMessageSearch={this.props.toggleExecuteMessageSearch}
                                      toggleCleanMessageResults={this.props.toggleCleanMessageResults}
                                      toggleMessageSearch={this.props.toggleMessageSearch}
+                                     handleDeleteMessage={this.handleDeleteMessage}
                                      room={this.props.room.roomInfo}
                                      roomId={this.props.room.roomInfo.id}
                                      results={this.props.search.messageResults}/>
@@ -136,6 +141,9 @@ const mapDispatchToProps = function(dispatch, ownProps) {
         },
         toggleCleanMessageResults: () => {
             dispatch({ type: search.CLEAN_MESSAGES })
+        },
+        toggleDeleteMessageResult: (message) => {
+            dispatch({ type: search.DELETE_MESSAGE, message: message })
         },
     }
 };

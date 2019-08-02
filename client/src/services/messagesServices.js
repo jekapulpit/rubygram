@@ -16,8 +16,8 @@ export async function sendMessage(messageAttributes) {
         .then((response) => { return response.json() });
 }
 
-export function deleteMessage(messageId) {
-    fetch(`http://${API_HOST}:${API_PORT}/api/v4/messages/${messageId}`, {
+export async function deleteMessage(messageId) {
+    return fetch(`http://${API_HOST}:${API_PORT}/api/v4/messages/${messageId}`, {
         method: 'DELETE',
         headers: {
             'Content-Type': 'application/json',

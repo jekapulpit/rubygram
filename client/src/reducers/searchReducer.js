@@ -21,6 +21,9 @@ export default (state = { results: [], active: false }, action) => {
             return {...state, messageResults: action.results};
         case search.CLEAN_MESSAGES:
             return {...state, messageResults: [], messageSearch: false};
+        case search.DELETE_MESSAGE:
+            let newMessages = state.messageResults.filter((message) => message.id !== action.message.id);
+            return {...state, messageResults: newMessages};
         case search.UPDATE_USER_RESULTS:
             let results = state.results.map((result) => {
                 if (result.id === action.result.id)

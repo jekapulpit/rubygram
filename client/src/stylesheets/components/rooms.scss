@@ -55,44 +55,7 @@
           -webkit-box-shadow: 3px 3px 10px 0 rgba(0,0,0,.3);
           -moz-box-shadow: 3px 3px 10px 0 rgba(0,0,0,.3);
           box-shadow: 3px 3px 10px 0 rgba(0,0,0,.3);
-          position: relative;
-          -webkit-transition: .3s;
-          -moz-transition: .3s;
-          -ms-transition: .3s;
-          -o-transition: .3s;
-          transition: .3s;
 
-
-          &:hover {
-            z-index: 1000;
-            -webkit-transform: translateX(-24px);
-            -moz-transform: translateX(-24px);
-            -ms-transform: translateX(-24px);
-            -o-transform: translateX(-24px);
-            transform: translateX(-24px);
-
-            .delete-but {
-              -webkit-transform: translateX(24px);
-              -moz-transform: translateX(24px);
-              -ms-transform: translateX(24px);
-              -o-transform: translateX(24px);
-              transform: translateX(24px);
-              visibility: visible;
-            }
-          }
-
-          .delete-but {
-            display: flex;
-            top: 0;
-            right: 0;
-            justify-content: center;
-            align-items: center;
-            position: absolute;
-            visibility: hidden;
-            height: 100%;
-            z-index: -1000;
-            cursor: pointer;
-          }
         }
 
         .partner-message {
@@ -115,6 +78,47 @@
 
           .sender, .sended {
             align-self: flex-end;
+          }
+
+          .message {
+            position: relative;
+            -webkit-transition: .3s;
+            -moz-transition: .3s;
+            -ms-transition: .3s;
+            -o-transition: .3s;
+            transition: .3s;
+
+
+            &:hover {
+              z-index: 1000;
+              -webkit-transform: translateX(-24px);
+              -moz-transform: translateX(-24px);
+              -ms-transform: translateX(-24px);
+              -o-transform: translateX(-24px);
+              transform: translateX(-24px);
+
+              .delete-but {
+                -webkit-transform: translateX(24px);
+                -moz-transform: translateX(24px);
+                -ms-transform: translateX(24px);
+                -o-transform: translateX(24px);
+                transform: translateX(24px);
+                visibility: visible;
+              }
+            }
+
+            .delete-but {
+              display: flex;
+              top: 0;
+              right: 0;
+              justify-content: center;
+              align-items: center;
+              position: absolute;
+              visibility: hidden;
+              height: 100%;
+              z-index: -1000;
+              cursor: pointer;
+            }
           }
         }
 
