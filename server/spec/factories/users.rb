@@ -5,6 +5,10 @@ FactoryGirl.define do
     sequence(:username) { |n| "person#{n}" }
     password '123456'
 
+    trait(:admin) do
+      admin true
+    end
+
     factory :user_with_messages do
       transient do
         messages_count 5
