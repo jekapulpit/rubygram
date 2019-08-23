@@ -4,8 +4,7 @@ class Api::V4::RoomsController < ApplicationController
   def show
     begin
       room = Room.includes(:messages, :users).find(params[:id])
-      messages = room.messages.map(&:with_send_info)
-      render json: { room: room.with_settings, messages: messages, users: room.users }
+      render json: room, serializer: Rooms::ShowSerializer
     rescue ArgumentError
       render json: { error: "error message" }
     end
