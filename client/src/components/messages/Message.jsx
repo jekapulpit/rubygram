@@ -4,7 +4,7 @@ import ClearIcon from '@material-ui/icons/Clear';
 
 const Message = props => {
     return (
-        <div className={props.message.sender_id === getCurrentUser().id ? "self-message" : "partner-message"}>
+        <div style={props.style} className={props.message.sender_id === getCurrentUser().id ? "self-message" : "partner-message"}>
           <div className="message">
               <div className="sender">{props.message.senders_name}</div>
               {props.message.content}

@@ -25,7 +25,6 @@ class ActiveRoom extends React.Component {
                 this.props.toggleSetRoom(data)
             })
             .then(() => this.props.toggleCleanResults())
-            .then(() => basicScroll())
             .then(() => readAllMessages(this.props.match.params.id))
             .then(() => syncCurrentUser())
     }
