@@ -14,6 +14,8 @@ export const rooms = {
     SHOW_USERS: 'SHOW_USERS',
     ADD_USER: 'ADD_USER',
     DELETE_USER: 'DELETE_USER',
+    CONNECT: 'CONNECT_ROOM',
+    DISCONNECT: 'DISCONNECT_ROOM',
 };
 
 export const messages = {

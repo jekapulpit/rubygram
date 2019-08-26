@@ -11,7 +11,8 @@ export default  {
         currentRoom: {
             roomInfo: {},
             messages: [],
-            users: []
+            users: [],
+            connected: false
         }
     },
     search: {

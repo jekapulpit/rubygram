@@ -7,7 +7,7 @@ class Rooms::ShowSerializer < ActiveModel::Serializer
 
   def messages
     ActiveModel::SerializableResource.new(
-        Room.first.messages.includes(:sender),
+        object.messages.includes(:sender),
         each_serializer: Messages::DialogSerializer
     ).as_json
   end

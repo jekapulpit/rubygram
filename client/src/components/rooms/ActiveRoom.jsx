@@ -5,7 +5,6 @@ import {messages, rooms, search} from "../../actionTypes";
 import {connect} from "react-redux";
 import {getRoom, readAllMessages, unsubscribeUser} from "../../services/roomsServices";
 import MessageList from "../messages/MessageList";
-import basicScroll from '../../services/scrollingService'
 import UserSearchWindow from "../search/UserSearchWindow";
 import { searchUsers } from '../../services/searchService'
 import RoomCable from "./RoomCable";
@@ -77,6 +76,7 @@ class ActiveRoom extends React.Component {
                 <RoomCable room={this.props.room.roomInfo}/>
                 <MessageList handleDeleteMessage={this.handleDeleteMessage}
                              roomId={this.props.room.roomInfo.id}
+                             connected={this.props.room.connected}
                              messages={this.props.room.messages}/>
                 <UserSearchWindow handleSearch={this.handleSearch}
                                   toggleSendInvite={this.props.toggleSendInvite}

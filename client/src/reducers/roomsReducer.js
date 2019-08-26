@@ -29,7 +29,10 @@ export default (state = { roomList: [], currentRoom: {} }, action) => {
         case rooms.DELETE_USER:
             let newUsers = state.currentRoom.users.filter((user) => user.id !== action.userId);
             return {...state, currentRoom: { ...state.currentRoom, users: newUsers} };
-
+        case rooms.CONNECT:
+            return {...state, currentRoom: { ...state.currentRoom, connected: true} };
+        case rooms.DISCONNECT:
+            return {...state, currentRoom: { ...state.currentRoom, connected: false} };
 
         case messages.GET_ALL_MESSAGES:
             return {...state, currentRoom: {...state.currentRoom, messages: action.messages}};

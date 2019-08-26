@@ -15,6 +15,18 @@ class MessageList extends React.Component {
         });
     }
 
+    handleSendMessage = message => {
+        sendMessage({
+            message: {
+                content: message,
+                sender_id: getCurrentUser().id,
+                recipient_id: this.props.roomId,
+                recipient_type: "Room",
+                sender_type: "User",
+            }
+        })
+    };
+
     renderRow = ({ index, key, style, parent }) => {
         return (
             <CellMeasurer
@@ -29,11 +41,19 @@ class MessageList extends React.Component {
     };
     render() {
         this.newMessage = '';
+        let alert = this.props.connected ? (
+            null
+        ) : (
+            <div className="error-alert">
+                you are disconnected
+            </div>
+        );
 
         return (
             <div className="talk">
                 <div className="message-box">
                     <div id="m-list" className="messages">
+                        {alert}
                         <AutoSizer>
                             {
                                 ({ width, height }) => {
@@ -56,17 +76,8 @@ class MessageList extends React.Component {
                         let newMessageContent = this.newMessage.value;
                         if (newMessageContent) {
                             e.target.reset();
-                            sendMessage({
-                                message: {
-                                    content: newMessageContent,
-                                    sender_id: getCurrentUser().id,
-                                    recipient_id: this.props.roomId,
-                                    recipient_type: "Room",
-                                    sender_type: "User",
-                                }
-                            })
+                            this.handleSendMessage(newMessageContent);
                         }
-
                     }} className="send-box messages">
                         <div>
                             <input ref={input => this.newMessage = input} type="text"/>
