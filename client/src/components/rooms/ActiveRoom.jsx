@@ -42,12 +42,8 @@ class ActiveRoom extends React.Component {
             })
     };
 
-    handleDeleteMessage = (messageId) => {
-        deleteMessage(messageId)
-            .then((result) => {
-                if(result.success)
-                    this.props.toggleDeleteMessageResult(result.message)
-            })
+    handleDeleteMessage = (message) => {
+        deleteMessage(message.id);
     };
 
     render() {
@@ -75,6 +71,8 @@ class ActiveRoom extends React.Component {
                 </div>
                 <RoomCable room={this.props.room.roomInfo}/>
                 <MessageList handleDeleteMessage={this.handleDeleteMessage}
+                             toggleDeleteMessage={this.props.toggleDeleteMessage}
+                             toggleSendMessage={this.props.toggleSendMessage}
                              roomId={this.props.room.roomInfo.id}
                              connected={this.props.room.connected}
                              messages={this.props.room.messages}/>
@@ -120,8 +118,11 @@ const mapDispatchToProps = function(dispatch, ownProps) {
         toggleDeleteUser: (userId) => {
             dispatch({ type: rooms.DELETE_USER, userId: userId })
         },
-        toggleSendMessage: (message) => {
-            dispatch({ type: messages.SEND, message: message })
+        toggleDeleteMessage: (message) => {
+            dispatch({ type: messages.DELETE, message: message })
+        },
+        toggleSendMessage: (message, errorState = false) => {
+            dispatch({ type: messages.SEND, message: message, errorState: errorState })
         },
         toggleReceiveMessage: (message) => {
             dispatch({ type: messages.RECEIVE, message: message })

@@ -16,15 +16,17 @@ class MessageList extends React.Component {
     }
 
     handleSendMessage = message => {
-        sendMessage({
-            message: {
+        let newMessageAttrs = {
                 content: message,
                 sender_id: getCurrentUser().id,
                 recipient_id: this.props.roomId,
                 recipient_type: "Room",
                 sender_type: "User",
-            }
-        })
+            };
+        if (this.props.connected)
+            sendMessage({message: newMessageAttrs});
+        else
+            this.props.toggleSendMessage(newMessageAttrs, true);
     };
 
     renderRow = ({ index, key, style, parent }) => {
@@ -35,7 +37,11 @@ class MessageList extends React.Component {
                 parent={parent}
                 columnIndex={0}
                 rowIndex={index}>
-                <Message style={style} handleDeleteMessage={this.props.handleDeleteMessage} message={this.props.messages[index]}/>
+                <Message
+                    style={style}
+                    toggleDeleteMessage={this.props.toggleDeleteMessage}
+                    handleDeleteMessage={this.props.handleDeleteMessage}
+                    message={this.props.messages[index]}/>
             </CellMeasurer>
         );
     };

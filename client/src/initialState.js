@@ -12,7 +12,7 @@ export default  {
             roomInfo: {},
             messages: [],
             users: [],
-            connected: false
+            connected: true
         }
     },
     search: {

@@ -65,6 +65,10 @@
           -moz-box-shadow: 3px 3px 10px 0 rgba(0,0,0,.3);
           box-shadow: 3px 3px 10px 0 rgba(0,0,0,.3);
 
+          &.error-state {
+            border: 1px solid #B00100;
+          }
+
           .error-flag {
             display: flex;
             top: 0;
