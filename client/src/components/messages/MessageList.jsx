@@ -38,7 +38,9 @@ class MessageList extends React.Component {
                 columnIndex={0}
                 rowIndex={index}>
                 <Message
+                    connected={this.props.connected}
                     style={style}
+                    handleSendMessage={this.handleSendMessage}
                     toggleDeleteMessage={this.props.toggleDeleteMessage}
                     handleDeleteMessage={this.props.handleDeleteMessage}
                     message={this.props.messages[index]}/>

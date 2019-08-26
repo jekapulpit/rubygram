@@ -10,13 +10,16 @@ const Message = props => {
             style={props.style}
             className={(props.message.sender_id === getCurrentUser().id || props.message.errorState) ? "self-message" : "partner-message"}>
           <div className={"message" + (props.message.errorState ? " error-state" : "")}>
-              <div className="sender">{props.message.senders_name}</div>
+              <div className="sender">{props.message.errorState ? 'sender: error' : props.message.senders_name}</div>
               {props.message.content}
-              <div className="sended">{props.message.send_time}</div>
+              <div className="sended">{props.message.errorState ? 'send time: error' : props.message.send_time}</div>
               {props.message.sender_id === getCurrentUser().id ?
                   <div className='delete-but' onClick={() => deleteHandler(props.message)}><ClearIcon/></div> : null}
               {props.message.errorState ?
-                  <div className='error-flag' onClick={() => props.handleDeleteMessage(props.message.id)}><AutorenewIcon/></div> : null}
+                  <div className='error-flag' onClick={() => {
+                      props.handleSendMessage(props.message.content);
+                      props.toggleDeleteMessage(props.message);
+                  }}><AutorenewIcon/></div> : null}
           </div>
         </div>
     );

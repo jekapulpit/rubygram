@@ -46,7 +46,9 @@ export default (state = { roomList: [], currentRoom: {} }, action) => {
             let newMessage = action.message;
             if (action.errorState) {
                 newMessage.errorState = action.errorState;
-                newMessage.id = (state.currentRoom.messages[state.currentRoom.messages.length - 1].id + 1);
+                newMessage.id = state.currentRoom.messages[state.currentRoom.messages.length - 1].id > 0 ?
+                    (-state.currentRoom.messages[state.currentRoom.messages.length - 1].id - 1) :
+                    (state.currentRoom.messages[state.currentRoom.messages.length - 1].id - 1);
             }
             let newMessageList = [...state.currentRoom.messages, newMessage];
             return {...state, currentRoom: {...state.currentRoom, messages: newMessageList}};
