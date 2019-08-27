@@ -15,6 +15,17 @@ class MessageSearchWindow extends React.Component {
         });
     }
 
+    bindListRef = ref => {
+        this.list = ref;
+    };
+
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        if (this.list) {
+            this.cache.clearAll();
+            this.list.forceUpdateGrid();
+        }
+    }
+
     renderRow = ({ index, key, style, parent }) => {
         return (
             <CellMeasurer
@@ -67,7 +78,7 @@ class MessageSearchWindow extends React.Component {
                             {
                                 ({ width, height }) => {
                                     return <List
-                                        ref='List'
+                                        ref={this.bindListRef}
                                         width={width}
                                         height={height}
                                         deferredMeasurementCache={this.cache}

@@ -10,9 +10,20 @@ class MessageList extends React.Component {
     constructor(props) {
         super(props);
         this.cache = new CellMeasurerCache({
-            fixedWidth: false,
+            fixedWidth: true,
             defaultHeight: 100
         });
+    }
+
+    bindListRef = ref => {
+        this.list = ref;
+    };
+
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        if (this.list) {
+            this.cache.clearAll();
+            this.list.forceUpdateGrid();
+        }
     }
 
     handleSendMessage = message => {
@@ -66,7 +77,7 @@ class MessageList extends React.Component {
                             {
                                 ({ width, height }) => {
                                     return <List
-                                        ref='List'
+                                        ref={this.bindListRef}
                                         width={width}
                                         height={height}
                                         deferredMeasurementCache={this.cache}

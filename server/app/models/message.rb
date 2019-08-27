@@ -3,7 +3,7 @@
 class Message < ApplicationRecord
   belongs_to :sender, class_name: 'User', foreign_key: 'sender_id', polymorphic: true
   belongs_to :recipient, class_name: 'Room', foreign_key: 'recipient_id', polymorphic: true
-  searchkick text_middle: [:content]
+  searchkick text_middle: [:content, :sender]
 
   scope :search_import, -> { includes(:sender) }
   scope :search_in_all_rooms, ->(content, sender) { search(content, where: {recipient_id: sender.rooms.pluck(:id)}, match: :text_middle) }
