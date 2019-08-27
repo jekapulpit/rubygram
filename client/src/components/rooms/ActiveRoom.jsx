@@ -69,7 +69,8 @@ class ActiveRoom extends React.Component {
                     <button className="btn neutral"
                             onClick={() => {this.props.toggleMessageSearch()}}>search for messages in room</button>
                 </div>
-                <RoomCable room={this.props.room.roomInfo}/>
+                <RoomCable
+                    room={this.props.room.roomInfo}/>
                 <MessageList handleDeleteMessage={this.handleDeleteMessage}
                              toggleDeleteMessage={this.props.toggleDeleteMessage}
                              toggleSendMessage={this.props.toggleSendMessage}

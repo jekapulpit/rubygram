@@ -16,17 +16,16 @@ class MessageList extends React.Component {
     }
 
     handleSendMessage = message => {
-        let newMessageAttrs = {
-                content: message,
-                sender_id: getCurrentUser().id,
-                recipient_id: this.props.roomId,
-                recipient_type: "Room",
-                sender_type: "User",
-            };
         if (this.props.connected)
-            sendMessage({message: newMessageAttrs});
-        else
-            this.props.toggleSendMessage(newMessageAttrs, true);
+            sendMessage({
+                message: {
+                    content: message,
+                    sender_id: getCurrentUser().id,
+                    recipient_id: this.props.roomId,
+                    recipient_type: "Room",
+                    sender_type: "User",
+                }
+            });
     };
 
     renderRow = ({ index, key, style, parent }) => {
