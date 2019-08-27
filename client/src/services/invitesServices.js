@@ -4,7 +4,6 @@ import {
     getTokenFromSessionStorage,
 } from "./sessionStorageServices";
 import store from "../store";
-import {invites} from "../actionTypes";
 import {syncCurrentUser} from "./authentificationService";
 
 export async function sendInvite(userId, roomId, content) {

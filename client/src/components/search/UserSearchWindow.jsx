@@ -1,11 +1,10 @@
 import React from "react"
 import UserResult from "./UserResult";
 import '../../stylesheets/components/search.scss'
-import {getCurrentUser} from "../../services/sessionStorageServices";
 
 const UserSearchWindow = props => {
     let userData={};
-    let emptySlots = (getCurrentUser().admin ? 'infinite' : props.room.empty_slots);
+    let emptySlots = (props.currentUser.admin ? 'infinite' : props.room.empty_slots);
     let results = props.results.map((result) => {
         return <UserResult
             toggleSendInvite={props.toggleSendInvite}

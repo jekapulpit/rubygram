@@ -7,7 +7,6 @@ import {getUserRooms} from "../../services/roomsServices";
 import {rooms} from "../../actionTypes";
 import EmptySlot from "./EmptySlot";
 import BlockedEmptySlot from "./BlockedEmptySlot";
-import {getCurrentUser} from "../../services/sessionStorageServices";
 
 class RoomList extends React.Component {
     componentDidMount() {
@@ -24,10 +23,10 @@ class RoomList extends React.Component {
 
         let memberships = this.props.roomList.filter((room) => room.member_status === "member")
             .map((room) => {
-            return (<RoomCard key={room.id} user={getCurrentUser()} room={room} />)
+            return (<RoomCard key={room.id} user={this.props.currentUser} room={room} />)
         });
 
-        let restSlotsNumber = getCurrentUser().admin ? 0 : (getCurrentUser().max_chats - createdRooms.length - 1);
+        let restSlotsNumber = this.props.currentUser.admin ? 0 : (this.props.currentUser.max_chats - createdRooms.length - 1);
 
         let emptySlots = (new Array(restSlotsNumber >= 0 ? restSlotsNumber : 0).fill(null)).map((slot) => {
             return (<BlockedEmptySlot />)
@@ -38,7 +37,7 @@ class RoomList extends React.Component {
                 <p>your chats: </p>
                 <div className="room-section">
                     {createdRooms}
-                    {(getCurrentUser().admin || (getCurrentUser().max_chats - createdRooms.length > 0)) ? (<EmptySlot />) : null}
+                    {(this.props.currentUser.admin || (this.props.currentUser.max_chats - createdRooms.length > 0)) ? (<EmptySlot />) : null}
                     {emptySlots}
                 </div>
                 <p>your memberships: </p>
@@ -59,7 +58,8 @@ const mapDispatchToProps = function(dispatch, ownProps) {
 };
 
 const mapStateToProps = state => ({
-    roomList: state.rooms.roomList
+    roomList: state.rooms.roomList,
+    currentUser: state.users.currentUser
 });
 
 export default hot(connect(mapStateToProps, mapDispatchToProps)(RoomList));

@@ -20,7 +20,7 @@ export default (state = { roomList: [], currentRoom: {} }, action) => {
             return {...state, roomList: updatedRooms};
         case rooms.SET_CURRENT_ROOM:
             let {room, users} = action.data;
-            return {...state, currentRoom: { messages: action.data.messages, roomInfo: room, users: users }};
+            return {...state, currentRoom: { messages: action.data.messages, roomInfo: room, users: users, connected: true }};
         case rooms.SHOW_USERS:
             return {...state, showUsers: !state.showUsers };
         case rooms.ADD_USER:

@@ -14,8 +14,6 @@ import AccessibilityIcon from '@material-ui/icons/Accessibility';
 import AddIcon from '@material-ui/icons/Add';
 import {syncCurrentUser} from "../../services/authentificationService";
 import {deleteMessage} from "../../services/messagesServices";
-import {getCurrentUser} from "../../services/sessionStorageServices";
-
 
 class ActiveRoom extends React.Component {
     componentDidMount() {
@@ -63,7 +61,7 @@ class ActiveRoom extends React.Component {
                 <div className="room-header active-room">
                     <div className="members">
                         <p className="clickable-link" onClick={() => this.props.toggleShowUsers()}><AccessibilityIcon /> {this.props.room.users.length} member(s)</p>
-                        {this.props.room.roomInfo.creator === getCurrentUser().id ?
+                        {this.props.room.roomInfo.creator === this.props.currentUser.id ?
                             <p className="clickable-link" onClick={() => this.props.toggleSearch()}><AddIcon /> invite more people</p> : null
                         }
                     </div>
@@ -77,6 +75,7 @@ class ActiveRoom extends React.Component {
                              toggleSendMessage={this.props.toggleSendMessage}
                              roomId={this.props.room.roomInfo.id}
                              connected={this.props.room.connected}
+                             currentUser={this.props.currentUser}
                              messages={this.props.room.messages}/>
                 <UserSearchWindow handleSearch={this.handleSearch}
                                   toggleIncrementSlots={this.props.toggleIncrementSlots}
@@ -84,6 +83,7 @@ class ActiveRoom extends React.Component {
                                   toggleCancelInvite={this.props.toggleCancelInvite}
                                   toggleSendInvite={this.props.toggleSendInvite}
                                   results={this.props.search.results}
+                                  currentUser={this.props.currentUser}
                                   toggleSearch={this.props.toggleSearch}
                                   room={this.props.room.roomInfo}
                                   visible={this.props.search.active}/>
@@ -106,7 +106,8 @@ class ActiveRoom extends React.Component {
 const mapStateToProps = state => ({
     room: state.rooms.currentRoom,
     showUsers: state.rooms.showUsers,
-    search: state.search
+    search: state.search,
+    currentUser: state.users.currentUser
 });
 
 const mapDispatchToProps = function(dispatch, ownProps) {

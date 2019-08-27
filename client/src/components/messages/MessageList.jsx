@@ -2,7 +2,6 @@ import React from "react"
 import Message from "./Message";
 import { hot } from 'react-hot-loader/root';
 import {sendMessage} from "../../services/messagesServices";
-import {getCurrentUser} from "../../services/sessionStorageServices";
 import SendIcon from '@material-ui/icons/Send';
 import { List, AutoSizer, CellMeasurer, CellMeasurerCache } from "react-virtualized";
 
@@ -31,7 +30,7 @@ class MessageList extends React.Component {
             sendMessage({
                 message: {
                     content: message,
-                    sender_id: getCurrentUser().id,
+                    sender_id: this.props.currentUser.id,
                     recipient_id: this.props.roomId,
                     recipient_type: "Room",
                     sender_type: "User",
@@ -48,6 +47,7 @@ class MessageList extends React.Component {
                 columnIndex={0}
                 rowIndex={index}>
                 <Message
+                    currentUser={this.props.currentUser}
                     connected={this.props.connected}
                     style={style}
                     handleSendMessage={this.handleSendMessage}
