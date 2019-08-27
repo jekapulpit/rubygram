@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class Api::V4::InvitesController < ApplicationController
-  before_action :set_invite, only: %i[destroy accept reject]
+  before_action :set_invite, only: %i[accept reject]
 
   def index
     render json: { invites: current_user.sent_invites }
@@ -10,7 +10,10 @@ class Api::V4::InvitesController < ApplicationController
   def create
     begin
       @invite = Invites::CreateService.new(invite_params[:content], invite_params[:user_id], invite_params[:room_id]).call
-      NotificationsChannel.broadcast_to 'notifications_channel', @invite if @invite.valid?
+      NotificationsChannel.broadcast_to 'notifications_channel', {
+          invite: @invite,
+          type: 'RECEIVE_INVITE'
+      } if @invite.valid?
       render json: { success: @invite.valid?, invite: @invite, errors: @invite.errors }
     rescue NoMethodError => exception
       render json: { success: false, errors: { record: [exception.message] }}
@@ -18,6 +21,16 @@ class Api::V4::InvitesController < ApplicationController
   end
 
   def destroy
+    invite = Invite.find_by(user_id: params[:user_id], room_id: params[:room_id])
+    destroyed = invite.destroy
+    NotificationsChannel.broadcast_to 'notifications_channel', {
+        invite: invite,
+        type: 'CANCEL_INVITE'
+    }
+    render json: {
+        success: destroyed,
+        invite: invite,
+    }
   end
 
   def accept

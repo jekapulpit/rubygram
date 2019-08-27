@@ -78,6 +78,7 @@ class ActiveRoom extends React.Component {
                              connected={this.props.room.connected}
                              messages={this.props.room.messages}/>
                 <UserSearchWindow handleSearch={this.handleSearch}
+                                  toggleCancelInvite={this.props.toggleCancelInvite}
                                   toggleSendInvite={this.props.toggleSendInvite}
                                   results={this.props.search.results}
                                   toggleSearch={this.props.toggleSearch}
@@ -133,6 +134,9 @@ const mapDispatchToProps = function(dispatch, ownProps) {
         },
         toggleSendInvite: (userId) => {
             dispatch({ type: search.SEND, userId: userId })
+        },
+        toggleCancelInvite: (userId) => {
+            dispatch({ type: search.CANCEL, userId: userId })
         },
         toggleCleanResults: () => {
             dispatch({ type: search.CLEAN })

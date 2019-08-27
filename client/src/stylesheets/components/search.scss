@@ -26,7 +26,7 @@
     flex-direction: column;
     width: 500px;
     height: 600px;
-    background: rgba(255,255,255,.5);;
+    background: #fff;
     z-index: 2000;
 
     .search-form {
@@ -48,6 +48,10 @@
       flex-direction: column;
       overflow-y: scroll;
       box-sizing: border-box;
+
+      a {
+        color: #BE5C5C;
+      }
 
       .result {
         display: flex;

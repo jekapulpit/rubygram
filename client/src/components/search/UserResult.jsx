@@ -1,5 +1,5 @@
 import React from "react"
-import {sendInvite} from "../../services/invitesServices";
+import {cancelInvite, sendInvite} from "../../services/invitesServices";
 import {getCurrentUser} from "../../services/sessionStorageServices";
 import {Link} from "react-router-dom";
 
@@ -7,16 +7,24 @@ const UserResult = props => {
     let inviteStatus;
     switch (props.userInfo.invite_status) {
         case "sent":
-            inviteStatus = (<p className="sent">sent</p>);
+            inviteStatus = (<button onClick={() => {
+                    cancelInvite(props.userInfo.id, props.room.id)
+                        .then((data) => {
+                            if(data.success)
+                                props.toggleCancelInvite(props.userInfo.id);
+                        })
+                }
+            }
+                className="btn empty">cancel invite</button>);
             break;
         case "accepted":
-            inviteStatus = (<p className="accepted">accepted</p>);
+            inviteStatus = (<button className="btn accept">accepted</button>);
             break;
         case "rejected":
-            inviteStatus = (<p className="rejected">rejected</p>);
+            inviteStatus = (<button className="btn reject">rejected</button>);
             break;
         default:
-            inviteStatus = (<button onClick={() => {
+            inviteStatus = (<button className="btn neutral" onClick={() => {
                 sendInvite(props.userInfo.id, props.room.id, `User ${getCurrentUser().username} invites you to his chat "${props.room.name}"!`)
                     .then((data) => {
                         if(data.success)

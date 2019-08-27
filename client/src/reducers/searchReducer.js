@@ -13,6 +13,13 @@ export default (state = { results: [], active: false }, action) => {
                 return result;
             });
             return {...state, results: newResults};
+        case search.CANCEL:
+            let newInviteResults = state.results.map((result) => {
+                if(result.id === action.userId)
+                    return {...result, invite_status: null};
+                return result;
+            });
+            return {...state, results: newInviteResults};
         case search.CLEAN:
             return {...state, results: []};
         case search.TOGGLE_MESSAGES:
