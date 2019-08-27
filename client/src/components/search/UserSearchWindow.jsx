@@ -1,12 +1,16 @@
 import React from "react"
 import UserResult from "./UserResult";
 import '../../stylesheets/components/search.scss'
+import {getCurrentUser} from "../../services/sessionStorageServices";
 
 const UserSearchWindow = props => {
     let userData={};
+    let emptySlots = (getCurrentUser().admin ? 'infinite' : props.room.empty_slots);
     let results = props.results.map((result) => {
         return <UserResult
             toggleSendInvite={props.toggleSendInvite}
+            toggleDecrementSlots={props.toggleDecrementSlots}
+            toggleIncrementSlots={props.toggleIncrementSlots}
             toggleCancelInvite={props.toggleCancelInvite}
             room={props.room}
             key={result.id}
@@ -24,6 +28,7 @@ const UserSearchWindow = props => {
                         <button>search</button>
                     </form>
                 </div>
+                <h3 style={{textAlign: 'center'}}>You have {emptySlots} invite(s)</h3>
                 <div className="results">
                     {results}
                 </div>

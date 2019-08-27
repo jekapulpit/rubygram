@@ -78,6 +78,8 @@ class ActiveRoom extends React.Component {
                              connected={this.props.room.connected}
                              messages={this.props.room.messages}/>
                 <UserSearchWindow handleSearch={this.handleSearch}
+                                  toggleIncrementSlots={this.props.toggleIncrementSlots}
+                                  toggleDecrementSlots={this.props.toggleDecrementSlots}
                                   toggleCancelInvite={this.props.toggleCancelInvite}
                                   toggleSendInvite={this.props.toggleSendInvite}
                                   results={this.props.search.results}
@@ -116,6 +118,12 @@ const mapDispatchToProps = function(dispatch, ownProps) {
         },
         toggleAddUser: (user) => {
             dispatch({ type: rooms.ADD_USER, user: user })
+        },
+        toggleIncrementSlots: () => {
+            dispatch({ type: rooms.UPDATE_SLOTS, param: 1 })
+        },
+        toggleDecrementSlots: () => {
+            dispatch({ type: rooms.UPDATE_SLOTS, param: -1 })
         },
         toggleDeleteUser: (userId) => {
             dispatch({ type: rooms.DELETE_USER, userId: userId })

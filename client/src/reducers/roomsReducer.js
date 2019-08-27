@@ -26,6 +26,13 @@ export default (state = { roomList: [], currentRoom: {} }, action) => {
         case rooms.ADD_USER:
             let newUserList = state.currentRoom.users.concat(action.user);
             return {...state, currentRoom: { ...state.currentRoom, users: newUserList} };
+        case rooms.UPDATE_SLOTS:
+            return {...state, currentRoom: {...state.currentRoom, roomInfo:
+                            {...state.currentRoom.roomInfo,
+                                empty_slots: state.currentRoom.roomInfo.empty_slots += action.param
+                            }
+                    }
+            };
         case rooms.DELETE_USER:
             let newUsers = state.currentRoom.users.filter((user) => user.id !== action.userId);
             return {...state, currentRoom: { ...state.currentRoom, users: newUsers} };

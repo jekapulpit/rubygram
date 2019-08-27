@@ -10,8 +10,11 @@ const UserResult = props => {
             inviteStatus = (<button onClick={() => {
                     cancelInvite(props.userInfo.id, props.room.id)
                         .then((data) => {
-                            if(data.success)
+                            if(data.success) {
                                 props.toggleCancelInvite(props.userInfo.id);
+                                if (!getCurrentUser().admin)
+                                    props.toggleIncrementSlots();
+                            }
                         })
                 }
             }
@@ -27,8 +30,11 @@ const UserResult = props => {
             inviteStatus = (<button className="btn neutral" onClick={() => {
                 sendInvite(props.userInfo.id, props.room.id, `User ${getCurrentUser().username} invites you to his chat "${props.room.name}"!`)
                     .then((data) => {
-                        if(data.success)
+                        if(data.success) {
                             props.toggleSendInvite(props.userInfo.id);
+                            if (!getCurrentUser().admin)
+                                props.toggleDecrementSlots();
+                        }
                     })
             }}>invite</button>)
     }
