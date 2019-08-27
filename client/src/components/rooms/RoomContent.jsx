@@ -14,8 +14,8 @@ const RoomContent = props => {
             <MessageSearchWindow toggleCleanMessageResults={props.toggleCleanMessageResults}
                                  toggleExecuteMessageSearch={props.toggleExecuteMessageSearch}
                                  toggleMessageSearch={props.toggleMessageSearch}
-                                 handleDeleteMessage={(messageId) => {
-                                     deleteMessage(messageId)
+                                 handleDeleteMessage={(message) => {
+                                     deleteMessage(message.id)
                                          .then((result) => {
                                              if(result.success)
                                                  props.toggleDeleteMessageResult(result.message)

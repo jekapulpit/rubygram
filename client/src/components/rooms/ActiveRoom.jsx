@@ -43,7 +43,8 @@ class ActiveRoom extends React.Component {
     };
 
     handleDeleteMessage = (message) => {
-        deleteMessage(message.id);
+        deleteMessage(message.id)
+            .then((data) => this.props.toggleDeleteMessageResult(data.message))
     };
 
     render() {

@@ -46,6 +46,7 @@ class MessageList extends React.Component {
             </CellMeasurer>
         );
     };
+
     render() {
         this.newMessage = '';
         let alert = this.props.connected ? (
