@@ -18,15 +18,21 @@ class RoomCable extends React.Component {
                 key={this.props.room.id}
                 channel={{ channel: 'RoomsChannel', room_id: this.props.room.id }}
                 onDisconnected={() => { this.props.toggleDisconnect() }}
-                onConnected={() => { getRoom(this.props.room.id)
-                    .then((data) => this.props.toggleSetRoom(data))
-                    .then(() => this.props.toggleConnect())
-                }}
+                onConnected={() => {
+                    this.props.toggleConnect();
+                    if(!this.props.connected)
+                        getRoom(this.props.room.id)
+                        .then((data) => this.props.toggleSetRoom(data))}
+                }
                 onReceived={receiveMessage}
             />
         )
     }
 }
+
+const mapStateToProps = state => ({
+    connected: state.rooms.currentRoom.connected,
+});
 
 const mapDispatchToProps = function(dispatch, ownProps) {
     return {
@@ -42,4 +48,4 @@ const mapDispatchToProps = function(dispatch, ownProps) {
     }
 };
 
-export default hot(connect(null, mapDispatchToProps)(RoomCable));
+export default hot(connect(mapStateToProps, mapDispatchToProps)(RoomCable));

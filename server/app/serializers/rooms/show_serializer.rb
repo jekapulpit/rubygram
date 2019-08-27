@@ -2,7 +2,7 @@ class Rooms::ShowSerializer < ActiveModel::Serializer
   attributes :room, :messages, :users
 
   def room
-    object.attributes
+    object.with_settings
   end
 
   def messages

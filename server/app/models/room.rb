@@ -22,7 +22,8 @@ class Room < ApplicationRecord
     attributes.merge({
                          max_users: max_users,
                          creator: creator.id,
-                         admins: creator.admin?
+                         admin: creator.admin?,
+                         empty_slots: empty_slots
                      })
   end
 
