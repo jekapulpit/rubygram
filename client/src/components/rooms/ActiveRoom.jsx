@@ -14,6 +14,8 @@ import AccessibilityIcon from '@material-ui/icons/Accessibility';
 import AddIcon from '@material-ui/icons/Add';
 import {syncCurrentUser} from "../../services/authentificationService";
 import {deleteMessage} from "../../services/messagesServices";
+import ArrowRightAltIcon from '@material-ui/icons/ArrowRightAlt';
+import { Link } from 'react-router-dom';
 
 class ActiveRoom extends React.Component {
     componentDidMount() {
@@ -59,6 +61,8 @@ class ActiveRoom extends React.Component {
         ) : (
             <React.Fragment>
                 <div className="room-header active-room">
+                    <Link to='/home/rooms' className="btn back"><ArrowRightAltIcon className='arrow'/>back
+                    </Link>
                     <div className="members">
                         <p className="clickable-link" onClick={() => this.props.toggleShowUsers()}><AccessibilityIcon /> {this.props.room.users.length} member(s)</p>
                         {this.props.room.roomInfo.creator === this.props.currentUser.id ?
