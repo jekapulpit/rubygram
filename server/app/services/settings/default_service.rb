@@ -9,7 +9,7 @@ module Settings
     end
 
     def call
-      return false unless current_user.admin?
+      return false unless (current_user.admin? && new_value >= 0)
       target_setting.update(value: new_value)
     end
 

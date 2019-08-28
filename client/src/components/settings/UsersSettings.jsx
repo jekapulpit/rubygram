@@ -41,10 +41,11 @@ class UsersSettings extends React.Component {
 
     handleChangeDefaultSettings = (newValue) => {
         changeDefaultUserSettings(newValue)
-            .then(() => {
-                this.setState({
-                    defaultValue: newValue
-                })
+            .then((data) => {
+                if (data.success)
+                    this.setState({
+                        defaultValue: newValue
+                    })
             })
     };
 
