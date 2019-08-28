@@ -3,7 +3,7 @@ import { hot } from 'react-hot-loader/root';
 import '../../stylesheets/components/notifications.scss'
 
 const Room = props => {
-    let fill = props.room.admins ? (
+    let fill = props.room.admin ? (
         <p>{props.room.name}, members limit: infinite</p>
     ) : (
         <React.Fragment>

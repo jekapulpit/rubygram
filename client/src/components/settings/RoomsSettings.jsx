@@ -41,10 +41,11 @@ class RoomsSettings extends React.Component {
 
     handleChangeDefaultSettings = (newValue) => {
         changeDefaultRoomSettings(newValue)
-            .then(() => {
-                this.setState({
-                    defaultValue: newValue
-                })
+            .then((data) => {
+                if (data.success)
+                    this.setState({
+                        defaultValue: newValue
+                    })
             })
     };
 
