@@ -23,6 +23,9 @@ const UserResult = props => {
         case "accepted":
             inviteStatus = (<button className="btn accept">accepted</button>);
             break;
+        case "ignoring":
+            inviteStatus = (<button className="btn reject">user ignores you</button>);
+            break;
         case "rejected":
             inviteStatus = (<button className="btn reject">rejected</button>);
             break;

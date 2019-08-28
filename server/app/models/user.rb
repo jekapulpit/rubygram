@@ -15,11 +15,14 @@ class User < ApplicationRecord
 
   def invite_status(room)
     invite = Invite.find_by(room: room, user: self)
+    if ignoring?(room.creator)
+      return 'ignoring'
+    end
     if invite
       return invite.status
     end
     if in? room.users
-      return "accepted"
+      return 'accepted'
     end
   end
 
