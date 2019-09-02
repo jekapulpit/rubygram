@@ -6,8 +6,10 @@ class Message < ApplicationRecord
   searchkick text_middle: [:content, :sender]
 
   scope :search_import, -> { includes(:sender) }
-  scope :search_in_all_rooms, ->(content, sender) { search(content, where: {recipient_id: sender.rooms.pluck(:id)}, match: :text_middle) }
-  scope :search_in_room, ->(content, room_id) { search(content, where: {recipient_id: room_id}, match: :text_middle) }
+  scope :search_in_all_rooms, ->(content, sender) { search_import
+                                                        .search(content, where: {recipient_id: sender.rooms.pluck(:id)}, match: :text_middle, load: false) }
+  scope :search_in_room, ->(content, room_id) { search_import
+                                                    .search(content, where: {recipient_id: room_id}, match: :text_middle, load: false) }
 
   def with_send_info
     attributes.merge({
@@ -19,8 +21,10 @@ class Message < ApplicationRecord
   def search_data
     {
         content: content,
-        sender: sender.username,
-        recipient_id: recipient_id
+        senders_name: sender.username,
+        recipient_id: recipient_id,
+        sender_id: sender_id,
+        send_time: created_at.strftime("%B %d, %Y")
     }
   end
 end

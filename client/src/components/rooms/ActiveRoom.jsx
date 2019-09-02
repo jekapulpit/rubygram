@@ -54,6 +54,7 @@ class ActiveRoom extends React.Component {
                                      toggleCleanMessageResults={this.props.toggleCleanMessageResults}
                                      toggleMessageSearch={this.props.toggleMessageSearch}
                                      handleDeleteMessage={this.handleDeleteMessage}
+                                     currentUser={this.props.currentUser}
                                      room={this.props.room.roomInfo}
                                      roomId={this.props.room.roomInfo.id}
                                      results={this.props.search.messageResults}/>

@@ -35,6 +35,7 @@ class MessageSearchWindow extends React.Component {
                 columnIndex={0}
                 rowIndex={index}>
                 <Message
+                    currentUser={this.props.currentUser}
                     style={style}
                     handleDeleteMessage={this.props.handleDeleteMessage}
                     message={this.props.results[index]}/>
