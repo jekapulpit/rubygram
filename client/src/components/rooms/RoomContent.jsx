@@ -14,10 +14,10 @@ const RoomContent = props => {
             <MessageSearchWindow toggleCleanMessageResults={props.toggleCleanMessageResults}
                                  toggleExecuteMessageSearch={props.toggleExecuteMessageSearch}
                                  toggleMessageSearch={props.toggleMessageSearch}
+                                 currentUser={props.currentUser}
                                  handleDeleteMessage={(message) => {
                                      deleteMessage(message.id)
                                          .then((result) => {
-                                             if(result.success)
                                                  props.toggleDeleteMessageResult(result.message)
                                          })
                                  }}
@@ -39,7 +39,8 @@ const RoomContent = props => {
     )
 };
 const mapStateToProps = state => ({
-    search: state.search
+    search: state.search,
+    currentUser: state.users.currentUser
 });
 
 const mapDispatchToProps = function(dispatch, ownProps) {
