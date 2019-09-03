@@ -8,9 +8,9 @@ class Room < ApplicationRecord
   has_many :messages, as: :recipient, dependent: :destroy
   has_many :invites, dependent: :destroy
 
-  searchkick text_middle: [:name, :creators_username]
+  searchkick text_middle: %i[name creators_username]
 
-  scope :search_import, -> { includes(:creator, :setting) }
+  scope :search_import, -> { includes(:creator, :room_relations, :setting) }
 
   def with_member_status(user)
     attributes.merge({
@@ -33,7 +33,7 @@ class Room < ApplicationRecord
   end
 
   def max_users
-    defined?(setting.value) ? setting.value : DefaultSetting.max_users.value
+    defined?(setting.value) ? setting.value : self.class.default_max_users
   end
 
   def search_data
@@ -43,8 +43,15 @@ class Room < ApplicationRecord
         creators_username: creator.username,
         creators_email: creator.email,
         max_users: max_users,
-        empty_slots: empty_slots
     }
+  end
+
+  def self.default_max_users
+    @@default_setting ||= DefaultSetting.max_users.value
+  end
+
+  def self.clear_max_users
+    @@default_setting = nil
   end
 
   private

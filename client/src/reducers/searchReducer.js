@@ -33,7 +33,7 @@ export default (state = { results: [], active: false }, action) => {
             return {...state, messageResults: newMessages};
         case search.UPDATE_USER_RESULTS:
             let results = state.results.map((result) => {
-                if (result.id === action.result.id)
+                if (result.id == action.result.id)
                     return action.result;
                 return result
             });

@@ -3,7 +3,7 @@
 class Api::V4::SearchController < ApplicationController
   def find_users
     puts params[:room_id]
-    results = params[:room_id] ? User.search_for_invite(params[:request], params[:room_id]) : User.search_with_settings(params[:request])
+    results = params[:room_id] ? User.search_for_invite(params[:request], params[:room_id]) : User.search_by_email(params[:request])
     render json: { results: results }
   end
 
@@ -18,7 +18,7 @@ class Api::V4::SearchController < ApplicationController
   end
 
   def find_rooms
-    results = Room.search(params[:request], load: false).results
+    results = Room.search(params[:request], load: false, match: :text_middle).results
     render json: { results: results }
   end
 end

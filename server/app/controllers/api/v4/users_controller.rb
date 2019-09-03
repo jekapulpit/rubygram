@@ -29,11 +29,13 @@ class Api::V4::UsersController < ApplicationController
   def set_max_chats
     setting = Settings::UsersService.new(params[:id], params[:new_value], current_user).call
     user = User.find(params[:id])
+    user.reindex
     render json: { success: setting, user: user.with_settings }
   end
 
   def set_default_max_chats
     setting = Settings::DefaultService.new('max_chats', params[:new_value], current_user).call
+    User.reindex
     render json: { success: setting }
   end
 

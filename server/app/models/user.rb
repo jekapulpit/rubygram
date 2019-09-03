@@ -65,18 +65,48 @@ class User < ApplicationRecord
   end
 
   def all_rooms
-    rooms.map { |room| room.with_member_status(self) }
+    rooms.joins(:room_relations)
+        .select("distinct on (room_relations.room_id) rooms.*, room_relations.unread_number as unread_number, (case
+                 when room_relations.status = 1 then 'creator'
+                 else 'member' end) as member_status")
   end
 
   def max_chats
-    defined?(setting.value) ? setting.value : DefaultSetting.max_chats.value
+    defined?(setting.value) ? setting.value : self.class.default_max_chats
   end
 
   def empty_slots
     max_chats - room_relations.where(status: 'creator').count
   end
 
-  scope :search_by_email, ->(email) { search(email, fields: [{ email: :exact }, :username]) }
-  scope :search_for_invite, ->(request, room_id) { search_by_email(request).map { |user| user.with_invited_status(Room.find(room_id)) } }
-  scope :search_with_settings, ->(request) { search_by_email(request).map(&:with_settings) }
+  def search_data
+    {
+        email: email,
+        username: username,
+        admin: admin,
+        max_chats: max_chats,
+    }
+  end
+
+  def self.default_max_chats
+    @@default_setting ||= DefaultSetting.max_chats.value
+  end
+
+  def self.clear_max_chats
+    @@default_setting = nil
+  end
+
+  scope :search_import, -> { includes(:room_relations, :setting) }
+
+  scope :search_by_email, ->(email) {
+    search(email, fields: [{ email: :exact }, :username])
+  }
+
+  scope :search_for_settings, ->(email) {
+    search(email, fields: [{ email: :exact }, :username], load: false).results
+  }
+
+  scope :search_for_invite, ->(request, room_id) {
+    search_by_email(request).map { |user| user.with_invited_status(Room.find(room_id)) }
+  }
 end

@@ -54,6 +54,7 @@ class Api::V4::RoomsController < ApplicationController
 
   def set_default_max_users
     setting = Settings::DefaultService.new('max_users', params[:new_value], current_user).call
+    Room.reindex
     render json: { success: setting }
   end
 
