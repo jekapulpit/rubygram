@@ -18,7 +18,7 @@ class Api::V4::SearchController < ApplicationController
   end
 
   def find_rooms
-    results = Room.search(params[:request])
-    render json: { results: results.map(&:with_settings) }
+    results = Room.search(params[:request], load: false).results
+    render json: { results: results }
   end
 end

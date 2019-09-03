@@ -40,7 +40,7 @@ export default (state = { results: [], active: false }, action) => {
             return {...state, results: results};
         case search.UPDATE_ROOM_RESULTS:
             let roomResults = state.roomsResults.map((result) => {
-                if (result.id === action.result.id)
+                if (result.id == action.result.id)
                     return action.result;
                 return result
             });
