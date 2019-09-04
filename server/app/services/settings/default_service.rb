@@ -10,7 +10,7 @@ module Settings
 
     def call
       return false unless (current_user.admin? && new_value >= 0)
-      clear_defaults
+      self.class.clear_defaults
       target_setting.update(value: new_value)
     end
 
@@ -18,7 +18,7 @@ module Settings
       DefaultSetting.find_by(setting_type: setting_type)
     end
 
-    def clear_defaults
+    def self.clear_defaults
       Room.clear_max_users
       User.clear_max_chats
     end

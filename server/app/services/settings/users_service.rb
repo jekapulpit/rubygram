@@ -10,12 +10,7 @@ module Settings
 
     def call
       return false unless (current_user.admin? && new_value >= 0)
-      special_setting ?
-          special_setting.update(value: new_value) : Setting.create(target: user, value: new_value)
-    end
-
-    def special_setting
-      Setting.find_by(target: user)
+      user.update_attributes(setting: Setting.find_or_create_by(target: user, value: new_value))
     end
   end
 end
