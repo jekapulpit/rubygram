@@ -2,7 +2,6 @@
 
 class Api::V4::SearchController < ApplicationController
   def find_users
-    puts params[:room_id]
     results = params[:room_id] ? User.search_for_invite(params[:request], params[:room_id]) : User.search_for_settings(params[:request])
     render json: { results: results }
   end

@@ -34,34 +34,4 @@ RSpec.describe User, type: :model do
       end
     end
   end
-
-  describe 'user#ignore' do
-    before do
-      Invites::CreateService.new('test content', outsider.id, room.id).call
-    end
-
-    context 'when user not in black list' do
-      it 'invites not should be empty' do
-        expect(outsider.invites.where(room_id: creator
-                                                   .rooms
-                                                   .includes(:room_relations)
-                                                   .where(room_relations: {status: "creator"}))).not_to be_empty
-      end
-    end
-
-    context 'when user in black list' do
-      before do
-        outsider.ignore(creator)
-      end
-      it 'should delete all invites from this user' do
-        expect(outsider.invites.where(room_id: creator
-                                                   .rooms
-                                                   .includes(:room_relations)
-                                                   .where(room_relations: {status: "creator"}))).to be_empty
-      end
-      it 'new invites should not be created' do
-        expect(Invites::CreateService.new('test content', outsider.id, room.id).call).to be_nil
-      end
-    end
-  end
 end

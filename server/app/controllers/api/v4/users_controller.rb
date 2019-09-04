@@ -50,7 +50,7 @@ class Api::V4::UsersController < ApplicationController
   end
 
   def ignore_by_room
-    deleted_invites = current_user.ignore Room.find(params[:id]).creator
+    deleted_invites = BlackLists::AddService.new(Room.find(params[:id]).user_id, current_user.id).call
     render json: {
         success: true,
         deleted_invites: deleted_invites.pluck(:id)
@@ -58,7 +58,7 @@ class Api::V4::UsersController < ApplicationController
   end
 
   def ignore
-    deleted_invites = current_user.ignore User.find(params[:id])
+    deleted_invites = BlackLists::AddService.new(User.find(params[:id]), current_user.id).call
     render json: {
         success: true,
         deleted_invites: deleted_invites.pluck(:id)
