@@ -34,8 +34,13 @@ class Api::V4::InvitesController < ApplicationController
   end
 
   def accept
+    room = @invite.room
     if @invite.accept
-      render json: { success: true, room: @invite.room, user: @invite.user }
+      RoomsChannel.broadcast_to room, {
+          user: @invite.user.with_invited_status(room),
+          type: 'ANSWER'
+      }
+      render json: { success: true, room: room, user: @invite.user }
     else
       render json: { success: false }
     end
@@ -47,8 +52,13 @@ class Api::V4::InvitesController < ApplicationController
   end
 
   def reject
+    room = @invite.room
     if @invite.reject
-      render json: { success: true, room: @invite.room, user: @invite.user }
+      RoomsChannel.broadcast_to room, {
+          user: @invite.user.with_invited_status(room),
+          type: 'ANSWER'
+      }
+      render json: { success: true, room: room, user: @invite.user }
     else
       render json: { success: false }
     end

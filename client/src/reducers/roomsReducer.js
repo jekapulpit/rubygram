@@ -24,6 +24,9 @@ export default (state = { roomList: [], currentRoom: {} }, action) => {
         case rooms.UNSUBSCRIBE:
             let newMembers = state.currentRoom.users.filter((user) => user.id !== action.user_id);
             return {...state, currentRoom: { ...state.currentRoom, users: newMembers }};
+        case rooms.ANSWER:
+            let newMemberList = state.currentRoom.users.concat(action.user);
+            return {...state, currentRoom: { ...state.currentRoom, users: newMemberList }};
         case rooms.SHOW_USERS:
             return {...state, showUsers: !state.showUsers };
         case rooms.ADD_USER:

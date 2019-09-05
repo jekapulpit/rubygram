@@ -3,7 +3,7 @@ import {getCurrentUser, getTokenFromSessionStorage} from "./sessionStorageServic
 import store from '../store'
 import basicScroll from "./scrollingService";
 import {readAllMessages} from "./roomsServices";
-import {messages, rooms} from "../actionTypes";
+import {messages, rooms, search} from "../actionTypes";
 
 export async function sendMessage(messageAttributes) {
     return fetch(`http://${API_HOST}:${API_PORT}/api/v4/messages/`, {
@@ -34,6 +34,9 @@ export function receiveMessage(action) {
         case rooms.UNSUBSCRIBE:
             if(action.user_id === getCurrentUser().id)
                 window.location = '/home/rooms';
+            break;
+        case rooms.SUBSCRIBE:
+            store.dispatch({type: search.UPDATE_USER_RESULTS, result: action.user});
             break;
         case messages.RECEIVE:
             if(window.location.pathname === ('/home/rooms/' + action.message.recipient_id))
