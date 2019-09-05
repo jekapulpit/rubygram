@@ -36,7 +36,12 @@ class Api::V4::RoomsController < ApplicationController
   end
 
   def unsubscribe
-    render json: { success: Rooms::UnsubscribeService.new(params[:id], params[:user_id]).call }
+    success = Rooms::UnsubscribeService.new(params[:id], params[:user_id]).call
+    RoomsChannel.broadcast_to Room.find(params[:id]), {
+        user_id: params[:user_id],
+        type: 'UNSUBSCRIBE'
+    } if success
+    render json: { success: success }
   end
 
   def read_all

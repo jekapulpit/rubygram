@@ -1,9 +1,9 @@
 import { API_HOST, API_PORT } from '../constants'
-import { getTokenFromSessionStorage } from "./sessionStorageServices";
+import {getCurrentUser, getTokenFromSessionStorage} from "./sessionStorageServices";
 import store from '../store'
 import basicScroll from "./scrollingService";
 import {readAllMessages} from "./roomsServices";
-import {messages} from "../actionTypes";
+import {messages, rooms} from "../actionTypes";
 
 export async function sendMessage(messageAttributes) {
     return fetch(`http://${API_HOST}:${API_PORT}/api/v4/messages/`, {
@@ -29,9 +29,16 @@ export async function deleteMessage(messageId) {
 }
 
 export function receiveMessage(action) {
-    if(window.location.pathname === ('/home/rooms/' + action.message.recipient_id))
-        readAllMessages(action.message.recipient_id);
     store.dispatch(action);
-    if(action.type === messages.RECEIVE)
-        basicScroll();
+    switch (action.type) {
+        case rooms.UNSUBSCRIBE:
+            if(action.user_id === getCurrentUser().id)
+                window.location = '/home/rooms';
+            break;
+        case messages.RECEIVE:
+            if(window.location.pathname === ('/home/rooms/' + action.message.recipient_id))
+                readAllMessages(action.message.recipient_id);
+            basicScroll();
+            break;
+    }
 }

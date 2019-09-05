@@ -21,6 +21,9 @@ export default (state = { roomList: [], currentRoom: {} }, action) => {
         case rooms.SET_CURRENT_ROOM:
             let {room, users} = action.data;
             return {...state, currentRoom: { messages: action.data.messages, roomInfo: room, users: users, connected: true }};
+        case rooms.UNSUBSCRIBE:
+            let newMembers = state.currentRoom.users.filter((user) => user.id !== action.user_id);
+            return {...state, currentRoom: { ...state.currentRoom, users: newMembers }};
         case rooms.SHOW_USERS:
             return {...state, showUsers: !state.showUsers };
         case rooms.ADD_USER:

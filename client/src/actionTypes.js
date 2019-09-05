@@ -17,6 +17,7 @@ export const rooms = {
     DELETE_USER: 'DELETE_USER',
     CONNECT: 'CONNECT_ROOM',
     DISCONNECT: 'DISCONNECT_ROOM',
+    UNSUBSCRIBE: 'UNSUBSCRIBE'
 };
 
 export const messages = {
