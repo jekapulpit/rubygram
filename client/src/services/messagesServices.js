@@ -35,7 +35,7 @@ export function receiveMessage(action) {
             if(action.user_id === getCurrentUser().id)
                 window.location = '/home/rooms';
             break;
-        case rooms.SUBSCRIBE:
+        case rooms.ANSWER:
             store.dispatch({type: search.UPDATE_USER_RESULTS, result: action.user});
             break;
         case messages.RECEIVE:
