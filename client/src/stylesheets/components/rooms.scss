@@ -104,6 +104,26 @@
             align-self: flex-end;
           }
 
+          &.center {
+            justify-content: center;
+            align-items: center;
+          }
+
+          .notification {
+            width: 300px;
+            border-right: 10px;
+            font-size: 18px;
+            text-align: center;
+            padding: 20px;
+            background-color: #01487a;
+            border-radius: 25px;
+            margin: 15px;
+            color: #f6f6f6;
+            -webkit-box-shadow: 3px 3px 10px 0 rgba(0,0,0,.3);
+            -moz-box-shadow: 3px 3px 10px 0 rgba(0,0,0,.3);
+            box-shadow: 3px 3px 10px 0 rgba(0,0,0,.3);
+          }
+
           .message {
             position: relative;
             -webkit-transition: .3s;

@@ -13,7 +13,7 @@ class Message < ApplicationRecord
 
   def with_send_info
     attributes.merge({
-      senders_name: sender.username,
+      senders_name: notification? ? sender.name : sender.username,
       send_time: created_at.strftime("%B %d, %Y")
     })
   end
@@ -21,10 +21,14 @@ class Message < ApplicationRecord
   def search_data
     {
         content: content,
-        senders_name: sender.username,
+        senders_name: notification? ? sender.name : sender.username,
         recipient_id: recipient_id,
         sender_id: sender_id,
         send_time: created_at.strftime("%B %d, %Y")
     }
+  end
+
+  def notification?
+    sender == recipient
   end
 end

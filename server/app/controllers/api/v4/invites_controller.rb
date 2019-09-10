@@ -34,16 +34,9 @@ class Api::V4::InvitesController < ApplicationController
   end
 
   def accept
-    room = @invite.room
-    if @invite.accept
-      RoomsChannel.broadcast_to room, {
-          user: @invite.user.with_invited_status(room),
-          type: 'ANSWER'
-      }
-      render json: { success: true, room: room, user: @invite.user }
-    else
-      render json: { success: false }
-    end
+    render json: { success: Invites::AcceptService.new(@invite).call,
+                   room: @invite.room,
+                   user: @invite.user }
   end
 
   def read_all

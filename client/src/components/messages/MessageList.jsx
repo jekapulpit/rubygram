@@ -4,6 +4,7 @@ import { hot } from 'react-hot-loader/root';
 import {sendMessage} from "../../services/messagesServices";
 import SendIcon from '@material-ui/icons/Send';
 import { List, AutoSizer, CellMeasurer, CellMeasurerCache } from "react-virtualized";
+import Notification from "./Notification";
 
 class MessageList extends React.Component {
     constructor(props) {
@@ -38,6 +39,20 @@ class MessageList extends React.Component {
             });
     };
 
+    getMessage = (index, style) => {
+        return this.props.messages[index].sender_id === this.props.messages[index].recipient_id ?
+            <Notification style={style}
+                          message={this.props.messages[index]}/> :
+            <Message
+                currentUser={this.props.currentUser}
+                connected={this.props.connected}
+                style={style}
+                handleSendMessage={this.handleSendMessage}
+                toggleDeleteMessage={this.props.toggleDeleteMessage}
+                handleDeleteMessage={this.props.handleDeleteMessage}
+                message={this.props.messages[index]}/>
+    };
+
     renderRow = ({ index, key, style, parent }) => {
         return (
             <CellMeasurer
@@ -46,14 +61,7 @@ class MessageList extends React.Component {
                 parent={parent}
                 columnIndex={0}
                 rowIndex={index}>
-                <Message
-                    currentUser={this.props.currentUser}
-                    connected={this.props.connected}
-                    style={style}
-                    handleSendMessage={this.handleSendMessage}
-                    toggleDeleteMessage={this.props.toggleDeleteMessage}
-                    handleDeleteMessage={this.props.handleDeleteMessage}
-                    message={this.props.messages[index]}/>
+                {this.getMessage(index, style)}
             </CellMeasurer>
         );
     };
