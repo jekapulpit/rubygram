@@ -11,6 +11,11 @@ module Rooms
       relation = RoomRelation.find_by(room: room, user: user)
       invite = Invite.find_by(room: room, user: user)
       invite.destroy if invite
+      send_notification
+      relation.destroy
+    end
+
+    def send_notification
       message = Message.new(
           content: "user #{user.username} left the conversation",
           sender: room,
@@ -21,7 +26,6 @@ module Rooms
           message: message,
           type: 'RECEIVE_MESSAGE'
       }
-      relation.destroy
     end
   end
 end
