@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Rooms
   class UnsubscribeService
     attr_reader :room, :user
@@ -10,22 +12,21 @@ module Rooms
     def call
       relation = RoomRelation.find_by(room: room, user: user)
       invite = Invite.find_by(room: room, user: user)
-      invite.destroy if invite
+      invite&.destroy
       send_notification
       relation.destroy
     end
 
     def send_notification
       message = Message.new(
-          content: "user #{user.username} left the conversation",
-          sender: room,
-          recipient: room
+        content: "user #{user.username} left the conversation",
+        sender: room,
+        recipient: room
       )
       message.save
-      RoomsChannel.broadcast_to room, {
-          message: message,
-          type: 'RECEIVE_MESSAGE'
-      }
+      RoomsChannel.broadcast_to room,
+                                message: message,
+                                type: 'RECEIVE_MESSAGE'
     end
   end
 end

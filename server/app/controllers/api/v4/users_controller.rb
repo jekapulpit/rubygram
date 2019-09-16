@@ -1,15 +1,14 @@
-class Api::V4::UsersController < ApplicationController
+# frozen_string_literal: true
 
+class Api::V4::UsersController < ApplicationController
   skip_before_action :authenticate_user, only: :create
 
   def update
-    begin
-      user = User.find(params[:id])
-      success = user.update_attributes(user_params)
-      render json: { success: success, user: user.with_settings, errors: user.errors }
-    rescue ActiveRecord::RecordNotFound => exception
-      render json: { success: false, errors: { record: [exception.message] } }
-    end
+    user = User.find(params[:id])
+    success = user.update_attributes(user_params)
+    render json: { success: success, user: user.with_settings, errors: user.errors }
+  rescue ActiveRecord::RecordNotFound => e
+    render json: { success: false, errors: { record: [e.message] } }
   end
 
   def create
@@ -18,12 +17,10 @@ class Api::V4::UsersController < ApplicationController
   end
 
   def show
-    begin
-      user = User.find(params[:id])
-      render json: { success: true, user: user.with_settings, errors: user.errors }
-    rescue ActiveRecord::RecordNotFound => exception
-      render json: { success: false, errors: { record: [exception.message] } }
-    end
+    user = User.find(params[:id])
+    render json: { success: true, user: user.with_settings, errors: user.errors }
+  rescue ActiveRecord::RecordNotFound => e
+    render json: { success: false, errors: { record: [e.message] } }
   end
 
   def set_max_chats
@@ -52,24 +49,24 @@ class Api::V4::UsersController < ApplicationController
   def ignore_by_room
     deleted_invites = BlackLists::AddService.new(Room.find(params[:id]).user_id, current_user.id).call
     render json: {
-        success: true,
-        deleted_invites: deleted_invites.pluck(:id)
+      success: true,
+      deleted_invites: deleted_invites.pluck(:id)
     }
   end
 
   def ignore
     deleted_invites = BlackLists::AddService.new(User.find(params[:id]), current_user.id).call
     render json: {
-        success: true,
-        deleted_invites: deleted_invites.pluck(:id)
+      success: true,
+      deleted_invites: deleted_invites.pluck(:id)
     }
   end
 
   def stop_ignore
     target = User.find(params[:id])
     render json: {
-        success: current_user.stop_ignore(target),
-        user: target
+      success: current_user.stop_ignore(target),
+      user: target
     }
   end
 

@@ -1,8 +1,10 @@
+# frozen_string_literal: true
+
 module Rooms
   class CreateService
     attr_reader :name, :creator, :user_list
 
-    def initialize(name, creator, user_list = nil)
+    def initialize(name, creator, _user_list = nil)
       @name = name
       @creator = creator
     end

@@ -2,12 +2,10 @@
 
 class Api::V4::RoomsController < ApplicationController
   def show
-    begin
-      room = Room.includes(:messages, :users).find(params[:id])
-      render json: room, serializer: Rooms::ShowSerializer
-    rescue ArgumentError
-      render json: { error: "error message" }
-    end
+    room = Room.includes(:messages, :users).find(params[:id])
+    render json: room, serializer: Rooms::ShowSerializer
+  rescue ArgumentError
+    render json: { error: 'error message' }
   end
 
   def index
@@ -25,8 +23,8 @@ class Api::V4::RoomsController < ApplicationController
     begin
       success = room.update_attributes(room_params)
       render json: { success: success, room: room.with_member_status(current_user), errors: room.errors }
-    rescue ActiveRecord::RecordNotFound => exception
-      render json: { success: false, errors: { record: [exception.message] } }
+    rescue ActiveRecord::RecordNotFound => e
+      render json: { success: false, errors: { record: [e.message] } }
     end
   end
 
@@ -37,10 +35,11 @@ class Api::V4::RoomsController < ApplicationController
 
   def unsubscribe
     success = Rooms::UnsubscribeService.new(params[:id], params[:user_id]).call
-    RoomsChannel.broadcast_to Room.find(params[:id]), {
-        user_id: params[:user_id],
-        type: 'UNSUBSCRIBE'
-    } if success
+    if success
+      RoomsChannel.broadcast_to Room.find(params[:id]),
+                                user_id: params[:user_id],
+                                type: 'UNSUBSCRIBE'
+    end
     render json: { success: success }
   end
 
@@ -54,7 +53,7 @@ class Api::V4::RoomsController < ApplicationController
     setting = Settings::RoomsService.new(params[:id], params[:new_value], current_user).call
     room = Room.find(params[:id])
     room.reindex
-    render json: { success: setting, room: room.with_settings}
+    render json: { success: setting, room: room.with_settings }
   end
 
   def set_default_max_users

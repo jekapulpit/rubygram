@@ -8,28 +8,26 @@ class Api::V4::InvitesController < ApplicationController
   end
 
   def create
-    begin
-      @invite = Invites::CreateService.new(invite_params[:content], invite_params[:user_id], invite_params[:room_id]).call
-      NotificationsChannel.broadcast_to 'notifications_channel', {
-          invite: @invite,
-          type: 'RECEIVE_INVITE'
-      } if @invite.valid?
-      render json: { success: @invite.valid?, invite: @invite, errors: @invite.errors }
-    rescue NoMethodError => exception
-      render json: { success: false, errors: { record: [exception.message] }}
+    @invite = Invites::CreateService.new(invite_params[:content], invite_params[:user_id], invite_params[:room_id]).call
+    if @invite.valid?
+      NotificationsChannel.broadcast_to 'notifications_channel',
+                                        invite: @invite,
+                                        type: 'RECEIVE_INVITE'
     end
+    render json: { success: @invite.valid?, invite: @invite, errors: @invite.errors }
+  rescue NoMethodError => e
+    render json: { success: false, errors: { record: [e.message] } }
   end
 
   def destroy
     invite = Invite.find_by(user_id: params[:user_id], room_id: params[:room_id])
     destroyed = invite.destroy
-    NotificationsChannel.broadcast_to 'notifications_channel', {
-        invite: invite,
-        type: 'CANCEL_INVITE'
-    }
+    NotificationsChannel.broadcast_to 'notifications_channel',
+                                      invite: invite,
+                                      type: 'CANCEL_INVITE'
     render json: {
-        success: destroyed,
-        invite: invite,
+      success: destroyed,
+      invite: invite
     }
   end
 
@@ -47,10 +45,9 @@ class Api::V4::InvitesController < ApplicationController
   def reject
     room = @invite.room
     if @invite.reject
-      RoomsChannel.broadcast_to room, {
-          user: @invite.user.with_invited_status(room),
-          type: 'ANSWER'
-      }
+      RoomsChannel.broadcast_to room,
+                                user: @invite.user.with_invited_status(room),
+                                type: 'ANSWER'
       render json: { success: true, room: room, user: @invite.user }
     else
       render json: { success: false }

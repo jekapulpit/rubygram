@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Users
   class DecodeAuthentificationCommand < BaseCommand
     private
@@ -11,6 +13,7 @@ module Users
 
     def payload
       return unless token_present?
+
       @result = user if user
     end
 
@@ -25,6 +28,7 @@ module Users
 
     def token
       return authorization_header.split(' ').last if authorization_header.present?
+
       errors.add(:token, I18n.t('decode_authentication_command.token_missing'))
       nil
     end

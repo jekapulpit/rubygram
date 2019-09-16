@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Invites
   class AcceptService
     attr_reader :invite
@@ -16,20 +18,18 @@ module Invites
 
     def send_notifications
       room = @invite.room
-      RoomsChannel.broadcast_to room, {
-          user: @invite.user.with_invited_status(room),
-          type: 'ANSWER'
-      }
+      RoomsChannel.broadcast_to room,
+                                user: @invite.user.with_invited_status(room),
+                                type: 'ANSWER'
       message = Message.new(
-          content: "user #{@invite.user.username} joined the conversation",
-          sender: room,
-          recipient: room
+        content: "user #{@invite.user.username} joined the conversation",
+        sender: room,
+        recipient: room
       )
       message.save
-      RoomsChannel.broadcast_to room, {
-          message: message,
-          type: 'RECEIVE_MESSAGE'
-      }
+      RoomsChannel.broadcast_to room,
+                                message: message,
+                                type: 'RECEIVE_MESSAGE'
     end
   end
 end

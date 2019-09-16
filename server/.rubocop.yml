@@ -1,0 +1,185 @@
+
+# inherit_from: .rubocop_todo.yml
+
+# This config is based on this gem
+#   saved for reference
+# inherit_gem:
+#   meowcop:
+#     - config/rubocop.yml
+
+AllCops:
+  Include:
+    - rubocop-rspec
+  TargetRubyVersion: 2.5
+  TargetRailsVersion: 5.2
+  UseCache: true
+  # Include:
+  #   - 'lib/**/*'
+  #   - 'app/**/*'
+  #   - 'spec/**/*'
+  Exclude:
+    - 'db/**/*' # migrations shouldn't be checked. there should be no business logic there
+    - 'db/schema.rb' # should not be maintained by us
+    - 'config/**/*' # no business logic
+    - 'bin/*' # should not be maintained by us
+    - '{config.ru,Rakefile,Gemfile}' # same as config
+
+  DisplayCopNames: true
+  DisplayStyleGuide: true
+
+Rails:
+  Enabled: true
+
+Bundler/OrderedGems:
+  Enabled: false
+
+#Lint start
+Lint/AmbiguousRegexpLiteral:
+  Enabled: false
+Lint/InheritException:
+  EnforcedStyle: standard_error
+Lint/UnneededCopEnableDirective:
+  Enabled: false
+# Lint End
+
+#Metrics Start
+Metrics/BlockLength:
+  Enabled: true
+  Max: 25
+  Exclude:
+    # RuboCop's default
+    - 'Rakefile'
+    - '**/*.rake'
+    - 'spec/**/*.rb'
+    # In many cases, config/routes.rb has very long block
+    - 'config/routes.rb'
+Metrics/PerceivedComplexity:
+  Enabled: true
+  Max: 6
+Metrics/LineLength:
+  Max: 120
+Metrics/MethodLength:
+  Max: 12
+#Metrics End
+
+# Performance Start
+# Performance End
+
+# Rails Start
+# Rails End
+
+# Security Start
+# Security End
+
+# Layout Start
+Layout/BlockAlignment:
+  Enabled: true
+  EnforcedStyleAlignWith: start_of_block
+Layout/DotPosition:
+  EnforcedStyle: trailing # why? # team decision
+Layout/EndOfLine:
+  EnforcedStyle: lf
+Layout/MultilineAssignmentLayout:
+  Enabled: true
+  EnforcedStyle: same_line
+Layout/MultilineMethodCallIndentation:
+  EnforcedStyle: indented_relative_to_receiver
+  IndentationWidth: 2
+Layout/MultilineMethodDefinitionBraceLayout:
+  EnforcedStyle: new_line
+Layout/SpaceInLambdaLiteral:
+  EnforcedStyle: require_no_space
+# Layout End
+
+# Naming Start
+Naming/MethodName:
+  EnforcedStyle: snake_case
+Naming/VariableNumber:
+  EnforcedStyle: snake_case
+# Naming End
+
+# Style Start
+Style/Alias:
+  EnforcedStyle: prefer_alias_method
+Style/AccessModifierDeclarations:
+  Exclude:
+    - 'app/services/client/eventer/base.rb'
+Style/BracesAroundHashParameters:
+  EnforcedStyle: context_dependent
+Style/ClassCheck:
+  Enabled: true
+  EnforcedStyle: is_a?
+Style/CollectionMethods:
+  Enabled: true
+  PreferredMethods:
+    collect: map
+    collect!: map!
+    inject: reduce
+    detect: find
+    find_all: select
+Style/EmptyCaseCondition:
+  Enabled: false
+Style/EmptyMethod:
+  EnforcedStyle: compact
+Style/For:
+  EnforcedStyle: each
+Style/FormatString:
+  EnforcedStyle: format
+Style/FormatStringToken:
+  EnforcedStyle: template
+Style/HashSyntax:
+  Enabled: true
+  EnforcedStyle: ruby19_no_mixed_keys
+Style/IfUnlessModifier:
+  Enabled: true
+Style/MethodDefParentheses:
+  EnforcedStyle: require_parentheses
+  Enabled: true
+Style/MixinGrouping:
+  EnforcedStyle: separated
+  Enabled: true
+Style/NumericLiteralPrefix:
+  Enabled: false
+Style/NumericPredicate:
+  EnforcedStyle: predicate
+  Enabled: true
+Style/PercentLiteralDelimiters:
+  Enabled: true
+  PreferredDelimiters:
+    "%": "()"
+    "%q": "()"
+    "%Q": "()"
+    "%s": "()"
+    "%x": "()"
+    "%i": "[]"
+    "%I": "[]"
+    "%w": "[]"
+    "%W": "[]"
+    "%r": "{}"
+Style/PerlBackrefs:
+  Enabled: false
+Style/RaiseArgs:
+  EnforcedStyle: exploded
+  Enabled: true
+Style/RedundantSelf:
+  Enabled: false
+Style/RegexpLiteral:
+  Enabled: false
+Style/Send:
+  Enabled: true
+Style/SignalException:
+  EnforcedStyle: only_raise
+  Enabled: true
+Style/SingleLineBlockParams:
+  Enabled: false
+Style/StabbyLambdaParentheses:
+  EnforcedStyle: require_parentheses
+Style/TernaryParentheses:
+  EnforcedStyle: require_no_parentheses
+Style/TrailingUnderscoreVariable:
+  Enabled: false
+# Style End
+
+
+RSpec/NestedGroups:
+  Max: 10

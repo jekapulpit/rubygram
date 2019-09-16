@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class BaseCommand
   attr_reader :result
 
@@ -21,9 +23,7 @@ class BaseCommand
 
   private
 
-  def initialize(*_)
-  end
+  def initialize(*_); end
 
-  def payload
-  end
+  def payload; end
 end

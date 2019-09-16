@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Settings
   class DefaultService
     attr_reader :setting_type, :new_value, :current_user
@@ -9,7 +11,8 @@ module Settings
     end
 
     def call
-      return false unless (current_user.admin? && new_value >= 0)
+      return false unless current_user.admin? && new_value >= 0
+
       self.class.clear_defaults
       target_setting.update(value: new_value)
     end

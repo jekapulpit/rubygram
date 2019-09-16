@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module BlackLists
   class AddService
     attr_reader :target, :owner
@@ -20,7 +22,7 @@ module BlackLists
       owner.invites.where(room_id: target
                                  .rooms
                                  .joins(:room_relations)
-                                 .where(room_relations: {status: "creator"})
+                                 .where(room_relations: { status: 'creator' })
                                  .distinct
                                  .pluck(:id)).destroy_all
     end

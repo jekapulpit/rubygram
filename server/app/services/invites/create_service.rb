@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Invites
   class CreateService
     attr_reader :content, :invite_type, :room, :user
@@ -10,8 +12,8 @@ module Invites
     end
 
     def call
-      user.update(unread_notifications: (user.unread_notifications + 1)) unless (unable_to_invite || user.ignoring?(room.creator))
-      Invite.create(content: content, invite_type: invite_type, room: room, user: user) unless (unable_to_invite || user.ignoring?(room.creator))
+      user.update(unread_notifications: (user.unread_notifications + 1)) unless unable_to_invite || user.ignoring?(room.creator)
+      Invite.create(content: content, invite_type: invite_type, room: room, user: user) unless unable_to_invite || user.ignoring?(room.creator)
     end
 
     def unable_to_invite

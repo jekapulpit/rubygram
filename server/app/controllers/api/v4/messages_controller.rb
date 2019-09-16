@@ -6,18 +6,17 @@ class Api::V4::MessagesController < ApplicationController
     room = Room.find(message_params[:recipient_id])
     if message.save
       increment_unread(room)
-      RoomsChannel.broadcast_to room, {
-          message: message.with_send_info,
-          type: 'RECEIVE_MESSAGE'
-      }
+      RoomsChannel.broadcast_to room,
+                                message: message.with_send_info,
+                                type: 'RECEIVE_MESSAGE'
       render json: {
-          success: true,
-          message: message,
+        success: true,
+        message: message
       }
     else
       render json: {
-          success: false,
-          errors: message.errors
+        success: false,
+        errors: message.errors
       }
     end
   end
@@ -26,14 +25,13 @@ class Api::V4::MessagesController < ApplicationController
     message = Message.find(params[:id])
     room = message.recipient
     destroyed = message.destroy
-    RoomsChannel.broadcast_to room, {
-        message: message,
-        type: 'DELETE_MESSAGE'
-    }
+    RoomsChannel.broadcast_to room,
+                              message: message,
+                              type: 'DELETE_MESSAGE'
     render json: {
-        success: destroyed,
-        message: message,
-        errors: message.errors
+      success: destroyed,
+      message: message,
+      errors: message.errors
     }
   end
 

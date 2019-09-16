@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 Rails.application.routes.draw do
   devise_for :users
 
@@ -6,7 +8,7 @@ Rails.application.routes.draw do
       resources :rooms
       resources :invites
       resources :messages
-      resources :users, only: %[update show]
+      resources :users, only: %(update show)
       resource :auth, only: %i[create]
       post '/rooms/unread/:id', to: 'rooms#read_all'
       post '/invites/unread/', to: 'invites#read_all'
@@ -35,5 +37,4 @@ Rails.application.routes.draw do
   end
 
   mount ActionCable.server => '/cable'
-
 end

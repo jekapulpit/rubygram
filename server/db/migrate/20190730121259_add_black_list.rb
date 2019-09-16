@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class AddBlackList < ActiveRecord::Migration[5.2]
   def change
     create_table 'black_lists', force: :cascade do |t|

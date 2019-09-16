@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class AddSettingsTable < ActiveRecord::Migration[5.2]
   def change
     create_table 'settings', force: :cascade do |t|

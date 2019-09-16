@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Messages::DialogSerializer < ActiveModel::Serializer
   attributes :id, :content, :sender_id, :recipient_id, :sender_type, :senders_name, :send_time
 
@@ -6,6 +8,6 @@ class Messages::DialogSerializer < ActiveModel::Serializer
   end
 
   def send_time
-    object.created_at.strftime("%B %d, %Y")
+    object.created_at.strftime('%B %d, %Y')
   end
 end

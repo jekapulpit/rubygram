@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Users
   class AuthenticateUserCommand < BaseCommand
     private
@@ -14,7 +16,7 @@ module Users
     end
 
     def password_valid?
-      user && user.valid_password?(password)
+      user&.valid_password?(password)
     end
 
     def payload
@@ -27,8 +29,8 @@ module Users
 
     def contents
       {
-          user_id: user.id,
-          exp: 24.hours.from_now.to_i
+        user_id: user.id,
+        exp: 24.hours.from_now.to_i
       }
     end
   end
