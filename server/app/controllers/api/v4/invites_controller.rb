@@ -9,11 +9,6 @@ class Api::V4::InvitesController < ApplicationController
 
   def create
     @invite = Invites::CreateService.new(invite_params[:content], invite_params[:user_id], invite_params[:room_id]).call
-    if @invite.valid?
-      NotificationsChannel.broadcast_to 'notifications_channel',
-                                        invite: @invite,
-                                        type: 'RECEIVE_INVITE'
-    end
     render json: { success: @invite.valid?, invite: @invite, errors: @invite.errors }
   rescue NoMethodError => e
     render json: { success: false, errors: { record: [e.message] } }
@@ -43,15 +38,9 @@ class Api::V4::InvitesController < ApplicationController
   end
 
   def reject
-    room = @invite.room
-    if @invite.reject
-      RoomsChannel.broadcast_to room,
-                                user: @invite.user.with_invited_status(room),
-                                type: 'ANSWER'
-      render json: { success: true, room: room, user: @invite.user }
-    else
-      render json: { success: false }
-    end
+    render json: { success: Invites::RejectService.new(@invite).call,
+                   room: @invite.room,
+                   user: @invite.user }
   end
 
   private
