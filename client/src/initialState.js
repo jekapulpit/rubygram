@@ -1,28 +1,28 @@
-export default  {
-    users: {
-        currentUser: {
-            ignoring_users: []
-        },
-        loggedIn: false
+export default {
+  users: {
+    currentUser: {
+      ignoring_users: [],
     },
-    rooms: {
-        showUsers: false,
-        roomList: [],
-        currentRoom: {
-            roomInfo: {},
-            messages: [],
-            users: [],
-            connected: true
-        }
+    loggedIn: false,
+  },
+  rooms: {
+    showUsers: false,
+    roomList: [],
+    currentRoom: {
+      roomInfo: {},
+      messages: [],
+      users: [],
+      connected: true,
     },
-    search: {
-        active: false,
-        messageSearch: false,
-        results: [],
-        messageResults: [],
-        roomsResults: [],
-    },
-    invites: {
-        inviteList: []
-    }
+  },
+  search: {
+    active: false,
+    messageSearch: false,
+    results: [],
+    messageResults: [],
+    roomsResults: [],
+  },
+  invites: {
+    inviteList: [],
+  },
 };
