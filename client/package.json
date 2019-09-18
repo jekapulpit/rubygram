@@ -1,5 +1,5 @@
 {
-  "name": "mathereal-input",
+  "name": "rubygram",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -14,7 +14,6 @@
     "enzyme-adapter-react-15": "^1.4.0",
     "enzyme-adapter-react-16": "^1.13.2",
     "enzyme-to-json": "^3.3.5",
-    "eslint": "6.1.0",
     "identity-obj-proxy": "^3.0.0",
     "material-ui": "^0.20.2",
     "node-sass": "^4.12.0",
