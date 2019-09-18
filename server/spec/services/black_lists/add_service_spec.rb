@@ -32,7 +32,7 @@ RSpec.describe BlackLists::AddService do
                                                  .where(room_relations: { status: 'creator' }))).to be_empty
     end
     it 'new invites should not be created' do
-      expect(Invites::CreateService.new('test content', outsider.id, room.id).call).to be_nil
+      expect(Invites::CreateService.new('test content', outsider.id, room.id).call.id).to be_nil
     end
   end
 end
