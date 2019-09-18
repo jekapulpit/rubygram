@@ -5,7 +5,7 @@ class Room < ApplicationRecord
   has_many :room_relations, dependent: :destroy
   has_many :users, through: :room_relations
   belongs_to :creator, class_name: 'User', foreign_key: :user_id
-  has_many :messages, as: :recipient, dependent: :destroy
+  has_many :messages, as: :recipient
   has_many :invites, dependent: :destroy
 
   searchkick text_middle: %i[name creators_username]
