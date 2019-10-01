@@ -10,5 +10,3 @@
 
 DefaultSetting.create(setting_type: 'max_chats', value: 5)
 DefaultSetting.create(setting_type: 'max_users', value: 5)
-FactoryGirl.create(:filled_room, users_count: 2)
-FactoryGirl.create(:user, :admin)

@@ -40,7 +40,7 @@ class MessageList extends React.Component {
     };
 
     getMessage = (index, style) => {
-        return this.props.messages[index].sender_id === this.props.messages[index].recipient_id ?
+        return this.props.messages[index].sender_type === "Room" ?
             <Notification style={style}
                           message={this.props.messages[index]}/> :
             <Message
