@@ -2,7 +2,7 @@
 
 module Invites
   class CreateService
-    attr_reader :content, :invite_type, :room, :user, :invite
+    attr_reader :content, :invite_type, :room, :user
 
     def initialize(content, user_id, room_id = nil, invite_type = 0)
       @content = content
