@@ -63,6 +63,8 @@ GEM
     byebug (11.0.1)
     case_transform (0.2)
       activesupport
+    childprocess (2.0.0)
+      rake (< 13.0)
     coderay (1.1.2)
     concurrent-ruby (1.1.5)
     connection_pool (2.2.2)
@@ -190,9 +192,14 @@ GEM
     rb-inotify (0.10.0)
       ffi (~> 1.0)
     redis (4.1.2)
+    regexp_parser (1.6.0)
     responders (3.0.0)
       actionpack (>= 5.0)
       railties (>= 5.0)
+    rspec (3.8.0)
+      rspec-core (~> 3.8.0)
+      rspec-expectations (~> 3.8.0)
+      rspec-mocks (~> 3.8.0)
     rspec-core (3.8.2)
       rspec-support (~> 3.8.0)
     rspec-expectations (3.8.4)
@@ -219,6 +226,7 @@ GEM
       unicode-display_width (>= 1.4.0, < 1.7)
     ruby-progressbar (1.10.1)
     ruby_dep (1.5.0)
+    rubyzip (2.0.0)
     sass (3.7.4)
       sass-listen (~> 4.0.0)
     sass-listen (4.0.0)
@@ -243,6 +251,9 @@ GEM
       activemodel (>= 5)
       elasticsearch (>= 6)
       hashie
+    selenium-webdriver (3.142.5)
+      childprocess (>= 0.5, < 3.0)
+      rubyzip (>= 1.2.2)
     sidekiq (5.2.7)
       connection_pool (~> 2.2, >= 2.2.2)
       rack (>= 1.5.0)
@@ -269,6 +280,16 @@ GEM
     unicode-display_width (1.6.0)
     warden (1.2.8)
       rack (>= 2.0.6)
+    watir (6.16.5)
+      regexp_parser (~> 1.2)
+      selenium-webdriver (~> 3.6)
+    watir-rails (2.2.1)
+      rack
+      rails
+      watir (>= 6.0.0.beta4)
+    watir-rspec (3.0.0)
+      rspec (~> 3.0)
+      watir (>= 6.0.0.beta4)
     web-console (3.7.0)
       actionview (>= 5.0)
       activemodel (>= 5.0)
@@ -309,10 +330,14 @@ DEPENDENCIES
   rubocop
   sass-rails (~> 5.0)
   searchkick
+  selenium-webdriver
   sidekiq
   spring
   spring-watcher-listen (~> 2.0.0)
   tzinfo-data
+  watir
+  watir-rails
+  watir-rspec
   web-console (>= 3.3.0)
 
 RUBY VERSION
