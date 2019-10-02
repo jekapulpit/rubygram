@@ -8,6 +8,7 @@ class LoginPage
     @email_field         = @browser.text_field(:name, 'email')
     @password_field      = @browser.text_field(:name, 'password')
     @submit_button       = @browser.button(:id, 'form-submit-btn')
+    visit
   end
 
   def method_missing(sym, *args, &block)
@@ -20,6 +21,10 @@ class LoginPage
 
   def page_title
     @browser.title
+  end
+
+  def authorised?
+    @browser.a(:href, '/home/rooms').exists?
   end
 
   def log_in(credentials)
