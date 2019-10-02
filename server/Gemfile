@@ -50,7 +50,6 @@ group :development, :test do
   gem 'watir'
   gem 'watir-rspec'
   gem 'watir-rails'
-  gem 'selenium-webdriver'
 end
 
 group :development do

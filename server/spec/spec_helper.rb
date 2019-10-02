@@ -97,7 +97,7 @@ end
 
 # Configuration for watir-rspec
 require "watir/rspec"
-​
+
 RSpec.configure do |config|
   # Use Watir::RSpec::HtmlFormatter to get links to the screenshots, html and
   # all other files created during the failing examples.
@@ -109,12 +109,12 @@ RSpec.configure do |config|
     @browser = Watir::Browser.new
     @browser.goto(root_url)
   end
-  ​
+
   # Close that browser after each example.
   config.after :all, type: :feature do
     @browser.close if @browser
   end
-  ​
+
   # Include RSpec::Helper into each of your example group for making it possible to
   # write in your examples instead of:
   #   @browser.goto "localhost"
@@ -127,7 +127,7 @@ RSpec.configure do |config|
   # This needs that you've used @browser as an instance variable name in
   # before :all block.
   config.include Watir::RSpec::Helper, type: :feature
-  ​
+
   # Include RSpec::Matchers into each of your example group for making it possible to
   # use #within with some of RSpec matchers for easier asynchronous testing:
   #   expect(@browser.text_field(name: "first_name")).to exist.within(2)
