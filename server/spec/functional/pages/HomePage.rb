@@ -8,6 +8,7 @@ class HomePage
     @rooms_link         = @browser.a(:href, '/home/rooms')
     @notifications_link = @browser.a(:href, '/home/notifications')
     @profile_link       = @browser.a(:href, '/home/profile')
+    visit
   end
 
   def method_missing(sym, *args, &block)
@@ -20,17 +21,21 @@ class HomePage
 
   def visit_rooms
     @browser.goto '/home/rooms'
+    self
   end
 
   def visit_notifications
     @browser.goto '/home/notifications'
+    self
   end
 
   def visit_profile
     @browser.goto '/home/profile'
+    self
   end
 
   def visit_room(room_id)
     @browser.goto "/home/rooms/#{room_id}"
+    self
   end
 end
