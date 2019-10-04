@@ -24,5 +24,7 @@ script:
 - psql -c "GRANT ALL PRIVILEGES ON DATABASE rubygram_test to alex;" -U postgres
 - psql -c "ALTER DATABASE rubygram_test OWNER TO alex;" -U postgres
 - bundle exec rake db:migrate
+- rspec ./spec/models
+- rspec ./spec/services
 - cd ../client
 - yarn
