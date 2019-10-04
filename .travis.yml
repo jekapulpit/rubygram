@@ -1,0 +1,16 @@
+language: ruby
+
+rvm:
+- 2.3.3
+
+services:
+- postgresql
+
+script:
+- cd server
+- bundle install
+- psql -c "create user alex with encrypted password 'qwerty123';" -U postgres
+- psql -c "CREATE DATABASE rubygram_test;" -U postgres
+- psql -c "GRANT ALL PRIVILEGES ON DATABASE rubygram_test to alex;" -U postgres
+- psql -c "ALTER DATABASE rubygram_test OWNER TO alex;" -U postgres
+- bundle exec rake db:migrate

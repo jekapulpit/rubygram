@@ -107,8 +107,8 @@ class MessageList extends React.Component {
                         }
                     }} className="send-box messages">
                         <div>
-                            <input ref={input => this.newMessage = input} type="text"/>
-                            <button><SendIcon/></button>
+                            <input id='message-field' ref={input => this.newMessage = input} type="text"/>
+                            <button id='send-message-btn'><SendIcon/></button>
                         </div>
                     </form>
                 </div>
