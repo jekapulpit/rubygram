@@ -330,7 +330,6 @@ DEPENDENCIES
   rubocop
   sass-rails (~> 5.0)
   searchkick
-  selenium-webdriver
   sidekiq
   spring
   spring-watcher-listen (~> 2.0.0)
