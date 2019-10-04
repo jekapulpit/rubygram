@@ -23,7 +23,7 @@ script:
 - psql -c "CREATE DATABASE rubygram_test;" -U postgres
 - psql -c "GRANT ALL PRIVILEGES ON DATABASE rubygram_test to alex;" -U postgres
 - psql -c "ALTER DATABASE rubygram_test OWNER TO alex;" -U postgres
-- bundle exec rake db:migrate
+- bundle exec rake db:migrate db:seed
 - rspec ./spec/models
 - rspec ./spec/services
 - cd ../client
