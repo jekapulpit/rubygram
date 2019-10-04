@@ -3,8 +3,18 @@ language: ruby
 rvm:
 - 2.6.0
 
+node_js:
+  - 10
+
 services:
 - postgresql
+- elasticsearch
+
+before_install:
+- curl -o- -L https://yarnpkg.com/install.sh | bash -s -- --version version-number
+- export PATH="$HOME/.yarn/bin:$PATH"
+
+cache: yarn
 
 script:
 - cd server
@@ -14,3 +24,5 @@ script:
 - psql -c "GRANT ALL PRIVILEGES ON DATABASE rubygram_test to alex;" -U postgres
 - psql -c "ALTER DATABASE rubygram_test OWNER TO alex;" -U postgres
 - bundle exec rake db:migrate
+- cd ../client
+- yarn
